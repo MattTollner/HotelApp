@@ -32,6 +32,9 @@ class StaffHomeViewController: UIViewController {
     }
     
 
+    @IBAction func unwindToStaffHome(segue:UIStoryboardSegue) {
+                
+    }
 
     @IBAction func dasf(_ sender: Any) {
        
@@ -51,6 +54,15 @@ class StaffHomeViewController: UIViewController {
         
     }
     
+    @IBAction func editInfoTapped(_ sender: Any) {
+        if HelperClass.userTypeRefernce.userType == "Admin" {
+            print("Perfrom Segue")
+            performSegue(withIdentifier: "toManageRooms", sender: self)
+        } else {
+            print("Permission Denied")
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
     
     @IBAction func manageRoomsTapped(_ sender: Any) {
         if HelperClass.userTypeRefernce.userType == "Admin" {

@@ -139,6 +139,16 @@ class EditStaffViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func confirmAlert(){
+        let successAlert = UIAlertController(title: "Account Updated", message: "Updated account information is now live", preferredStyle: UIAlertControllerStyle.alert)
+        
+        successAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
+            self.performSegue(withIdentifier: "unwindEditAccount", sender: self)
+        }))
+        
+        
+        self.present(successAlert, animated: true, completion: nil)
+    }
   
     @IBAction func updateAccountTapped(_ sender: Any) {
         if (checkLabels() == false)
@@ -162,7 +172,7 @@ class EditStaffViewController: UIViewController {
                     print("Error updating staff document: \(error)")
                 } else {
                     print("Document updated stored id: \(self.staffToUpdate[0].StaffID)")
-                    self.performSegue(withIdentifier: "unwindCreateAccount", sender: self)
+                    self.confirmAlert()
                 }
             }
             

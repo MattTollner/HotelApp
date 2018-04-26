@@ -9,18 +9,62 @@
 import UIKit
 import SendGrid
 import Alamofire
+import Firebase
 
 class HotelMainPageViewController: UIViewController {
 
     
-  
+    @IBOutlet weak var addressTextView: UITextView!
+    @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var checkInLabel: UILabel!
+    @IBOutlet weak var checkOutLabel: UILabel!
+    @IBOutlet weak var breakfastTimeLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var loadingLabel: UILabel!
+    
+    @IBOutlet weak var phoneStack: UIStackView!
+    
+    @IBOutlet weak var infoStack: UIStackView!
+    
+    var hotelInfo : HotelInfo?
+    var db : Firestore?
+    
+    @IBOutlet weak var breakfastLabel: UILabel!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        disableElements()
+        activityIndicator.startAnimating()
+        loadingLabel.isHidden = false
+        db = Firestore.firestore()
+        retriveInformation()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+    }
+    
+    func enableElements(){
+        print("enabling elements")
+        infoStack.isHidden = false
+        activityIndicator.stopAnimating()
+        loadingLabel.isHidden = true
+        activityIndicator.isHidden = true
+        addressTextView.isHidden = false
+        
+        reloadInputViews() 
+    }
+    
+    func disableElements(){
+        print("disabling elements")
+        infoStack.isHidden = true
+        addressTextView.isHidden = true
+    }
+   
     @IBAction func unwindToVC1(segue:UIStoryboardSegue) {
         print("Home page moved")
         APIClient.customerOkay = false
@@ -67,16 +111,46 @@ class HotelMainPageViewController: UIViewController {
         }
     }
     
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func retriveInformation(){
+        print("Retriving Info")
+        disableElements()
+        db?.collection("HotelInfo").getDocuments { (snapshot, error) in
+            if let error = error {
+                //print("Error getting documents: \(error)")
+                self.activityIndicator.stopAnimating()
+                self.loadingLabel.isHidden = true
+            } else {
+                for document in snapshot!.documents {
+                    //print("\(document.documentID) => \(document.data())")
+                    self.hotelInfo = HotelInfo(dictionary: document.data() as [String : AnyObject])
+                    self.populateInformation()
+                }
+                
+                self.activityIndicator.stopAnimating()
+                self.loadingLabel.isHidden = true
+            }
+        }
     }
-    */
+        
+        func populateInformation(){
+            print("Populating Info")
+            enableElements()
+            if let hotel = hotelInfo{
+                addressTextView.text = hotel.Address
+                emailLabel.text = hotel.Email
+                phoneLabel.text = hotel.Phone
+                breakfastTimeLabel.text = hotel.Breakfast
+                checkInLabel.text = hotel.CheckIn
+                checkOutLabel.text = hotel.CheckOut
+            } else {
+                print("hotel blank")
+            }
+            
+        }
+    
+    
 
+
+    
 }
+
