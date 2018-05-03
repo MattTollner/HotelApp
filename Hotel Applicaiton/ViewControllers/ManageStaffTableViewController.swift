@@ -23,7 +23,7 @@ class ManageStaffTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
        
         activityIndicator.startAnimating()
-        getStaff()
+        //getStaff()
         //tableView.reloadData()
     }
     @IBAction func unwindToManageStaff(segue:UIStoryboardSegue) {
@@ -63,11 +63,10 @@ class ManageStaffTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-   
-    @IBAction func segmentChange(_ sender: Any) {
+    func updateSeg(){
         selectedStaff.removeAll()
         let segValue = segmentPicker.titleForSegment(at: segmentPicker.selectedSegmentIndex)
-        
+        print("Staff list count "  + String(staffList.count))
         if segmentPicker.selectedSegmentIndex == 3 {
             for staff in staffList
             {
@@ -83,8 +82,12 @@ class ManageStaffTableViewController: UITableViewController {
         }
         
         print(selectedStaff.count)
-       
+        
         tableView.reloadData()
+    }
+   
+    @IBAction func segmentChange(_ sender: Any) {
+       updateSeg()
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -154,8 +157,12 @@ class ManageStaffTableViewController: UITableViewController {
                     let delAlert = UIAlertController(title: "Delete Staff", message: "Are you sure you want to delete the staff account?", preferredStyle: UIAlertControllerStyle.alert)
                     delAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
                         print("Staff document successfully removed!")
-                        self.staffList.remove(at: indexPath.row)
-                        tableView.reloadData()
+                        print("s staff type " + self.selectedStaff[indexPath.row].Email)
+                        print("Staff type " + self.staffList[indexPath.row].Email )
+                        self.activityIndicator.startAnimating()
+                        self.segmentPicker.selectedSegmentIndex = 0
+                        self.segmentPicker.isEnabled = false
+                        self.getStaff()
                     }))
                     
                     delAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
@@ -181,11 +188,13 @@ class ManageStaffTableViewController: UITableViewController {
                 print("Error getting staff documents : \(error)")
             } else
             {
+                print("DOC COUNT " + String(describing: snapshot?.documents.count))
                 for document in snapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
+                   // print("\(document.documentID) => \(document.data())")
                     
                     let staff = Staff(dictionary: document.data() as [String : AnyObject])
                     self.staffList.append(staff)
+                    print("Staff :: " + staff.Email)
                     if(staff.StaffType == "Admin"){
                         self.selectedStaff.append(staff)
                     }

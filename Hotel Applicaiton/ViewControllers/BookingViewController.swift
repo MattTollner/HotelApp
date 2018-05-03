@@ -44,6 +44,9 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var roomTypeArr = [String]()
     var tempRoomTypeArr = ["","","","","","","","","","","","","","",""]
+    var nights = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"]
+    var rooms = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"]
+    var dataSource = [String]()
     //  var cellsArr = [BookingRoomTableViewCell]()
    // var roomTypeArr = [String]()
     func testTapped(_ sender: Any) {
@@ -248,6 +251,15 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         return count
     }
+    
+    @IBAction func editingNights(_ sender: Any) {
+        print("Editing Nights")
+        
+    }
+    @IBAction func touchUpInside(_ sender: Any) {
+        print("Editing Nights")
+    }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         

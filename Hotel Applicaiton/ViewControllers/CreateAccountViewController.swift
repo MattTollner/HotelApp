@@ -158,7 +158,7 @@ class CreateAccountViewController: UIViewController {
                     let successAlert = UIAlertController(title: "Staff Created", message: "Created a new account with email : " + self.emailInput.text!, preferredStyle: UIAlertControllerStyle.alert)
                     
                     successAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
-                        self.performSegue(withIdentifier: "unwindToManageStaff", sender: self)
+                        self.performSegue(withIdentifier: "unwindCreateAccount", sender: self)
                     }))
                     
                     

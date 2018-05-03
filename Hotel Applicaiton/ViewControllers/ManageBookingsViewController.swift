@@ -28,13 +28,13 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
     var calendar : Date?
     var todayDateStr : String?
     
-    @IBOutlet weak var activityIndicatoer: UIActivityIndicatorView!
-    @IBAction func unwindToManageBookings(segue:UIStoryboardSegue) {
-    }
     
-    @IBAction func refreshBookings(_ sender: Any) {
-        activityIndicatoer.startAnimating()
-        testQ(roomType: "jh")
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    @IBAction func unwindToManageBookings(segue:UIStoryboardSegue) {
+        print("Home page moved")
+        APIClient.customerOkay = false
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -72,7 +72,7 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -84,11 +84,12 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
         dateFormatter.dateFormat = "dd/MM/yyyy"
         todayDateStr = dateFormatter.string(from: currentDate)
         print("Todays date is " + todayDateStr!)
+        
+        calendar = dateFormatter.date(from: todayDateStr!)
         testQ(roomType: "jh")
-        activityIndicatoer.startAnimating()
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -97,10 +98,11 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
     func updateTable(){
         refinedCustomerList = []
         refinedBookingList  = []
+        
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy" //Your date format
         let theDate = dateFormatter.date(from: todayDateStr!)
-        
         var a : Int = Int(bookingList.endIndex)
         a -= 1
         
@@ -193,21 +195,36 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
         updateTable()
         tableView.reloadData()
     }
-
+    
     @IBAction func timeChanged(_ sender: Any) {
         updateTable()
         tableView.reloadData()
     }
-     var dispatchGroup = DispatchGroup()
+    var dispatchGroup = DispatchGroup()
     
+    @IBAction func refreshData(_ sender: Any) {
+        activityIndicator.startAnimating()
+        refinedBookingList = []
+        refinedCustomerList = []
+        checkInSegment.selectedSegmentIndex = 0
+        timeSegment.selectedSegmentIndex = 0
+        testQ(roomType: "d")
+    }
     //Firebase Functions
     func testQ(roomType : String)
     {
+      
         promiseGetBookings()
             
             .then { obj -> Void in
-                var canBookRoomType = false
+                var bListCount : Int
+                var index : Int = 0
+                bListCount = self.bookingList.count
+                print("bListCount :: " + String(bListCount))
+                
                 for i in self.bookingList {
+                    
+                    print("i Index :: " + String(describing: i))
                     self.dispatchGroup.enter()
                     
                     self.db.collection("Customer").document(i.CustomerID ).getDocument(completion: { (snapshot, error) in
@@ -219,22 +236,33 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
                             let customer = Customer(dictionary: snapshot?.data() as! [String : AnyObject])
                             print("Appending to customer list " + customer.Forename)
                             self.customerList.append(customer)
+                            //self.refinedCustomerList.append(customer)
+                            print("Index " + String(index))
+                            index += 1
+                             print("Index " + String(index))
+                            print("List COunt " + String(bListCount))
+                            if index == bListCount{
+                                print("Bing")
+                                self.updateTable()
+                                self.activityIndicator.stopAnimating()
+                                self.tableView.reloadData()
+                            }
                             self.dispatchGroup.leave()
+                            
                         }
                     })
+                   
+                   
                 }
+                
+                print("End of method??")
                 
             }
             .then { obj -> Void in
-                //self.tableView.reloadData()
-                self.updateTable()
-                self.tableView.reloadData()
-                self.activityIndicatoer.stopAnimating()
-                print("ENd")
+                print("ENd :: Custerom List : " + String(self.customerList.count) + " BookingList :: " + String(self.bookingList.count))
             }
             .catch(){
                 err in
-                self.activityIndicatoer.stopAnimating()
                 print("Caught error")
         }
     }
@@ -264,6 +292,8 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
                     reject(error)
                 } else
                 {
+                    self.customerList = []
+                    self.bookingList = []
                     print("Getting bookingss")
                     for document in snapshot!.documents {
                         // print("\(document.documentID) => \(document.data())")
@@ -271,6 +301,7 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
                         let booking = Booking(dictionary: document.data() as [String : AnyObject])
                         print("Booking " + booking.RoomID[0])
                         self.bookingList.append(booking)
+                     //  self.refinedBookingList.append(booking)
                         //  self.tableView.reloadData()
                     }
                     
@@ -282,5 +313,5 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     
-
+    
 }
