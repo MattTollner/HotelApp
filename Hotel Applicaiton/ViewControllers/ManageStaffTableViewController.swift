@@ -209,10 +209,12 @@ class ManageStaffTableViewController: UITableViewController {
                     }
                     self.tableView.reloadData()
                 }
+                print("stopping activiyt indicaotr")
+                self.activityIndicator.stopAnimating()
             }
         }
         
-        activityIndicator.stopAnimating()
+        
         segmentPicker.isEnabled = true
         tableView.reloadData()
         

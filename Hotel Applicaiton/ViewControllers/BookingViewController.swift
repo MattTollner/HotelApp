@@ -53,7 +53,7 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var tableView: UITableView!
     
     var roomTypeArr = [String]()
-    var tempRoomTypeArr = ["","","","","","","","","","","","","","",""]
+    var tempRoomTypeArr = ["","","","",""]
     var nights = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"]
     var rooms = ["1","2","3","4"]
     var nightsSelected = true
@@ -306,6 +306,7 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
             if  let destination = segue.destination as? BookingSummaryViewController {
                 destination.checkIn = dateTextField.text!
                 destination.nightsStaying = nightsTextField.text!
+                print("ROOM IDS COUNT :: " + String(self.roomIDs.count))
                 destination.roomIDs = self.roomIDs
             }
         
@@ -347,8 +348,7 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
         nightsSelected = false
         thePicker.reloadAllComponents()
         print("editing room")
-        roomCountTextFiled.text = "1"
-        
+        //roomCountTextFiled.text = "1"
     
     }
     @IBAction func touchUpRooms(_ sender: Any) {
@@ -368,6 +368,10 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.priceTextField.text = "N/A"
         
      
+        if(indexPath.row == 0){
+            tempRoomTypeArr =  ["","","",""]
+        }
+        
         self.tempRoomTypeArr[indexPath.row] = cell.roomTypeLabel.text!
        // self.roomTypeArr.insert(cell.roomTypeLabel.text!, at: indexPath.row)
         
@@ -530,10 +534,10 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBAction func roomsFieldChange(_ sender: Any) {
         if roomCountTextFiled.text == "" || roomCountTextFiled.text == nil{
             roomCountTextFiled.text = "0"
-            tempRoomTypeArr = ["","","","","","","","","","","","","","",""]
+            tempRoomTypeArr = ["","","",""]
         } else {
             print("Reloading Table")
-            tempRoomTypeArr = ["","","","","","","","","","","","","","",""]
+            tempRoomTypeArr = ["","","",""]
             tableView.reloadData()
         }
     }
