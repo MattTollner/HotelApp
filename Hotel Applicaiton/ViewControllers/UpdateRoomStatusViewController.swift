@@ -60,6 +60,16 @@ class UpdateRoomStatusViewController: UIViewController {
         }
     }
     
+    func successAlert(){
+        let alert = UIAlertController(title: "Success!", message: "Updated room status..", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { action in
+            
+        }))
+        
+        self.present(alert, animated: true)
+    }
+    
     @IBAction func updateStatus(_ sender: Any) {
         
         let updatedRoom : [String : Any] = ["Number" : roomToUpdate?.Number as Any,
@@ -75,11 +85,7 @@ class UpdateRoomStatusViewController: UIViewController {
                 self.fireError(titleText: "Error updating room status", lowerText: err.localizedDescription)
             } else {
                 print("Room Updated")
-                let successAlert = UIAlertController(title: "Success", message: "Room has been successfully updated", preferredStyle: UIAlertControllerStyle.alert)
-                
-                successAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
-                    print("Okay Pressed")
-                }))
+                self.successAlert()
             }
         }
     }
