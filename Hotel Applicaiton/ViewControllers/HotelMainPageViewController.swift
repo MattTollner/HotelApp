@@ -144,6 +144,7 @@ class HotelMainPageViewController: UIViewController {
             print("Populating Info")
             enableElements()
             if let hotel = hotelInfo{
+                HelperClass.hotelInfo = hotel
                 addressTextView.text = hotel.Address
                 emailLabel.text = hotel.Email
                 phoneLabel.text = hotel.Phone

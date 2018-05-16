@@ -17,6 +17,8 @@ class HotelInfo {
     var Phone : String
     
     
+    
+    
     init(dictionary: [String: AnyObject])
     {
         self.Address = dictionary["Address"] as! String

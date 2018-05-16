@@ -22,15 +22,45 @@ class BookingSummaryTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         print("Awoke frfom nib " + String(roomPrice))
-       // priceLabel.text = String(roomPrice)
+        priceLabel.text = String(roomPrice)
+        setBAmount()
+        updateValues()
+        
+    }
+    
+    func setBAmount(){
         if(roomTypeLabel.text == "Double Single") {
             print("Room Double Single")
+            breakfastAmount = 10.0
+        } else if (roomTypeLabel.text == "Single") {
+            print("Single breakfast now 5")
             breakfastAmount = 5.0
+        } else if (roomTypeLabel.text == "Double") {
+            print("Double breaksft 10")
+            breakfastAmount = 10.0
+        }else if (roomTypeLabel.text == "Family") {
+            print("Family breakfast 20")
+            breakfastAmount = 20.0
         } else {
-            print("Else hit breakfast now 10")
-            breakfastAmount = 10
+            print("Else hit breakfast defaulat 10")
+            breakfastAmount = 10.0
         }
     }
+    
+    func updateValues(){
+        //Breakfast
+        if(breakfastSegment.selectedSegmentIndex == 0) {
+            totalAmount = (roomPrice + breakfastAmount)
+            print("Setting Price Label :: " + String(totalAmount)   )
+            //priceLabel.text = String(totalAmount)
+            
+        } else {
+            totalAmount = roomPrice
+            print("Setting Price Label NO BREAKFAST :: " + String(totalAmount))
+            //priceLabel.text = String(totalAmount)
+        }
+    }
+    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -39,19 +69,9 @@ class BookingSummaryTableViewCell: UITableViewCell {
     }
 
     @IBAction func breakfastSegmetChanged(_ sender: Any) {
-        
-        if(breakfastSegment.selectedSegmentIndex == 0) {
-
-                print("Room cost : " + String(roomPrice) + " plus cost of breakfast (5)")
-                let doublePrice = roomPrice + 5.0
-                print("New cost = " + String(describing: doublePrice))
-               // priceLabel.text = "£" + String(describing: doublePrice)
-                totalAmount = doublePrice
-            
-        } else {
-            print("Else Hit")
-            //priceLabel.text = "£" + String(roomPrice)
-            totalAmount = roomPrice
-        }
+        setBAmount()
+        updateValues()
+       
     }
+
 }

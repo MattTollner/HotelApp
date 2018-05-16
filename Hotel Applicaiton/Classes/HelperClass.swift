@@ -9,9 +9,13 @@
 import UIKit
 
 class HelperClass {
+    
+    static var hotelInfo : HotelInfo?
 
         struct userTypeRefernce {
             static var userType : String = "Admin"
             static var userID : String = "NIL"
         }
+    
+    
 }
