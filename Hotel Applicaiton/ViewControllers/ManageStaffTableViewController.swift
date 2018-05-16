@@ -41,6 +41,13 @@ class ManageStaffTableViewController: UITableViewController {
         getStaff()
     }
     
+    func fireError(titleText : String, lowerText : String){
+        let alert = UIAlertController(title: titleText, message: lowerText, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -153,6 +160,7 @@ class ManageStaffTableViewController: UITableViewController {
             db.collection("Staff").document(sID).delete() { err in
                 if let err = err {
                     print("Error removing staff document: \(err)")
+                    self.fireError(titleText: "Error deleting staff!", lowerText: err.localizedDescription)
                 } else {
                     let delAlert = UIAlertController(title: "Delete Staff", message: "Are you sure you want to delete the staff account?", preferredStyle: UIAlertControllerStyle.alert)
                     delAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
@@ -186,6 +194,7 @@ class ManageStaffTableViewController: UITableViewController {
         db.collection("Staff").getDocuments { (snapshot, error) in
             if let error = error {
                 print("Error getting staff documents : \(error)")
+                self.fireError(titleText: "Unable to fetch staff", lowerText: error.localizedDescription)
             } else
             {
                 print("DOC COUNT " + String(describing: snapshot?.documents.count))

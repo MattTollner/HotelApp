@@ -71,6 +71,14 @@ class SearchBookingViewController: UIViewController, UITableViewDataSource, UITa
         }
         
     }
+    
+    func fireError(titleText : String, lowerText : String){
+        let alert = UIAlertController(title: titleText, message: lowerText, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
+    
     @IBAction func cancelBookingTapped(_ sender: Any) {
         let delAlert = UIAlertController(title: "Revoke Booking", message: "Are you sure you want to revoke the booking?", preferredStyle: UIAlertControllerStyle.alert)
         delAlert.addAction(UIAlertAction(title: "REVOKE", style: .default, handler: { (action: UIAlertAction!) in
@@ -81,11 +89,13 @@ class SearchBookingViewController: UIViewController, UITableViewDataSource, UITa
             self.db.collection("BookingArchive").document((self.booking?.BookingID)!).setData(dict!, completion: { (error) in
                 if error != nil {
                     print("Error adding to archive")
+                    self.fireError(titleText: "Error adding booking to archive", lowerText: (error?.localizedDescription)!)
                 } else {
                     print("Adding booking to archive")
                     self.db.collection("Booking").document((self.booking?.BookingID)!).delete() { (error) in
                         if let error = error {
                             print("Error deleting booking from booking table : \(error)")
+                            self.fireError(titleText: "Error deleting booking from table", lowerText: error.localizedDescription)
                         } else {
                             print("Booking Deleted From Booking Table")
                             self.bookingStatusLabel.text = self.booking?.BookingStatus

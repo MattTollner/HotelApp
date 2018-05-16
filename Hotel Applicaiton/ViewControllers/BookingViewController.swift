@@ -11,10 +11,21 @@ extension String {
     var isAlphanumeric: Bool {
         return !isEmpty && range(of: "[^0-9]", options: .regularExpression) == nil
     }
+    
+    var isCharacter : Bool {
+        return !isEmpty && range(of: "[^a-zA-Z]", options: .regularExpression) == nil
+    }
+    
+    var isNumeric : Bool {
+        return !isEmpty && range(of: "[^0-9]", options: .regularExpression) == nil
+    }
 }
 
 
-class BookingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class BookingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+   
+    
     
     var roomsList = [Room]()
     var bookingList = [Booking]()
@@ -29,7 +40,6 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
     //var reservedRoom = [potentialRooms]
     
     @IBOutlet weak var datePicker: UIDatePicker!
-    @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var nightsTextField: UITextField!
     @IBOutlet weak var roomCountTextFiled: UITextField!
@@ -45,7 +55,8 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
     var roomTypeArr = [String]()
     var tempRoomTypeArr = ["","","","","","","","","","","","","","",""]
     var nights = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"]
-    var rooms = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"]
+    var rooms = ["1","2","3","4"]
+    var nightsSelected = true
     var dataSource = [String]()
     //  var cellsArr = [BookingRoomTableViewCell]()
    // var roomTypeArr = [String]()
@@ -55,11 +66,16 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     let picker = UIDatePicker()
+     let thePicker = UIPickerView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        //pickerView.delegate = self
+        thePicker.delegate = self
+        
+        
         //tableView.isUserInteractionEnabled = false
         setUpDatePicker()
         // getBookings(roomID: "FFPxRPUt0mBJrsBVJ8Sd")
@@ -72,8 +88,31 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         refreshControl.addTarget(self, action: #selector(updateTheTable(_:)), for: .valueChanged)
         
+        
+       
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
+        
+        toolBar.setItems([doneButton], animated: true)
+        nightsTextField.inputAccessoryView = toolBar
+        roomCountTextFiled.inputAccessoryView = toolBar
+        
+        nightsTextField.inputView = thePicker
+        roomCountTextFiled.inputView = thePicker
+        
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("View appear")
+        roomIDs = []
+    }
+    
+    @objc func doneClicked(){
+        view.endEditing(true)
+    }
+    
     
     
     
@@ -84,6 +123,35 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.reloadData()
     }
     
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if(nightsSelected){
+            return nights.count
+        } else {
+            return rooms.count
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if(nightsSelected){
+            return nights[row]
+        } else {
+            return rooms[row]
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if(nightsSelected){
+            print("nights did select row " + nights[row])
+            nightsTextField.text = nights[row]
+        }else{
+            print("room did select row " + rooms[row])
+            roomCountTextFiled.text = rooms[row]
+        }
+    }
     
     func checkValues() -> Bool{
         
@@ -98,7 +166,7 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         //Checking Room Count Text Filed
         if let roomsCount = roomCountTextFiled.text{
-            if(!roomsCount.isAlphanumeric){
+            if(!roomsCount.isNumeric){
                 //FAIL room count not a number
                 print("Room count not a number")
                 roomCountTextFiled.backgroundColor = #colorLiteral(red: 1, green: 0.2551919259, blue: 0.1199331933, alpha: 1)
@@ -176,6 +244,12 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
             return false
         }
     }
+    func fireError(titleText : String, lowerText : String){
+        let alert = UIAlertController(title: titleText, message: lowerText, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
     
     @IBAction func testButton(_ sender: Any) {
         
@@ -252,12 +326,34 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
         return count
     }
     
-    @IBAction func editingNights(_ sender: Any) {
-        print("Editing Nights")
+    @IBAction func unwindToBooking(segue:UIStoryboardSegue) {
+        print("UNWIND DETECTED")
         
     }
-    @IBAction func touchUpInside(_ sender: Any) {
+    
+    
+    
+    @IBAction func editingNights(_ sender: Any) {
+        nightsSelected = true
+        thePicker.reloadAllComponents()
         print("Editing Nights")
+        nightsTextField.text = "1"
+    }
+    @IBAction func touchUpInside(_ sender: Any) {
+        print("touch up Nights")
+        
+    }
+    @IBAction func editingRooms(_ sender: Any) {
+        nightsSelected = false
+        thePicker.reloadAllComponents()
+        print("editing room")
+        roomCountTextFiled.text = "1"
+        
+    
+    }
+    @IBAction func touchUpRooms(_ sender: Any) {
+        print("touch up room")
+        
     }
     
     
@@ -337,6 +433,7 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
         
     }
     
+    
     func setUpDatePicker(){
         
         //Toolbar set up
@@ -359,6 +456,8 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
         picker.datePickerMode = .date
         
     }
+    
+    
     
     @objc func closeDatePicker(){
         //Format text date
@@ -425,6 +524,8 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.isHidden = true
     }
     @IBAction func roomFieldChange(_ sender: Any) {
+        print("reloading data rooms cahnge")
+        tableView.reloadData()
     }
     @IBAction func roomsFieldChange(_ sender: Any) {
         if roomCountTextFiled.text == "" || roomCountTextFiled.text == nil{
@@ -512,6 +613,7 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
             print("Searching for rooms with type " + roomType)
             self.db.collection("Rooms").whereField("RoomType", isEqualTo: roomType) .getDocuments(completion: { (snapshot, error) in
                 if let error = error {
+                    self.fireError(titleText: "Error fetching rooms", lowerText: error.localizedDescription)
                     reject(error)
                 }else
                 {
@@ -538,6 +640,7 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             self.db.collection("Booking").whereField("CheckIn", isLessThanOrEqualTo: EndB!).getDocuments(completion: { (snapshot, error) in
                 if let error = error {
+                    self.fireError(titleText: "Error fetching rooms", lowerText: error.localizedDescription)
                     reject(error)
                 }else
                 {

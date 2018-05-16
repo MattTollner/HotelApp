@@ -32,6 +32,23 @@ class HotelInfoViewController: UIViewController {
         detailStack.isHidden = true
         getInfo()
         // Do any additional setup after loading the view.
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
+        
+        
+        toolBar.setItems([doneButton], animated: true)
+        
+        addressInput.inputAccessoryView = toolBar
+        emailInput.inputAccessoryView = toolBar
+        breakfastPeriod.inputAccessoryView = toolBar
+        checkInInput.inputAccessoryView = toolBar
+        checkOutInput.inputAccessoryView = toolBar
+        phoneInput.inputAccessoryView = toolBar
+    }
+    
+    @objc func doneClicked(){
+        self.view.endEditing(true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,14 +58,26 @@ class HotelInfoViewController: UIViewController {
     
     @IBOutlet weak var updateButton: UIButton!
     
+    func fireError(titleText : String, lowerText : String){
+        let alert = UIAlertController(title: titleText, message: lowerText, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
+    
     func getInfo(){
         let docRef = db.collection("HotelInfo").document(docId)
         docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                self.info = HotelInfo(dictionary: document.data() as! [String : AnyObject])
-                self.populateInfo()
-            } else {
-                print("Document does not exist")
+            if let error = error {
+                self.fireError(titleText: "Error fetching hotel information", lowerText: error.localizedDescription)
+            }else {
+            
+                if let document = document, document.exists {
+                    self.info = HotelInfo(dictionary: document.data() as! [String : AnyObject])
+                    self.populateInfo()
+                } else {
+                    print("Document does not exist")
+                }
             }
         }
     }
@@ -86,7 +115,8 @@ class HotelInfoViewController: UIViewController {
                 let db = Firestore.firestore()
                 db.collection("HotelInfo").document(docId).setData(dInfo) { (error) in
                     if let error = error {
-                        print("Error updating staff document: \(error)")
+                        print("Error updating info document: \(error)")
+                        self.fireError(titleText: "Error updating hotel information", lowerText: error.localizedDescription)
                     } else {
                         print("Document updated")
                        self.confirmAlert()

@@ -48,6 +48,13 @@ class HotelMainPageViewController: UIViewController {
         
     }
     
+    func fireError(titleText : String, lowerText : String){
+        let alert = UIAlertController(title: titleText, message: lowerText, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
+    
     func enableElements(){
         print("enabling elements")
         infoStack.isHidden = false
@@ -117,6 +124,7 @@ class HotelMainPageViewController: UIViewController {
         db?.collection("HotelInfo").getDocuments { (snapshot, error) in
             if let error = error {
                 //print("Error getting documents: \(error)")
+                self.fireError(titleText: "Error retriving hotel information", lowerText: error.localizedDescription)
                 self.activityIndicator.stopAnimating()
                 self.loadingLabel.isHidden = true
             } else {

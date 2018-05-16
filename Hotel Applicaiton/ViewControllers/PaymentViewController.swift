@@ -88,11 +88,35 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
         //amountLabel.text = "£" + String(describing: fullBookingCost)
         self.buttonOutet.isHidden = false
         // Do any additional setup after loading the view.
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
+        
+        
+        toolBar.setItems([doneButton], animated: true)
+        
+        forenameLabel.inputAccessoryView = toolBar
+        sirnameLabel.inputAccessoryView = toolBar
+        emailLabel.inputAccessoryView = toolBar
+        addressLabel.inputAccessoryView = toolBar
+        confirmEmailLabel.inputAccessoryView = toolBar
+        postcodeLabel.inputAccessoryView = toolBar
+        cityLabel.inputAccessoryView = toolBar
+    }
+    
+    @objc func doneClicked(){
+        self.view.endEditing(true)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    func fireError(titleText : String, lowerText : String){
+        let alert = UIAlertController(title: titleText, message: lowerText, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
     }
     
    
@@ -273,6 +297,7 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
             ref = db.collection("Customer").addDocument(data: customerDict) { err in
                 if let err = err {
                     print("Error adding document: \(err)")
+                     self.fireError(titleText: "Error adding customer", lowerText: err.localizedDescription)
                 } else {
                     print("Customer added reference : " + (ref?.documentID)!)
                     cID = (ref?.documentID)!
@@ -297,6 +322,7 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
                     ref2 = db.collection("Booking").addDocument(data: bookingDict) {err in
                         if let err = err {
                             print("Error Adding Booking : \(err)")
+                            self.fireError(titleText: "Error adding booking", lowerText: err.localizedDescription)
                         } else {
                             print("Booking Successfully Added :: Booking refernce : " + (ref2?.documentID)!)
                             
@@ -320,6 +346,7 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
                             db.collection("Booking").document(bID).setData(bookingDict) { (error) in
                                 if let error = error {
                                     print("Error updating booking (ID not set): \(error)")
+                                     self.fireError(titleText: "Error setting booking data", lowerText: error.localizedDescription)
                                 } else {
                                     print("Booking ID updated stored id: \(bID)")
                                     self.performSegue(withIdentifier: "unwindBooking", sender: self)

@@ -16,12 +16,22 @@ class ViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
- 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var forgotPasswordButton: UIButton!
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
+        
+        toolBar.setItems([doneButton], animated: true)
+        emailTextField.inputAccessoryView = toolBar
+        passwordTextField.inputAccessoryView = toolBar
         
         
        // docRef = Firestore.firestore().collection("Rooms")
@@ -29,27 +39,100 @@ class ViewController: UIViewController {
         
         print("view did load")
     }
+    
+    @objc func doneClicked(){
+        view.endEditing(true)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func hideElements(value : Bool){
+        if(!value){
+            emailTextField.isHidden = false
+            passwordTextField.isHidden = false
+            forgotPasswordButton.isHidden = false
+            signInButton.isHidden = false
+            activityIndicator.stopAnimating()
+            activityIndicator.isHidden = true
+        } else {
+            emailTextField.isHidden = true
+            passwordTextField.isHidden = true
+            forgotPasswordButton.isHidden = true
+            signInButton.isHidden = true
+            activityIndicator.startAnimating()
+            activityIndicator.isHidden = false
+        }
+        
+    }
 
+    
+    func checkInputs() -> Bool {
+        let whitespaceSet = CharacterSet.whitespaces
+
+        var valid = false
+        
+        self.view.endEditing(true)
+      
+        if let email = emailTextField.text {
+            if(email.trimmingCharacters(in: whitespaceSet).isEmpty){
+                print("email only contains whte space")
+                valid = false
+            } else {
+                print("email valid")
+                valid = true
+            }
+        } else {
+            print("Invalid Email Call")
+            valid = false
+        }
+        
+        if passwordTextField.text != nil {
+            print("Pass Valid")
+            valid = true
+        } else {
+            print("Invalid pass Call")
+            valid = false
+        }
+        
+        return valid
+    }
+    
+    
+   
+    
     @IBAction func signInButton(_ sender: Any) {
-        let db = Firestore.firestore()
-        if let email = emailTextField.text, let password = passwordTextField.text
-        {
-            Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
-                if let firebaseError = error {
-                    print(firebaseError.localizedDescription)
-                    return
-                } else {
-                    print("Success Logged In!")
-                    self.storeSignInDetails()
-                    //self.performSegue(withIdentifier: "toStaffHome", sender: self)
-                }
-                
-            })
+        
+        if(!self.checkInputs()){
+            print("input not valid")
+        } else {
+            hideElements(value: true)
+            let db = Firestore.firestore()
+            if let email = emailTextField.text, let password = passwordTextField.text
+            {
+                Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
+                    if let firebaseError = error {
+                        print(firebaseError.localizedDescription)
+                        print("Hello")
+                        self.hideElements(value: false)
+                        let alert = UIAlertController(title: "Incorrect Email or Password", message: firebaseError.localizedDescription, preferredStyle: .alert)
+                        
+                        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                        self.present(alert, animated: true)
+                        return
+                    } else {
+                        print("Success Logged In!")
+                        self.hideElements(value: false)
+                        self.storeSignInDetails()
+                        self.performSegue(withIdentifier: "toStaffHome", sender: self)
+                    }
+                    
+                })
+            } else {
+                print("Inputs invalid")
+            }
         }
     }
     

@@ -22,6 +22,13 @@ class ManageCleaningViewController: UITableViewController {
         
     }
     
+    func fireError(titleText : String, lowerText : String){
+        let alert = UIAlertController(title: titleText, message: lowerText, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         getRooms()
@@ -67,6 +74,7 @@ class ManageCleaningViewController: UITableViewController {
         db.collection("Rooms").getDocuments { (snapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
+                self.fireError(titleText: "Error fetching rooms", lowerText: error.localizedDescription)
             } else {
                 for document in snapshot!.documents {
                     print("\(document.documentID) => \(document.data())")

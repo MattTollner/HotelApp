@@ -43,6 +43,13 @@ class UpdateRoomStatusViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func fireError(titleText : String, lowerText : String){
+        let alert = UIAlertController(title: titleText, message: lowerText, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
+    
     @IBAction func segmentChange(_ sender: Any) {
         if roomStateSegmented.selectedSegmentIndex == 0 {
             roomStatus.text = "Clean"
@@ -65,6 +72,7 @@ class UpdateRoomStatusViewController: UIViewController {
         db.collection("Rooms").document((roomToUpdate?.RoomID)!).setData(updatedRoom) { err in
             if let err = err {
                 print("Error updating room document: \(err)")
+                self.fireError(titleText: "Error updating room status", lowerText: err.localizedDescription)
             } else {
                 print("Room Updated")
                 let successAlert = UIAlertController(title: "Success", message: "Room has been successfully updated", preferredStyle: UIAlertControllerStyle.alert)

@@ -25,11 +25,35 @@ class CreateAccountViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
+        
+        
+        toolBar.setItems([doneButton], animated: true)
+        
+        foreNameInput.inputAccessoryView = toolBar
+        sirNameInput.inputAccessoryView = toolBar
+        emailInput.inputAccessoryView = toolBar
+        addressInput.inputAccessoryView = toolBar
+        postcodeInput.inputAccessoryView = toolBar
+        phoneNumberInput.inputAccessoryView = toolBar
+    }
+    
+    @objc func doneClicked(){
+        self.view.endEditing(true)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    func fireError(titleText : String, lowerText : String){
+        let alert = UIAlertController(title: titleText, message: lowerText, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
     }
     
     @IBAction func createAccountTapped(_ sender: Any) {
@@ -47,12 +71,7 @@ class CreateAccountViewController: UIViewController {
             Auth.auth().createUser(withEmail: emailInput.text!, password: "changeme", completion: { (user, error) in
                 
                 if let err = error {
-                    print("Error creating new account : \(err)")
-                    
-                    let alertSuc = UIAlertController(title: "Firebase Error", message: err.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
-                    alertSuc.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
-                    }))
-                    self.present(alertSuc, animated: true, completion: nil)
+                    self.fireError(titleText: "Unable to change create user", lowerText: err.localizedDescription)
                     
                     
                 } else {
@@ -153,6 +172,7 @@ class CreateAccountViewController: UIViewController {
             db.collection("Staff").document(userID!).setData(staff) { err in
                 if let err = err {
                     print("Error adding staff document: \(err)")
+                    self.fireError(titleText: "Error creating account", lowerText: err.localizedDescription)
                 } else {
                     print("Staff added with ID: \(userID!)")
                     let successAlert = UIAlertController(title: "Staff Created", message: "Created a new account with email : " + self.emailInput.text!, preferredStyle: UIAlertControllerStyle.alert)

@@ -15,7 +15,7 @@ class ManageRoomViewController: UITableViewController {
     var specifiedRoomList = [Room]()
     var roomsList = [Room]()
     var updateRoom = false;
-    var selectedRoom = [Room]()
+    var selectedRoom : Room?
     var topRoom = 0
     let db = Firestore.firestore()
   
@@ -42,13 +42,20 @@ class ManageRoomViewController: UITableViewController {
         return specifiedRoomList.count
     }
     
+    func fireError(titleText : String, lowerText : String){
+        let alert = UIAlertController(title: titleText, message: lowerText, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
         let cell = tableView.dequeueReusableCell(withIdentifier: "roomCell", for: indexPath) as! RoomTableViewCell
         //let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cellId")
-        cell.roomNumber.text = specifiedRoomList[indexPath.row].RoomType
-        cell.roomType.text = specifiedRoomList[indexPath.row].RoomType
-        cell.roomPrice.text = specifiedRoomList[indexPath.row].Price as? String
+        cell.roomNumber.text = "Number : " + specifiedRoomList[indexPath.row].Number
+        cell.roomType.text =   "Type   : " + specifiedRoomList[indexPath.row].RoomType
+        cell.roomPrice.text =  "Per/N  :£" + specifiedRoomList[indexPath.row].Price as? String
         
         return cell
     }
@@ -56,7 +63,7 @@ class ManageRoomViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedIndex = indexPath.row
         updateRoom = true
-        selectedRoom.append(specifiedRoomList[selectedIndex])
+        selectedRoom = specifiedRoomList[selectedIndex]
         performSegue(withIdentifier: "editRoom", sender: self)
     }
     
@@ -66,6 +73,7 @@ class ManageRoomViewController: UITableViewController {
             db.collection("Rooms").document(rID).delete() { err in
                 if let err = err {
                     print("Error removing document: \(err)")
+                    self.fireError(titleText: "Error deleting room!", lowerText: err.localizedDescription)
                 } else {
                     let delAlert = UIAlertController(title: "Delete Room", message: "Are you sure you want to delete the room?", preferredStyle: UIAlertControllerStyle.alert)
                     delAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
@@ -181,6 +189,7 @@ class ManageRoomViewController: UITableViewController {
         db.collection("Rooms").getDocuments { (snapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
+                self.fireError(titleText: "Error fetching rooms!", lowerText: error.localizedDescription)
                 self.activityIndicator.stopAnimating()
             } else {
                 for document in snapshot!.documents {

@@ -17,6 +17,7 @@ class CreateRoomViewController: UIViewController, UITextFieldDelegate, UIPickerV
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var addRoomButton: UIButton!
     @IBOutlet weak var highRoomNumLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var topRoom : Int = 0
     
@@ -27,7 +28,7 @@ class CreateRoomViewController: UIViewController, UITextFieldDelegate, UIPickerV
     var currentArr : [String] = []
     //Current text field
     var activeTextField : UITextField!
-    let typeArray = ["Single", "Double", "Single Double", "Family"]
+    let typeArray = ["Single", "Double", "Double Single", "Family"]
     @IBOutlet weak var labelOutput: UILabel!
     
     override func viewDidLoad() {
@@ -65,11 +66,29 @@ class CreateRoomViewController: UIViewController, UITextFieldDelegate, UIPickerV
     
         highRoomNumLabel.text = "Highest Room Number : " + String(topRoom)
      
-      
+        let toolBarText = UIToolbar()
+        toolBarText.sizeToFit()
+        let doneButton2 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
+        
+        
+        toolBar.setItems([doneButton], animated: true)
+        toolBarText.setItems([doneButton2], animated: true)
+        roomNumber.inputAccessoryView = toolBar
+        roomPrice.inputAccessoryView = toolBar
+        roomType.inputAccessoryView = toolBar
         
     }
     
+    @objc func doneClicked(){
+        self.view.endEditing(true)
+    }
     
+    func fireError(titleText : String, lowerText : String){
+        let alert = UIAlertController(title: titleText, message: lowerText, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
@@ -88,6 +107,8 @@ class CreateRoomViewController: UIViewController, UITextFieldDelegate, UIPickerV
     @IBAction func addRoom(_ sender: Any) {
         
         if checkLabels() {
+            activityIndicator.startAnimating()
+            addRoom.isEnabled = false
             var roomDict : [String : Any] = ["Number" : roomNumber.text!, "Price" : roomPrice.text!,
                                              "RoomState" : "Clean", "RoomType" : roomType.text!, "RoomID" : "Nil"]
             
@@ -98,8 +119,14 @@ class CreateRoomViewController: UIViewController, UITextFieldDelegate, UIPickerV
             ref = db.collection("Rooms").addDocument(data: roomDict) { err in
                 if let err = err {
                     print("Error adding document: \(err)")
+                    self.fireError(titleText: "Error adding room", lowerText: err.localizedDescription)
+                    self.activityIndicator.stopAnimating()
+                    self.addRoom.isEnabled = true
+                    
                 } else {
                     print("Document added with ID: \(ref!.documentID)")
+                    //self.activityIndicator.stopAnimating()
+                    //self.addRoom.isEnabled = true
                 }
             }
             
@@ -109,12 +136,22 @@ class CreateRoomViewController: UIViewController, UITextFieldDelegate, UIPickerV
             db.collection("Rooms").document(ref!.documentID).setData(roomDict) { (error) in
                 if let error = error {
                     print("Error adding document: \(error)")
+                    self.fireError(titleText: "Error adding room", lowerText: error.localizedDescription)
+
+                    self.activityIndicator.stopAnimating()
+                    self.addRoom.isEnabled = true
                 } else {
                     print("Document updated stored id: \(ref!.documentID)")
-                    self.performSegue(withIdentifier: "unwindAddRoom", sender: nil)            }
+                    self.activityIndicator.stopAnimating()
+                    self.addRoom.isEnabled = true
+                    self.performSegue(withIdentifier: "unwindAddRoom", sender: nil)
+                    
+                }
             }
         } else {
             print("Invalid input data")
+            self.activityIndicator.stopAnimating()
+            self.addRoom.isEnabled = true
         }
         
         
@@ -131,18 +168,11 @@ class CreateRoomViewController: UIViewController, UITextFieldDelegate, UIPickerV
         } else {
             roomNumber.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
         }
-        if(roomPrice.text?.isAlpha == false){
+        if(roomPrice.text?.isAlpha == true){
             roomPrice.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
             isPass = false
         }else {
             roomPrice.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
-        }
-        
-        if(roomType.text == "" || roomType.text?.isAlpha == false){
-            roomType.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
-            isPass = false
-        }else {
-            roomType.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
         }
         
         let types = ["Single", "Doulbe Single", "Double", "Family"]

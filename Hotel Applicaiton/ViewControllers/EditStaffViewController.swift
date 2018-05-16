@@ -68,6 +68,23 @@ class EditStaffViewController: UIViewController {
             
         }
         
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
+        
+        
+        toolBar.setItems([doneButton], animated: true)
+        
+        foreNameInput.inputAccessoryView = toolBar
+        sirNameInput.inputAccessoryView = toolBar
+        emailInput.inputAccessoryView = toolBar
+        addressInput.inputAccessoryView = toolBar
+        postcodeInput.inputAccessoryView = toolBar
+        phoneNumberInput.inputAccessoryView = toolBar
+    }
+    
+    @objc func doneClicked(){
+        self.view.endEditing(true)
     }
     
     func checkLabels( ) -> Bool{
@@ -149,6 +166,13 @@ class EditStaffViewController: UIViewController {
         
         self.present(successAlert, animated: true, completion: nil)
     }
+    
+    func fireError(titleText : String, lowerText : String){
+        let alert = UIAlertController(title: titleText, message: lowerText, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
   
     @IBAction func updateAccountTapped(_ sender: Any) {
         if (checkLabels() == false)
@@ -170,6 +194,7 @@ class EditStaffViewController: UIViewController {
             db.collection("Staff").document(staffToUpdate[0].StaffID).setData(staff) { (error) in
                 if let error = error {
                     print("Error updating staff document: \(error)")
+                    self.fireError(titleText: "Error updating staff", lowerText: error.localizedDescription)
                 } else {
                     print("Document updated stored id: \(self.staffToUpdate[0].StaffID)")
                     self.confirmAlert()

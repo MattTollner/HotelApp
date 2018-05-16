@@ -20,7 +20,7 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     @IBOutlet weak var addRoomButton: UIButton!
     
  
-    var roomToUpdate = [Room]()
+    var roomToUpdate : Room?
     var topRoom : Int?
  
     
@@ -41,6 +41,20 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         
         print("DB Reached")
         
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
+       
+        
+        toolBar.setItems([doneButton], animated: true)
+        
+        roomNumber.inputAccessoryView = toolBar
+        roomPrice.inputAccessoryView = toolBar
+        roomState.inputAccessoryView = toolBar
+        roomType.inputAccessoryView = toolBar
+       
+        
+        
         // Do any additional setup after loading the view.
         roomState.delegate = self
         roomType.delegate = self
@@ -51,16 +65,22 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         roomState.inputView = thePickerView
         roomType.inputView = thePickerView
         
-        
-        if(!roomToUpdate.isEmpty)
-        {
-            roomPrice.text = roomToUpdate[0].Price as? String
-            roomNumber.text = roomToUpdate[0].Number
-            roomType.text = roomToUpdate[0].RoomType
-            roomState.text = roomToUpdate[0].RoomState
+        if let room = roomToUpdate{
+            roomPrice.text = room.Price as? String
+            roomNumber.text = room.Number
+            roomType.text = room.RoomType
+            roomState.text = room.RoomState
             addRoomButton.setTitle("Update Room", for: .normal)
+        } else {
+            print("ROOM TO UPDATE EMPTY REWIND SEGUE")
         }
+        
+     
   
+    }
+    
+    @objc func doneClicked(){
+        self.view.endEditing(true)
     }
     
     
@@ -90,7 +110,7 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         } else {
             roomNumber.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
         }
-        if(roomPrice.text?.isAlpha == false){
+        if(roomPrice.text?.isAlpha == true){
             roomPrice.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
             isPass = false
         }else {
@@ -131,6 +151,8 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
                 roomType.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
                 break
             } else {
+                print("DB TYPE :: " + roomType.text!)
+                print("OS TYPE :: " + i)
                 roomType.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
                 isPass = false
             }
@@ -146,43 +168,46 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         
     }
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBAction func addRoom(_ sender: Any) {
+        
+        if let room = roomToUpdate{
+            
         
         
         if checkLabels() {
-            var roomDict : [String : Any] = ["Number" : roomNumber.text!, "Price" : roomPrice.text!,
-                                             "RoomState" : roomState.text!, "RoomType" : roomType.text!, "RoomID" : "Nil"]
-            
+            activityIndicator.startAnimating()
+            self.updateRoomButton.isEnabled = false
+            let roomDict : [String : Any] = ["Number" : roomNumber.text!, "Price" : roomPrice.text!,
+                                             "RoomState" : roomState.text!, "RoomType" : roomType.text!, "RoomID" : room.RoomID]
             
             let db = Firestore.firestore()
-            var ref: DocumentReference? = nil
-            ref = db.collection("Rooms").addDocument(data: roomDict) { err in
+            db.collection("Rooms").document(room.RoomID).setData(roomDict) { err in
                 if let err = err {
                     print("Error adding document: \(err)")
+                    self.fireError(titleText: "Error updating room", lowerText: err.localizedDescription)
+                    self.activityIndicator.stopAnimating()
                 } else {
-                    print("Document added with ID: \(ref!.documentID)")
+                    self.activityIndicator.stopAnimating()
+                    self.updateRoomButton.isEnabled = true
+                    print("Document succesfully updated PERFORM SEGUE")
                 }
             }
-            
-            roomDict = ["Number" : roomNumber.text!, "Price" : roomPrice.text!,
-                        "RoomState" : roomState.text!, "RoomType" : roomType.text!, "RoomID" : ref!.documentID]
-            
-            db.collection("Rooms").document(ref!.documentID).setData(roomDict) { (error) in
-                if let error = error {
-                    print("Error adding document: \(error)")
-                } else {
-                    print("Document updated stored id: \(ref!.documentID)")
-                    self.performSegue(withIdentifier: "unwindEditRoom", sender: self)
-                }
+         
+            } else {
+                print("Fields incorrect")
             }
-        } else {
-            print("Fields incorrect")
         }
-        
-       
-        
     }
     
+    func fireError(titleText : String, lowerText : String){
+        let alert = UIAlertController(title: titleText, message: lowerText, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
+    
+    @IBOutlet weak var updateRoomButton: UIButton!
     //-- Picker View
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
