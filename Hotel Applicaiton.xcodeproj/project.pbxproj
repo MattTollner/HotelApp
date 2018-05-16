@@ -22,6 +22,7 @@
 		0B78E4112039B9E8003661FA /* StaffTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B78E4102039B9E8003661FA /* StaffTableViewCell.swift */; };
 		0B78E4132039BA1B003661FA /* ManageStaffTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B78E4122039BA1B003661FA /* ManageStaffTableViewController.swift */; };
 		0B78E4152039CF0D003661FA /* EditStaffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B78E4142039CF0C003661FA /* EditStaffViewController.swift */; };
+		0B9ADA9420AC838B00A41361 /* UpdateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ADA9320AC838B00A41361 /* UpdateAccountViewController.swift */; };
 		33EEE9E10BE608C0E5F9F669 /* Pods_Hotel_ApplicaitonUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59D3ED5F9D6D1AFB886EBD7C /* Pods_Hotel_ApplicaitonUITests.framework */; };
 		4D911016942125DD7C0DED00 /* Pods_Hotel_ApplicaitonTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AE8CB443EA3C6A6DBF36010 /* Pods_Hotel_ApplicaitonTests.framework */; };
 		DE4F93A7EDA7A3E4E158B29E /* Pods_Hotel_Applicaiton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C33386EEADCA90F9D2F76601 /* Pods_Hotel_Applicaiton.framework */; };
@@ -87,6 +88,7 @@
 		0B78E4102039B9E8003661FA /* StaffTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffTableViewCell.swift; sourceTree = "<group>"; };
 		0B78E4122039BA1B003661FA /* ManageStaffTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageStaffTableViewController.swift; sourceTree = "<group>"; };
 		0B78E4142039CF0C003661FA /* EditStaffViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStaffViewController.swift; sourceTree = "<group>"; };
+		0B9ADA9320AC838B00A41361 /* UpdateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAccountViewController.swift; sourceTree = "<group>"; };
 		59D3ED5F9D6D1AFB886EBD7C /* Pods_Hotel_ApplicaitonUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hotel_ApplicaitonUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AE8CB443EA3C6A6DBF36010 /* Pods_Hotel_ApplicaitonTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hotel_ApplicaitonTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D6595B9E7DB8802B152C4B4 /* Pods-Hotel ApplicaitonUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hotel ApplicaitonUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hotel ApplicaitonUITests/Pods-Hotel ApplicaitonUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				F01F82DF2049ABBA00335F74 /* ManageBookingsViewController.swift */,
 				F01F82E12049B56600335F74 /* UpdateBookingViewController.swift */,
 				0B435F012092077B00ADDDF0 /* HotelInfoViewController.swift */,
+				0B9ADA9320AC838B00A41361 /* UpdateAccountViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -639,6 +642,7 @@
 				0B78E4112039B9E8003661FA /* StaffTableViewCell.swift in Sources */,
 				F01F82E02049ABBA00335F74 /* ManageBookingsViewController.swift in Sources */,
 				F02CF8312045B67F00D3CCDE /* RoomCleaningTableViewCell.swift in Sources */,
+				0B9ADA9420AC838B00A41361 /* UpdateAccountViewController.swift in Sources */,
 				F034A6EE20518C3900BE6F73 /* BookingSummaryTableViewCell.swift in Sources */,
 				0B4E85412038E2310040CE33 /* EditRoomViewController.swift in Sources */,
 				F01F82E22049B56700335F74 /* UpdateBookingViewController.swift in Sources */,

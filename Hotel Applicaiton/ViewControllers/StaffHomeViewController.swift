@@ -41,6 +41,7 @@ class StaffHomeViewController: UIViewController {
     }
     
     @IBAction func signOutTapped(_ sender: Any) {
+        print("Sign out")
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()

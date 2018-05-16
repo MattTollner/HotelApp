@@ -634,11 +634,20 @@
                                     <segue destination="huO-fG-qXG" kind="show" id="CF0-Xd-7Yi"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cps-9c-uOq">
+                                <rect key="frame" x="20" y="617" width="57" height="30"/>
+                                <state key="normal" title="Account"/>
+                                <connections>
+                                    <segue destination="rQb-Ug-LDJ" kind="show" id="IFG-oN-0nI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="zxg-b3-sgt" firstAttribute="bottom" secondItem="cps-9c-uOq" secondAttribute="bottom" constant="20" id="2dl-DH-Imt"/>
                             <constraint firstItem="0Ta-wI-NuP" firstAttribute="centerX" secondItem="zxg-b3-sgt" secondAttribute="centerX" id="baE-ci-fcK"/>
                             <constraint firstItem="0Ta-wI-NuP" firstAttribute="centerY" secondItem="zxg-b3-sgt" secondAttribute="centerY" id="hqG-x8-ndi"/>
+                            <constraint firstItem="cps-9c-uOq" firstAttribute="leading" secondItem="zxg-b3-sgt" secondAttribute="leading" constant="20" id="zUB-Rs-XvC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zxg-b3-sgt"/>
                     </view>
@@ -1500,7 +1509,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hzF-nF-6eS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="qhl-xZ-lTL" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1508" y="1253"/>
+            <point key="canvasLocation" x="1521" y="1321"/>
         </scene>
         <!--Manage Rooms-->
         <scene sceneID="xgo-tE-qe6">
@@ -2172,7 +2181,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XPz-Sr-muX" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="DcU-Fk-3dK" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="757.60000000000002" y="1591.7541229385308"/>
+            <point key="canvasLocation" x="642" y="1592"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jpQ-C1-dZQ">
@@ -2646,6 +2655,124 @@
                 <exit id="FI7-rM-edj" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="92" y="-1747.3763118440781"/>
+        </scene>
+        <!--Update Account-->
+        <scene sceneID="FLy-Xt-bHJ">
+            <objects>
+                <viewController title="Update Account" id="rQb-Ug-LDJ" customClass="UpdateAccountViewController" customModule="Hotel_Applicaiton" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hae-zJ-gVh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="gDZ-ba-AG9">
+                                <rect key="frame" x="25" y="79" width="325" height="417.5"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Forename" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EAD-Mh-etU">
+                                        <rect key="frame" x="0.0" y="0.0" width="325" height="38"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="fornameInputEdit:" destination="rQb-Ug-LDJ" eventType="editingDidBegin" id="oho-LH-AEX"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Sirname" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LrN-c2-mdB">
+                                        <rect key="frame" x="0.0" y="65" width="325" height="38"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="sirnameInputEdit:" destination="rQb-Ug-LDJ" eventType="editingDidBegin" id="ZSQ-cP-egU"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="17U-iZ-Tye">
+                                        <rect key="frame" x="0.0" y="130" width="325" height="38"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
+                                        <connections>
+                                            <action selector="emailInputEdit:" destination="rQb-Ug-LDJ" eventType="editingDidBegin" id="rYQ-gd-VkP"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xvu-kk-SwI">
+                                        <rect key="frame" x="0.0" y="195" width="325" height="38"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <textInputTraits key="textInputTraits" textContentType="street-address"/>
+                                        <connections>
+                                            <action selector="addressInputEdit:" destination="rQb-Ug-LDJ" eventType="editingDidBegin" id="AZA-mz-i8Y"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Postcode" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vYN-T8-H90">
+                                        <rect key="frame" x="0.0" y="260" width="325" height="38"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" textContentType="postal-code"/>
+                                        <connections>
+                                            <action selector="postcodeInputEdit:" destination="rQb-Ug-LDJ" eventType="editingDidBegin" id="Pyc-UA-ap4"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ql3-la-rSl">
+                                        <rect key="frame" x="0.0" y="325" width="325" height="38"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="phonePad" textContentType="tel"/>
+                                        <connections>
+                                            <action selector="phoneNubmerEdit:" destination="rQb-Ug-LDJ" eventType="editingDidBegin" id="ZJu-F4-WKe"/>
+                                        </connections>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6gp-cq-wRX">
+                                        <rect key="frame" x="0.0" y="390" width="325" height="27.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="qvm-kv-4Kv">
+                                <rect key="frame" x="169.5" y="347" width="37" height="37"/>
+                                <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8kg-AI-6tW">
+                                <rect key="frame" x="162" y="617" width="51" height="30"/>
+                                <state key="normal" title="Update"/>
+                                <connections>
+                                    <action selector="updateAccountTapped:" destination="rQb-Ug-LDJ" eventType="touchUpInside" id="vZk-9Y-dvl"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="qvm-kv-4Kv" firstAttribute="centerY" secondItem="lY0-Rg-ZAO" secondAttribute="centerY" id="6s7-4T-rzO"/>
+                            <constraint firstItem="8kg-AI-6tW" firstAttribute="centerX" secondItem="lY0-Rg-ZAO" secondAttribute="centerX" id="OaS-2H-xEa"/>
+                            <constraint firstItem="qvm-kv-4Kv" firstAttribute="centerX" secondItem="lY0-Rg-ZAO" secondAttribute="centerX" id="Rx9-gV-3gg"/>
+                            <constraint firstItem="gDZ-ba-AG9" firstAttribute="leading" secondItem="lY0-Rg-ZAO" secondAttribute="leading" constant="25" id="SIB-74-TSR"/>
+                            <constraint firstItem="lY0-Rg-ZAO" firstAttribute="trailing" secondItem="gDZ-ba-AG9" secondAttribute="trailing" constant="25" id="aro-Sw-gut"/>
+                            <constraint firstItem="lY0-Rg-ZAO" firstAttribute="bottom" secondItem="8kg-AI-6tW" secondAttribute="bottom" constant="20" id="esR-DC-c6W"/>
+                            <constraint firstItem="gDZ-ba-AG9" firstAttribute="top" secondItem="lY0-Rg-ZAO" secondAttribute="top" constant="15" id="oxH-rI-YCH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="lY0-Rg-ZAO"/>
+                    </view>
+                    <connections>
+                        <outlet property="accountTypeLabel" destination="6gp-cq-wRX" id="ekQ-3W-rHj"/>
+                        <outlet property="activityIndicator" destination="qvm-kv-4Kv" id="EVn-MY-z7O"/>
+                        <outlet property="addressInput" destination="xvu-kk-SwI" id="KkW-aB-Ahf"/>
+                        <outlet property="emailInput" destination="17U-iZ-Tye" id="ZVH-es-itp"/>
+                        <outlet property="foreNameInput" destination="EAD-Mh-etU" id="2bw-I6-kP3"/>
+                        <outlet property="mainStackView" destination="gDZ-ba-AG9" id="sSQ-U4-ah0"/>
+                        <outlet property="phoneNumberInput" destination="ql3-la-rSl" id="KU2-UV-LH5"/>
+                        <outlet property="postcodeInput" destination="vYN-T8-H90" id="sqq-PR-0Vx"/>
+                        <outlet property="sirNameInput" destination="LrN-c2-mdB" id="sK0-mk-Ouq"/>
+                        <outlet property="stackConstraint" destination="oxH-rI-YCH" id="L3B-D5-cwM"/>
+                        <outlet property="updateButton" destination="8kg-AI-6tW" id="HzC-DY-InY"/>
+                        <segue destination="ekQ-9A-5n9" kind="unwind" identifier="unwindToStaffHome" unwindAction="unwindToStaffHomeWithSegue:" id="esn-4h-vhf"/>
+                        <segue destination="ekQ-9A-5n9" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="QN5-I3-76o"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="huo-fI-bxV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ekQ-9A-5n9" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1502" y="639"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

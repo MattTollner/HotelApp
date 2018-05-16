@@ -67,6 +67,11 @@ class ViewController: UIViewController {
         }
         
     }
+    
+    @IBAction func unwindToLogin(segue:UIStoryboardSegue) {
+        print("Unwind to login")
+        
+    }
 
     
     func checkInputs() -> Bool {
