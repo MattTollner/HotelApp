@@ -35,6 +35,7 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
     @IBOutlet weak var paymentAtDeskLabel: UILabel!
     @IBOutlet weak var footnoteLabel: UILabel!
     
+    @IBOutlet weak var bottonConstraint: NSLayoutConstraint!
     //Segue Vars
     var amount : Double = 0.0
     var poundAmount : Double = 0.0
@@ -50,12 +51,20 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
     var breakfastAmount = 0.0
     var deskPayment = 0.0
     
+    var moveUpAmount = 0.0
+    
     let db = Firestore.firestore()
     
     //  let paymentTextField = STPPaymentCardTextField()
     var thePaymentContext = STPPaymentContext()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        //Keyboard observer
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         buttonOutet.isEnabled = false
         if depositAmount == 0 { //Payy all
@@ -102,6 +111,44 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
         confirmEmailLabel.inputAccessoryView = toolBar
         postcodeLabel.inputAccessoryView = toolBar
         cityLabel.inputAccessoryView = toolBar
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let info = notification.userInfo {
+            let rect:CGRect = info["UIKeyboardFrameEndUserInfoKey"] as! CGRect
+            print("KEYBOARD ADJUST")
+            enableElements(enable: false)
+            self.view.layoutIfNeeded()
+            UIView.animate(withDuration: 0.25) {
+                self.view.layoutIfNeeded()
+                print("MOVE UP AMOUNT :: " + String(self.moveUpAmount))
+                self.bottonConstraint.constant = (rect.height + 20)
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if let info = notification.userInfo {
+            self.view.layoutIfNeeded()
+            enableElements(enable: true)
+            UIView.animate(withDuration: 0.25) {
+                self.view.layoutIfNeeded()
+                self.bottonConstraint.constant = 87
+            }
+        }
+    }
+    
+    @IBOutlet weak var elementsStack: UIStackView!
+    @IBOutlet weak var priceStack: UIStackView!
+    
+    func enableElements(enable : Bool){
+        if enable {
+            elementsStack.isHidden = false
+            priceStack.isHidden = false
+        } else {
+            elementsStack.isHidden = true
+            priceStack.isHidden = true
+        }
     }
     
     @objc func doneClicked(){

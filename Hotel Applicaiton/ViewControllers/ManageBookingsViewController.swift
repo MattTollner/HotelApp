@@ -72,6 +72,12 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
     
+    @IBAction func refreshButton(_ sender: Any) {
+        activityIndicator.startAnimating()
+        timeSegment.selectedSegmentIndex = 0
+        checkInSegment.selectedSegmentIndex = 0
+        testQ(roomType: "<#T##String#>")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

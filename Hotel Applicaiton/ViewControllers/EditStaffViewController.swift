@@ -17,16 +17,18 @@ extension String {
 class EditStaffViewController: UIViewController {
 
   
+    @IBOutlet weak var stackConstraint: NSLayoutConstraint!
     @IBOutlet weak var foreNameInput: UITextField!
     @IBOutlet weak var sirNameInput: UITextField!
     @IBOutlet weak var emailInput: UITextField!
     @IBOutlet weak var addressInput: UITextField!
     @IBOutlet weak var phoneNumberInput: UITextField!
     @IBOutlet weak var postcodeInput: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-   
+   var moveStack = false
     
-    
+               let db = Firestore.firestore()
      var staffToUpdate = [Staff]()
     
     @IBOutlet weak var accountType: UISegmentedControl!
@@ -35,6 +37,10 @@ class EditStaffViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        //Keyboard observer
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         
         
@@ -83,8 +89,94 @@ class EditStaffViewController: UIViewController {
         phoneNumberInput.inputAccessoryView = toolBar
     }
     
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let info = notification.userInfo {
+            let rect:CGRect = info["UIKeyboardFrameEndUserInfoKey"] as! CGRect
+            print("KEYBOARD ADJUST")
+         
+            self.view.layoutIfNeeded()
+            if(moveStack){
+                           
+                UIView.animate(withDuration: 0.25) {
+                    self.view.layoutIfNeeded()
+                    self.stackConstraint.constant = -35
+                }
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if let info = notification.userInfo {
+            self.view.layoutIfNeeded()
+            UIView.animate(withDuration: 0.25) {
+                self.view.layoutIfNeeded()
+                self.stackConstraint.constant = 15
+            }
+        }
+    }
+    
+    
+    
     @objc func doneClicked(){
         self.view.endEditing(true)
+    }
+    
+    
+    @IBAction func fornameInputEdit(_ sender: Any) {
+        moveStack = false
+    }
+    @IBAction func sirnameInputEdit(_ sender: Any) {
+        moveStack = false
+    }
+    
+    @IBAction func emailInputEdit(_ sender: Any) {
+        moveStack = false
+    }
+    
+    @IBAction func addressInputEdit(_ sender: Any) {
+        moveStack = false
+    }
+
+    @IBAction func postcodeInputEdit(_ sender: Any) {
+        moveStack = true
+    }
+    
+    @IBAction func phoneNubmerEdit(_ sender: Any) {
+        moveStack = true
+    }
+    @IBAction func deleteButtonTapped(_ sender: Any) {
+        deleteStaff()
+    }
+    
+    @IBOutlet weak var mainStackView: UIStackView!
+    func deleteStaff(){
+        
+        let delAlert = UIAlertController(title: "Delete Staff", message: "Are you sure you want to delete the staff account?", preferredStyle: UIAlertControllerStyle.alert)
+        delAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
+            self.activityIndicator.startAnimating()
+            self.mainStackView.isHidden = true
+            self.db.collection("Staff").document(self.staffToUpdate[0].StaffID).delete() { err in
+                if let err = err {
+                    print("Error removing staff document: \(err)")
+                    self.activityIndicator.stopAnimating()
+                    self.mainStackView.isHidden = false
+                    self.fireError(titleText: "Error deleting staff!", lowerText: err.localizedDescription)
+                } else {
+                    self.activityIndicator.stopAnimating()
+                    self.mainStackView.isHidden = false
+                    self.confirmAlert()
+                    
+                }
+            }
+        }))
+        
+        delAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+            
+        }))
+        
+        self.present(delAlert, animated: true, completion: nil)
+        
+        
     }
     
     func checkLabels( ) -> Bool{
@@ -160,7 +252,7 @@ class EditStaffViewController: UIViewController {
         let successAlert = UIAlertController(title: "Account Updated", message: "Updated account information is now live", preferredStyle: UIAlertControllerStyle.alert)
         
         successAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
-            self.performSegue(withIdentifier: "unwindEditAccount", sender: self)
+            self.performSegue(withIdentifier: "unwindToManageStaff", sender: self)
         }))
         
         
@@ -180,7 +272,7 @@ class EditStaffViewController: UIViewController {
             print("All fields need to be entered")
         } else {
             
-            let db = Firestore.firestore()
+ 
             let staffType = accountType.titleForSegment(at: accountType.selectedSegmentIndex)
             let staff : [String : Any] = ["Forename" : foreNameInput.text!,
                                           "Sirname" : sirNameInput.text!,

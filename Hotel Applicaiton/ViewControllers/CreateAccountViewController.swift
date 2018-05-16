@@ -19,7 +19,10 @@ class CreateAccountViewController: UIViewController {
     @IBOutlet weak var phoneNumberInput: UITextField!
     @IBOutlet weak var postcodeInput: UITextField!
     
+    @IBOutlet weak var stackConstraint: NSLayoutConstraint!
     @IBOutlet weak var accountType: UISegmentedControl!
+    
+    var moveStack = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,12 +42,64 @@ class CreateAccountViewController: UIViewController {
         addressInput.inputAccessoryView = toolBar
         postcodeInput.inputAccessoryView = toolBar
         phoneNumberInput.inputAccessoryView = toolBar
+        
+        //Keyboard observer
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let info = notification.userInfo {
+            let rect:CGRect = info["UIKeyboardFrameEndUserInfoKey"] as! CGRect
+            print("KEYBOARD ADJUST")
+            if(moveStack){
+                self.view.layoutIfNeeded()
+                UIView.animate(withDuration: 0.25) {
+                    self.view.layoutIfNeeded()
+                    self.stackConstraint.constant = -80
+                }
+            }
+            
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        moveStack = false
+        if let info = notification.userInfo {
+            self.view.layoutIfNeeded()
+            UIView.animate(withDuration: 0.25) {
+                self.view.layoutIfNeeded()
+                self.stackConstraint.constant = 15
+            }
+        }
     }
     
     @objc func doneClicked(){
         self.view.endEditing(true)
     }
-
+    
+    @IBAction func phoneNumberEdit(_ sender: Any) {
+        moveStack = true
+    }
+    
+    @IBAction func postCodeEdit(_ sender: Any) {
+        moveStack = true
+    }
+    @IBAction func addressEdit(_ sender: Any) {
+        moveStack = false
+    }
+    @IBAction func emailEdit(_ sender: Any) {
+        moveStack = false
+    }
+    @IBAction func sirNameEdt(_ sender: Any) {
+        moveStack = false
+    }
+    @IBAction func fornemaeEdit(_ sender: Any) {
+        moveStack = false
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -178,7 +233,7 @@ class CreateAccountViewController: UIViewController {
                     let successAlert = UIAlertController(title: "Staff Created", message: "Created a new account with email : " + self.emailInput.text!, preferredStyle: UIAlertControllerStyle.alert)
                     
                     successAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
-                        self.performSegue(withIdentifier: "unwindCreateAccount", sender: self)
+                        self.performSegue(withIdentifier: "unwindToManageStaff", sender: self)
                     }))
                     
                     

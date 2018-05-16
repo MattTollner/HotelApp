@@ -18,7 +18,7 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     @IBOutlet weak var roomState: UITextField!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var addRoomButton: UIButton!
-    
+      let db = Firestore.firestore()
  
     var roomToUpdate : Room?
     var topRoom : Int?
@@ -181,7 +181,7 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
             let roomDict : [String : Any] = ["Number" : roomNumber.text!, "Price" : roomPrice.text!,
                                              "RoomState" : roomState.text!, "RoomType" : roomType.text!, "RoomID" : room.RoomID]
             
-            let db = Firestore.firestore()
+          
             db.collection("Rooms").document(room.RoomID).setData(roomDict) { err in
                 if let err = err {
                     print("Error adding document: \(err)")
@@ -191,6 +191,7 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
                     self.activityIndicator.stopAnimating()
                     self.updateRoomButton.isEnabled = true
                     print("Document succesfully updated PERFORM SEGUE")
+                    self.confirmAlert()
                 }
             }
          
@@ -198,6 +199,50 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
                 print("Fields incorrect")
             }
         }
+    }
+    
+    func confirmAlert(){
+        let successAlert = UIAlertController(title: "Account Updated", message: "Updated account information is now live", preferredStyle: UIAlertControllerStyle.alert)
+        
+        successAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
+            self.performSegue(withIdentifier: "unwindEditRoom", sender: self)
+        }))
+        
+        
+        self.present(successAlert, animated: true, completion: nil)
+    }
+    
+    func deleteRoom(){
+        
+        let delAlert = UIAlertController(title: "Delete Staff", message: "Are you sure you want to delete the staff account?", preferredStyle: UIAlertControllerStyle.alert)
+        delAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
+            self.activityIndicator.startAnimating()
+            //self.mainStackView.isHidden = true
+            self.db.collection("Room").document((self.roomToUpdate?.RoomID)!).delete() { err in
+                if let err = err {
+                    print("Error removing staff document: \(err)")
+                    self.activityIndicator.stopAnimating()
+                    //self.mainStackView.isHidden = false
+                    self.fireError(titleText: "Error deleting staff!", lowerText: err.localizedDescription)
+                } else {
+                    self.activityIndicator.stopAnimating()
+                    //self.mainStackView.isHidden = false
+                    self.confirmAlert()
+                    
+                }
+            }
+        }))
+        
+        delAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+            
+        }))
+        
+        self.present(delAlert, animated: true, completion: nil)
+        
+    
+    }
+    @IBAction func deleteRoomTapped(_ sender: Any) {
+        deleteRoom()
     }
     
     func fireError(titleText : String, lowerText : String){

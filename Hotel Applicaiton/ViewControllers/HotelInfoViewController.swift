@@ -19,10 +19,12 @@ class HotelInfoViewController: UIViewController {
     @IBOutlet weak var checkInInput: UITextField!
     @IBOutlet weak var phoneInput: UITextField!
     
+    @IBOutlet weak var stackConstraint: NSLayoutConstraint!
     @IBOutlet weak var detailStack: UIStackView!
     let db = Firestore.firestore()
     var info : HotelInfo?
    
+    var moveKeyBoard = false
     let docId = "R2Q0AM8B4G88twCy12ZG"
  
     
@@ -45,7 +47,40 @@ class HotelInfoViewController: UIViewController {
         checkInInput.inputAccessoryView = toolBar
         checkOutInput.inputAccessoryView = toolBar
         phoneInput.inputAccessoryView = toolBar
+        
+        //Keyboard observer
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if moveKeyBoard{
+            if let info = notification.userInfo {
+                let rect:CGRect = info["UIKeyboardFrameEndUserInfoKey"] as! CGRect
+                print("KEYBOARD ADJUST")
+                self.view.layoutIfNeeded()
+                UIView.animate(withDuration: 0.25) {
+                    self.view.layoutIfNeeded()
+                    self.stackConstraint.constant = (rect.height)
+                }
+            }
+        } else{
+            print("Bool False")
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        moveKeyBoard = false
+        if let info = notification.userInfo {
+            self.view.layoutIfNeeded()
+            UIView.animate(withDuration: 0.25) {
+                self.view.layoutIfNeeded()
+                self.stackConstraint.constant = 30
+            }
+        }
+    }
+    
     
     @objc func doneClicked(){
         self.view.endEditing(true)
@@ -63,6 +98,24 @@ class HotelInfoViewController: UIViewController {
         
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true)
+    }
+    
+    
+    @IBAction func phoneInputEdit(_ sender: Any) {
+        print("Phone Editing")
+        moveKeyBoard = true
+    }
+    @IBAction func checkOutInput(_ sender: Any) {
+        moveKeyBoard = true
+    }
+    @IBAction func checkInInput(_ sender: Any) {
+        moveKeyBoard = true
+    }
+    @IBAction func hotelEmailInput(_ sender: Any) {
+        moveKeyBoard = false
+    }
+    @IBAction func breakfastInputEdit(_ sender: Any) {
+        moveKeyBoard = false
     }
     
     func getInfo(){

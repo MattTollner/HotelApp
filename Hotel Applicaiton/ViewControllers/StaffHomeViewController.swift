@@ -57,7 +57,7 @@ class StaffHomeViewController: UIViewController {
     @IBAction func editInfoTapped(_ sender: Any) {
         if HelperClass.userTypeRefernce.userType == "Admin" {
             print("Perfrom Segue")
-            performSegue(withIdentifier: "toManageRooms", sender: self)
+            performSegue(withIdentifier: "toEditInfo", sender: self)
         } else {
             print("Permission Denied")
             self.present(alert, animated: true, completion: nil)
