@@ -8,6 +8,7 @@ class BookingSummaryViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var checkInLabel: UILabel!
     @IBOutlet weak var checkOutLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var theButton: UIButton!
     
     @IBOutlet weak var extraPriceLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
@@ -19,8 +20,8 @@ class BookingSummaryViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var checkOutSmallLabel: UILabel!
     @IBOutlet weak var breakfastSegment: UISegmentedControl!
     var roomIDs = [String]()
-    var breakfastRoomIDs  = ["","","","","","","","","","","","","","",""]
-    var breakfastArray = ["n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"]
+    var breakfastRoomIDs  = ["","","",""]
+    var breakfastArray = ["n","n","n","n"]
     var roomsToBook = [Room]()
     var totalPrice : Double = 0
     var paymentPrice : Double = 0
@@ -195,8 +196,12 @@ class BookingSummaryViewController: UIViewController, UITableViewDelegate, UITab
         }
         
     }
+
     
     func getRooms(){
+        
+        theButton.isEnabled = false
+        
         roomsToBook = []
         db.collection("Rooms").getDocuments { (snapshot, error) in
             if let error = error {
@@ -214,6 +219,7 @@ class BookingSummaryViewController: UIViewController, UITableViewDelegate, UITab
             }
             self.tableView.reloadData()
             self.populateText()
+            self.theButton.isEnabled = true
             self.activityIndicator.stopAnimating()
             self.price()
            // self.totalPrice(segmentIndex: self.paymentSegment.selectedSegmentIndex)

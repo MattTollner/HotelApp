@@ -14,6 +14,7 @@ class ManageRoomViewController: UITableViewController {
 
     var specifiedRoomList = [Room]()
     var roomsList = [Room]()
+    var roomNumberList : [String] = []
     var updateRoom = false;
     var selectedRoom : Room?
     var topRoom = 0
@@ -79,6 +80,12 @@ class ManageRoomViewController: UITableViewController {
                     delAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
                         print("Document successfully removed!")
                         
+                        self.activityIndicator.startAnimating()
+                        self.getRooms()
+                        self.segmentControl.selectedSegmentIndex = 0
+                        self.segmentControl.isEnabled = false
+                        
+                        /*
                         for i in 1...self.roomsList.count{
                             print("roomsList count : " + String(self.roomsList.count))
                             if self.specifiedRoomList[indexPath.row].RoomID == self.roomsList[i].RoomID
@@ -88,10 +95,11 @@ class ManageRoomViewController: UITableViewController {
                                 break
                             }
                         }
+ */
                         
-                        self.specifiedRoomList.remove(at: indexPath.row)
+                        //self.specifiedRoomList.remove(at: indexPath.row)
                         
-                        tableView.reloadData()
+                        //tableView.reloadData()
                     }))
                     
                     delAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
@@ -149,11 +157,13 @@ class ManageRoomViewController: UITableViewController {
         if(updateRoom == true) {
             if  let destination = segue.destination as? EditRoomViewController {
                 destination.roomToUpdate = selectedRoom
-            }
+                destination.roomsNumberList = roomNumberList
+            } 
         }
         
         if let destination = segue.destination as? CreateRoomViewController{
             destination.topRoom = topRoom
+            destination.roomsNumberList = roomNumberList
         }
     }
   
@@ -181,6 +191,7 @@ class ManageRoomViewController: UITableViewController {
         activityIndicator.startAnimating()
         getRooms()
         segmentControl.selectedSegmentIndex = 0
+        segmentControl.isEnabled = false
     }
     
     func getRooms(){
@@ -197,18 +208,25 @@ class ManageRoomViewController: UITableViewController {
                     
                     let rooms = Room(dictionary: document.data() as [String : AnyObject])
                     self.roomsList.append(rooms)
+                    self.roomNumberList.append(rooms.Number)
                     if(rooms.RoomType == "Single"){
                        self.specifiedRoomList.append(rooms)
                     }
-                    
+                    self.segmentControl.isEnabled = true
                     self.tableView.reloadData()                    
                     
                 }
+                
+            }
+            
+            if self.roomsList.count > 0 {
+                self.getLastRoom()
+            } else {
+                self.activityIndicator.stopAnimating()
             }
             
             print(self.roomsList.count)
-            self.getLastRoom()
-            
+           
         }
     }
 }

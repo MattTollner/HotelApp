@@ -23,7 +23,7 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     var roomToUpdate : Room?
     var topRoom : Int?
  
-    
+      var roomsNumberList : [String] = []
     @IBOutlet weak var addRoom: UIButton!
     let thePickerView = UIPickerView()
     
@@ -110,10 +110,12 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         } else {
             roomNumber.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
         }
-        if(roomPrice.text?.isAlpha == true){
+        if(roomPrice.text?.isNumeric != true){
+            print("ROOM PRICE NOT GOOD")
             roomPrice.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
             isPass = false
         }else {
+            print("ROOM PRICE GOOD")
             roomPrice.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
         }
         
@@ -146,8 +148,7 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         let types = ["Single", "Doulbe Single", "Double", "Family"]
         
         for i in types {
-            if roomType.text == i {
-                isPass = true
+            if roomType.text == i {           
                 roomType.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
                 break
             } else {
@@ -157,6 +158,23 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
                 isPass = false
             }
         }
+        
+        if let roomNum = roomNumber.text{
+            if(roomsNumberList.contains(roomNum)){
+                if(roomNum == roomToUpdate?.Number)
+                {
+                    isPass = true
+                } else {
+                    isPass = false
+                    fireError(titleText: "Room Number Exist", lowerText: "That room number appears to be on the database already")
+                }
+                
+            }
+        } else {
+            isPass = false
+        }
+        
+        
         
         if(isPass){
             return true

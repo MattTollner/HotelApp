@@ -26,6 +26,7 @@ class CreateRoomViewController: UIViewController, UITextFieldDelegate, UIPickerV
     
     // Hold Current array
     var currentArr : [String] = []
+    var roomsNumberList : [String] = []
     //Current text field
     var activeTextField : UITextField!
     let typeArray = ["Single", "Double", "Double Single", "Family"]
@@ -162,30 +163,39 @@ class CreateRoomViewController: UIViewController, UITextFieldDelegate, UIPickerV
     func checkLabels( ) -> Bool{
         var isPass = true
         
+        
+        
         if(roomNumber.text == ""){
             roomNumber.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
             isPass = false
         } else {
             roomNumber.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
         }
-        if(roomPrice.text?.isAlpha == true){
+        if(roomPrice.text?.isNumeric != true){
+            print("ROOM PRICE NOT GOOD")
             roomPrice.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
             isPass = false
         }else {
+            print("ROOM PRICE GOOD")
             roomPrice.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
         }
+      
         
         let types = ["Single", "Doulbe Single", "Double", "Family"]
         
         for i in types {
             if roomType.text == i {
-                isPass = true
                 roomType.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
                 break
             } else {
                 roomType.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
                 isPass = false
             }
+        }
+        
+        if(roomsNumberList.contains(roomNumber.text!)){
+            isPass = false
+            fireError(titleText: "Room Number Exist", lowerText: "That room number appears to be on the database already")
         }
         
         if(isPass){

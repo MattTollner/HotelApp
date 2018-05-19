@@ -50,9 +50,24 @@ class SearchBookingViewController: UIViewController, UITableViewDataSource, UITa
         tableView.dataSource = self
         errorLabel.isHidden = true
         hideElements()
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
         
-        // Do any additional setup after loading the view.
+        toolBar.setItems([doneButton], animated: true)
+        searchBar.inputAccessoryView = toolBar
+        
+        
+        // docRef = Firestore.firestore().collection("Rooms")
+        //ref = db.collection
+        
+        print("view did load")
     }
+    
+    @objc func doneClicked(){
+        view.endEditing(true)
+    }
+    // Do any additional setup after loading the view.
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -117,8 +132,8 @@ class SearchBookingViewController: UIViewController, UITableViewDataSource, UITa
     
     @IBAction func testButton(_ sender: Any) {
         self.nameLabel.text = self.customer?.getFullName()
-        self.checkInLabel.text = self.booking?.getCheckIn()
-        self.checkOutLabel.text = self.booking?.getCheckOut()
+        self.checkInLabel.text = "Check In: " + (self.booking?.getCheckIn())!
+        self.checkOutLabel.text = "Check Out: " + (self.booking?.getCheckOut())!
         self.bookingStatusLabel.text = self.booking?.BookingStatus
         self.amountPayedLabel.text = self.booking?.getAmountPayed()
         self.totalAmountLabel.text = self.booking?.getTotalAmount()
@@ -190,8 +205,8 @@ class SearchBookingViewController: UIViewController, UITableViewDataSource, UITa
                         self.customer = Customer(dictionary: snapshot?.data()! as! [String : AnyObject])
                         print("Success found customer")
                         self.nameLabel.text = self.customer?.getFullName()
-                        self.checkInLabel.text = self.booking?.getCheckIn()
-                        self.checkOutLabel.text = self.booking?.getCheckOut()
+                        self.checkInLabel.text = "Check In: " + (self.booking?.getCheckIn())!
+                        self.checkOutLabel.text = "Check Out: " + (self.booking?.getCheckOut())!
                         self.bookingStatusLabel.text = self.booking?.BookingStatus
                         self.amountPayedLabel.text = self.booking?.getAmountPayedDisplay()
                         self.totalAmountLabel.text = self.booking?.getTotalAmountDisplay()
@@ -265,7 +280,7 @@ class SearchBookingViewController: UIViewController, UITableViewDataSource, UITa
        
         if let booking = self.booking {
             cell.roomNumberLabel.text = bookedRooms[indexPath.row].Number
-            cell.roomTypeLabel.text = bookedRooms[indexPath.row].RoomType
+            cell.roomTypeLabel.text = "Type: " + bookedRooms[indexPath.row].RoomType
             //cell.roomStatusLabel.text = bookedRooms[indexPath.row].RoomState
             
             if (booking.Breakfast.contains(bookedRooms[indexPath.row].RoomID)){

@@ -111,6 +111,7 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
         confirmEmailLabel.inputAccessoryView = toolBar
         postcodeLabel.inputAccessoryView = toolBar
         cityLabel.inputAccessoryView = toolBar
+        
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -424,13 +425,23 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
         }
         
         let url = baseURL.appendingPathComponent("email")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        let checkIn = dateFormatter.string(from: self.checkInDate)
+        let checkOut = dateFormatter.string(from: self.checkOutDate)
         
-        
+        print("CHECK IN : " + checkIn + " Checkout " + checkOut)
+        let nameC = forenameLabel.text! + " " + sirnameLabel.text!
         Alamofire.request(url, method: .post, parameters: [
             
-            "customerEmail" : "matt.tollners@gmail.com",
-            "senderEmail" : "matt.tollner@live.co.uk",
-            "bookingRef" : bookingID
+            "customerEmail" : emailLabel.text!,
+            "senderEmail" : emailLabel.text!,
+            "bookingRef" : bookingID,
+            "totalAmount" : self.fullAmount,
+            "amountPayed" : self.depositAmount,
+            "checkInDate" : checkIn,
+            "checkOutDate" : checkOut,
+            "name": nameC,
             
             ])
             .validate(statusCode: 200..<300)

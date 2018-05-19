@@ -146,7 +146,7 @@ class CreateAccountViewController: UIViewController {
         } else {
             foreNameInput.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
         }
-        if(foreNameInput.text?.isAlpha == false){
+        if(foreNameInput.text?.isCharacter == false){
             foreNameInput.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
             isPass = false
         }else {
@@ -159,7 +159,7 @@ class CreateAccountViewController: UIViewController {
         }else {
             sirNameInput.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
         }
-        if(sirNameInput.text?.isAlpha == false){
+        if(sirNameInput.text?.isCharacter == false){
             sirNameInput.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
             isPass = false
         }else {
@@ -185,7 +185,7 @@ class CreateAccountViewController: UIViewController {
         }
         if(phoneNumberInput.text == "" || (phoneNumberInput.text?.isAlphaCharacter)!){
             phoneNumberInput.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
-            return false
+            isPass = false
         }else {
             phoneNumberInput.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
         }

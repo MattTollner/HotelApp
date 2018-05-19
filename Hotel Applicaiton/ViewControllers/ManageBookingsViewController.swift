@@ -83,6 +83,7 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
         let currentDate = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
@@ -102,95 +103,105 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func updateTable(){
-        refinedCustomerList = []
-        refinedBookingList  = []
         
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy" //Your date format
-        let theDate = dateFormatter.date(from: todayDateStr!)
-        var a : Int = Int(bookingList.endIndex)
-        a -= 1
-        
-        print("Booking 1 date : " + dateFormatter.string(from: bookingList[0].CheckIn))
-        
-        if checkInSegment.selectedSegmentIndex == 0 {
-            //Check In
-            if timeSegment.selectedSegmentIndex == 0 {
-                //All
-                print("All")
-                for i in 0...a {
-                    refinedBookingList.append(bookingList[i])
-                    refinedCustomerList.append(customerList[i])
-                }
-            } else if timeSegment.selectedSegmentIndex == 1 {
-                //Past
-                print("Past")
-                for i in 0...a {
-                    if bookingList[i].CheckIn.compare(theDate!) == .orderedAscending {
-                        refinedBookingList.append(bookingList[i])
-                        refinedCustomerList.append(customerList[i])
-                    }
-                }
-            } else if timeSegment.selectedSegmentIndex == 2 {
-                //Present
-                print("Present")
-                for i in 0...a{
-                    if bookingList[i].CheckIn.compare(theDate!) == .orderedSame {
-                        refinedBookingList.append(bookingList[i])
-                        refinedCustomerList.append(customerList[i])
-                    }
-                }
-            } else if timeSegment.selectedSegmentIndex == 3 {
-                //Future
-                print("Future")
-                for i in 0...a {
-                    if bookingList[i].CheckIn.compare(theDate!) == .orderedDescending {
-                        refinedBookingList.append(bookingList[i])
-                        refinedCustomerList.append(customerList[i])
-                    }
-                }
-            } else  {
-                print("Nothing")
-            }
+        if bookingList[0].BookingID == ""{
+            print("BOOKING LIST EMPTY :: ERROR CAUGHT")
         } else {
-            //Check Out
-            if timeSegment.selectedSegmentIndex == 0 {
-                //All
-                print("All")
-                for i in 0...a {
-                    refinedBookingList.append(bookingList[i])
-                    refinedCustomerList.append(customerList[i])
-                }
-            } else if timeSegment.selectedSegmentIndex == 1 {
-                //Past
-                print("Past")
-                for i in 0...a {
-                    if bookingList[i].CheckOut.compare(theDate!) == .orderedAscending {
+            
+            
+            
+            refinedCustomerList = []
+            refinedBookingList  = []
+            
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd/MM/yyyy" //Your date format
+            let theDate = dateFormatter.date(from: todayDateStr!)
+            var a : Int = Int(bookingList.endIndex)
+            a -= 1
+            
+            //ERROR WAS ERE
+            print("Booking 1 date : " + dateFormatter.string(from: bookingList[0].CheckIn))
+            
+            if checkInSegment.selectedSegmentIndex == 0 {
+                //Check In
+                if timeSegment.selectedSegmentIndex == 0 {
+                    //All
+                    print("All")
+                    for i in 0...a {
                         refinedBookingList.append(bookingList[i])
                         refinedCustomerList.append(customerList[i])
                     }
+                } else if timeSegment.selectedSegmentIndex == 1 {
+                    //Past
+                    print("Past")
+                    for i in 0...a {
+                        if bookingList[i].CheckIn.compare(theDate!) == .orderedAscending {
+                            refinedBookingList.append(bookingList[i])
+                            refinedCustomerList.append(customerList[i])
+                        }
+                    }
+                } else if timeSegment.selectedSegmentIndex == 2 {
+                    //Present
+                    print("Present")
+                    for i in 0...a{
+                        if bookingList[i].CheckIn.compare(theDate!) == .orderedSame {
+                            refinedBookingList.append(bookingList[i])
+                            refinedCustomerList.append(customerList[i])
+                        }
+                    }
+                } else if timeSegment.selectedSegmentIndex == 3 {
+                    //Future
+                    print("Future")
+                    for i in 0...a {
+                        if bookingList[i].CheckIn.compare(theDate!) == .orderedDescending {
+                            refinedBookingList.append(bookingList[i])
+                            refinedCustomerList.append(customerList[i])
+                        }
+                    }
+                } else  {
+                    print("Nothing")
                 }
-            } else if timeSegment.selectedSegmentIndex == 2 {
-                //Present
-                print("Present")
-                for i in 0...a{
-                    if bookingList[i].CheckOut.compare(theDate!) == .orderedSame {
+            } else {
+                //Check Out
+                if timeSegment.selectedSegmentIndex == 0 {
+                    //All
+                    print("All")
+                    for i in 0...a {
                         refinedBookingList.append(bookingList[i])
                         refinedCustomerList.append(customerList[i])
                     }
-                }
-            } else if timeSegment.selectedSegmentIndex == 3 {
-                //Future
-                print("Future")
-                for i in 0...a {
-                    if bookingList[i].CheckOut.compare(theDate!) == .orderedDescending {
-                        refinedBookingList.append(bookingList[i])
-                        refinedCustomerList.append(customerList[i])
+                } else if timeSegment.selectedSegmentIndex == 1 {
+                    //Past
+                    print("Past")
+                    for i in 0...a {
+                        if bookingList[i].CheckOut.compare(theDate!) == .orderedAscending {
+                            refinedBookingList.append(bookingList[i])
+                            refinedCustomerList.append(customerList[i])
+                        }
                     }
+                } else if timeSegment.selectedSegmentIndex == 2 {
+                    //Present
+                    print("Present")
+                    for i in 0...a{
+                        if bookingList[i].CheckOut.compare(theDate!) == .orderedSame {
+                            refinedBookingList.append(bookingList[i])
+                            refinedCustomerList.append(customerList[i])
+                        }
+                    }
+                } else if timeSegment.selectedSegmentIndex == 3 {
+                    //Future
+                    print("Future")
+                    for i in 0...a {
+                        if bookingList[i].CheckOut.compare(theDate!) == .orderedDescending {
+                            refinedBookingList.append(bookingList[i])
+                            refinedCustomerList.append(customerList[i])
+                        }
+                    }
+                } else  {
+                    print("Nothing")
                 }
-            } else  {
-                print("Nothing")
             }
         }
         
@@ -198,7 +209,11 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
     
     
     @IBAction func checkInChanged(_ sender: Any) {
-        updateTable()
+        if(bookingList.isEmpty){
+            print("No bookings to filter")
+        } else {
+            updateTable()
+        }
         tableView.reloadData()
     }
     

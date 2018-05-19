@@ -27,8 +27,9 @@ class HotelMainPageViewController: UIViewController {
     
     @IBOutlet weak var infoStack: UIStackView!
     
-    var hotelInfo : HotelInfo?
-    var db : Firestore?
+   let db = Firestore.firestore()
+     var hotelInfo : HotelInfo?
+
     
     @IBOutlet weak var breakfastLabel: UILabel!
     
@@ -37,10 +38,11 @@ class HotelMainPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+      
+       
         disableElements()
         activityIndicator.startAnimating()
         loadingLabel.isHidden = false
-        db = Firestore.firestore()
         retriveInformation()
     }
     
@@ -121,7 +123,7 @@ class HotelMainPageViewController: UIViewController {
     func retriveInformation(){
         print("Retriving Info")
         disableElements()
-        db?.collection("HotelInfo").getDocuments { (snapshot, error) in
+        db.collection("HotelInfo").getDocuments { (snapshot, error) in
             if let error = error {
                 //print("Error getting documents: \(error)")
                 self.fireError(titleText: "Error retriving hotel information", lowerText: error.localizedDescription)

@@ -279,7 +279,19 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
                 for i in roomTypeArr {
                     print ("Room TYpe :  + " + i)
                 }
-                testQ(roomType: roomTypeArr[roomTypeArrIndex])
+                
+                if roomTypeArr.count != 0{
+                    testQ(roomType: roomTypeArr[roomTypeArrIndex])
+                } else {
+                    print("roomTypeEmpty")
+                    activityIndicator.stopAnimating()
+                    
+                    tableView.reloadData()
+                    checkButton.isEnabled = true
+                    fireError(titleText: "Error table not loaded", lowerText: "Please try again")
+                    //testQ(roomType: roomTypeArr[roomTypeArrIndex])
+                }
+                
                 
                 
             }
@@ -348,7 +360,8 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
         nightsSelected = false
         thePicker.reloadAllComponents()
         print("editing room")
-        //roomCountTextFiled.text = "1"
+        roomCountTextFiled.text = "1"
+        
     
     }
     @IBAction func touchUpRooms(_ sender: Any) {
@@ -357,6 +370,9 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     
+    @IBAction func editEndRooms(_ sender: Any) {
+        tableView.reloadData()
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "bookingCell", for: indexPath) as! BookingRoomTableViewCell
@@ -635,6 +651,7 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
     func promiseGetBookings() -> Promise<[Booking]>{
         return Promise { fulfil, reject in
             let dateFormatter = DateFormatter()
+           
             dateFormatter.dateFormat = "dd-MM-yyyy"
             let sDate = dateTextField!.text
             let StartB = dateFormatter.date(from: sDate!)
@@ -642,14 +659,21 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
             dateComponent.day = 3
             let EndB = Calendar.current.date(byAdding: dateComponent, to: StartB!)
             
+            print("END B DATE :: " + dateFormatter.string(from: EndB!))
+            
             self.db.collection("Booking").whereField("CheckIn", isLessThanOrEqualTo: EndB!).getDocuments(completion: { (snapshot, error) in
                 if let error = error {
                     self.fireError(titleText: "Error fetching rooms", lowerText: error.localizedDescription)
                     reject(error)
                 }else
                 {
+                    
+                    print("BOOKING RETRIVED ::  " + String(snapshot!.documents.count))
+                    
                     for document in snapshot!.documents{
+                        
                         let booking = Booking(dictionary : document.data() as [String : AnyObject])
+                        print("BOOKING :: " + booking.getCheckIn())
                         //print("Booking documetn for room " + booking.RoomID)
                 
                         if booking.checkAvailability(sDate: sDate!){
@@ -668,6 +692,7 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
                             continue
                         }
                     }
+                    print("FULFIL PROMISE GET BOOKING")
                     fulfil(self.potentailBookings)
                 }
             })

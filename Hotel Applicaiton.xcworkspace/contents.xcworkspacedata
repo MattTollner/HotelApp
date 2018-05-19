@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Lato2OFL">
+   </FileRef>
+   <FileRef
       location = "group:Hotel Applicaiton.xcodeproj">
    </FileRef>
    <FileRef

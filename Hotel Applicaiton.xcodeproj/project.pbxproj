@@ -23,6 +23,9 @@
 		0B78E4132039BA1B003661FA /* ManageStaffTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B78E4122039BA1B003661FA /* ManageStaffTableViewController.swift */; };
 		0B78E4152039CF0D003661FA /* EditStaffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B78E4142039CF0C003661FA /* EditStaffViewController.swift */; };
 		0B9ADA9420AC838B00A41361 /* UpdateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ADA9320AC838B00A41361 /* UpdateAccountViewController.swift */; };
+		0BACC9BA20AF7BD900214056 /* Lato2OFL copy in Resources */ = {isa = PBXBuildFile; fileRef = 0BACC9B920AF7BD900214056 /* Lato2OFL copy */; };
+		0BACC9BC20AF7C4200214056 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BACC9BB20AF7C4200214056 /* Lato-Light.ttf */; };
+		0BACC9BE20AF7C4D00214056 /* Lato-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BACC9BD20AF7C4C00214056 /* Lato-Thin.ttf */; };
 		33EEE9E10BE608C0E5F9F669 /* Pods_Hotel_ApplicaitonUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59D3ED5F9D6D1AFB886EBD7C /* Pods_Hotel_ApplicaitonUITests.framework */; };
 		4D911016942125DD7C0DED00 /* Pods_Hotel_ApplicaitonTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AE8CB443EA3C6A6DBF36010 /* Pods_Hotel_ApplicaitonTests.framework */; };
 		DE4F93A7EDA7A3E4E158B29E /* Pods_Hotel_Applicaiton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C33386EEADCA90F9D2F76601 /* Pods_Hotel_Applicaiton.framework */; };
@@ -89,6 +92,9 @@
 		0B78E4122039BA1B003661FA /* ManageStaffTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageStaffTableViewController.swift; sourceTree = "<group>"; };
 		0B78E4142039CF0C003661FA /* EditStaffViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStaffViewController.swift; sourceTree = "<group>"; };
 		0B9ADA9320AC838B00A41361 /* UpdateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAccountViewController.swift; sourceTree = "<group>"; };
+		0BACC9B920AF7BD900214056 /* Lato2OFL copy */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Lato2OFL copy"; sourceTree = "<group>"; };
+		0BACC9BB20AF7C4200214056 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
+		0BACC9BD20AF7C4C00214056 /* Lato-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Thin.ttf"; sourceTree = "<group>"; };
 		59D3ED5F9D6D1AFB886EBD7C /* Pods_Hotel_ApplicaitonUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hotel_ApplicaitonUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AE8CB443EA3C6A6DBF36010 /* Pods_Hotel_ApplicaitonTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hotel_ApplicaitonTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D6595B9E7DB8802B152C4B4 /* Pods-Hotel ApplicaitonUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hotel ApplicaitonUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hotel ApplicaitonUITests/Pods-Hotel ApplicaitonUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -239,6 +245,9 @@
 		F011EF05202E344E00FC689D = {
 			isa = PBXGroup;
 			children = (
+				0BACC9BD20AF7C4C00214056 /* Lato-Thin.ttf */,
+				0BACC9BB20AF7C4200214056 /* Lato-Light.ttf */,
+				0BACC9B920AF7BD900214056 /* Lato2OFL copy */,
 				F011EF10202E344E00FC689D /* Hotel Applicaiton */,
 				F011EF25202E344E00FC689D /* Hotel ApplicaitonTests */,
 				F011EF30202E344E00FC689D /* Hotel ApplicaitonUITests */,
@@ -313,7 +322,6 @@
 				F011EF0B202E344E00FC689D /* Frameworks */,
 				F011EF0C202E344E00FC689D /* Resources */,
 				7BEBE7E5F414A0194115CD1D /* [CP] Embed Pods Frameworks */,
-				9746F2A68DFC6F73BB79E92E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -332,8 +340,6 @@
 				F011EF1E202E344E00FC689D /* Sources */,
 				F011EF1F202E344E00FC689D /* Frameworks */,
 				F011EF20202E344E00FC689D /* Resources */,
-				4F83A2DA75D6E40AFE46277F /* [CP] Embed Pods Frameworks */,
-				A884FAC8C7A59566363650DE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -353,8 +359,6 @@
 				F011EF29202E344E00FC689D /* Sources */,
 				F011EF2A202E344E00FC689D /* Frameworks */,
 				F011EF2B202E344E00FC689D /* Resources */,
-				ACD08EE9FE4E6E898991E1B8 /* [CP] Embed Pods Frameworks */,
-				575EC90DA4889F0D8419A928 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -417,8 +421,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BACC9BC20AF7C4200214056 /* Lato-Light.ttf in Resources */,
 				F011EF1C202E344E00FC689D /* LaunchScreen.storyboard in Resources */,
 				F011EF40202E368D00FC689D /* GoogleService-Info.plist in Resources */,
+				0BACC9BA20AF7BD900214056 /* Lato2OFL copy in Resources */,
+				0BACC9BE20AF7C4D00214056 /* Lato-Thin.ttf in Resources */,
 				F011EF19202E344E00FC689D /* Assets.xcassets in Resources */,
 				F011EF17202E344E00FC689D /* Main.storyboard in Resources */,
 			);
@@ -461,36 +468,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4F83A2DA75D6E40AFE46277F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hotel ApplicaitonTests/Pods-Hotel ApplicaitonTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		575EC90DA4889F0D8419A928 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hotel ApplicaitonUITests/Pods-Hotel ApplicaitonUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		75FE9594FA3DA365E92F8706 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -524,6 +501,7 @@
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SendGrid/SendGrid.framework",
 				"${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
@@ -541,6 +519,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SendGrid.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stripe.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
@@ -551,51 +530,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hotel Applicaiton/Pods-Hotel Applicaiton-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9746F2A68DFC6F73BB79E92E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hotel Applicaiton/Pods-Hotel Applicaiton-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A884FAC8C7A59566363650DE /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hotel ApplicaitonTests/Pods-Hotel ApplicaitonTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		ACD08EE9FE4E6E898991E1B8 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hotel ApplicaitonUITests/Pods-Hotel ApplicaitonUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E4F23CE858A30458D15A39EC /* [CP] Check Pods Manifest.lock */ = {

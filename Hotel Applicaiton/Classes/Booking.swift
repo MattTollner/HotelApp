@@ -7,6 +7,7 @@
 //
 
 import UIKit
+//import Firebase
 
 class Booking {
     var RoomID : [String]
@@ -14,6 +15,8 @@ class Booking {
     var BookingDate : String
     var CheckIn : Date
     var CheckOut : Date
+    //var CheckInStamp : Timestamp
+    //var CheckOutStamp : Timestamp
     var BookingStatus : String
     var TotalAmount : Double
     var AmountPayed : Double
@@ -26,40 +29,111 @@ class Booking {
         self.RoomID = dictionary["RoomID"] as! [String]
         self.CustomerID  = dictionary["CustomerID"] as! String
         self.BookingDate = dictionary["BookingDate"] as! String
-        self.CheckIn = dictionary["CheckIn"] as! Date
-        self.CheckOut = dictionary["CheckOut"] as! Date
+        // self.CheckInStamp = dictionary["CheckIn"] as! Timestamp
+        //  self.CheckOutStamp = dictionary["CheckOut"] as! Timestamp
         self.BookingStatus = dictionary["Status"] as! String
         self.TotalAmount = dictionary["TotalAmount"] as! Double
         self.Breakfast = dictionary["Breakfast"] as! [String]
         self.AmountPayed = dictionary["AmountPayed"] as! Double
         self.BookingID = dictionary["BookingID"] as! String
+        self.CheckIn = dictionary["CheckIn"] as! Date
+        self.CheckOut = dictionary["CheckOut"] as! Date
+        // self.CheckIn = self.CheckInStamp.dateValue()
+        // self.CheckOut = self.CheckOutStamp.dateValue()
         
     }
     
     
     func checkAvailability(sDate : String) -> Bool{
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        let StartB = dateFormatter.date(from: sDate)
-        var dateComponent = DateComponents ()
-        dateComponent.day = 3
-        let EndB = Calendar.current.date(byAdding: dateComponent, to: StartB!)
         
-        if(self.CheckIn <= EndB!) && (self.CheckOut >= StartB!)
-        {
-          //  print(" BOOKING CLASS Unable to book room")
-            //Rooms not available
-            return false
-           
-        } else
-        {
-           // print("BOOKING CLASS Current booking does not clash" )
-            //Rooms available check status
-            if(self.BookingStatus == "Cancelled" || self.BookingStatus == "CheckedOut" ){
-                return true
-            } else {
-               return false
+        //Check Status
+        
+        if(self.BookingStatus == "Cancelled" || self.BookingStatus == "CheckedOut" || self.BookingStatus == "Checked Out" ){
+            print("TRUE: ")
+            return true
+        } else {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd-MM-yyyy"
+            var dateComponent2 = DateComponents ()
+            dateComponent2.minute = 600
+            var StartB = dateFormatter.date(from: sDate)
+            StartB = Calendar.current.date(byAdding: dateComponent2, to: StartB!)
+            var dateComponent = DateComponents ()
+            dateComponent.day = 3
+            
+            let EndB = Calendar.current.date(byAdding: dateComponent, to: StartB!)
+            
+            
+            if(self.CheckOut <= StartB! && self.CheckIn <= StartB!){
+                print("FIRED ONE")
             }
+            
+            
+            if(self.CheckOut <= StartB! && self.CheckIn < StartB!){
+                print("FIRED TWO")
+            }
+            if(self.CheckOut <= StartB! && self.CheckIn == StartB!){
+                print("FIRED FOUR")
+            }
+            
+            
+            if(self.CheckIn <= EndB!) && (self.CheckOut >= StartB!){
+                print("FIRED 3")
+            }
+            //< less than
+            if(self.CheckIn <= EndB!) && (self.CheckOut >= StartB!)
+            {
+                
+                
+                let isIT = Calendar.current.isDate(self.CheckOut, inSameDayAs: StartB!)
+                print("BOOKING NOT AVAILBLE " + String(isIT))
+                
+                //  print(" BOOKING CLASS Unable to book room")
+                //Rooms not available
+                return false
+                
+            } else
+            {
+                print("Did not match criteria")
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd/MM/yyyy" //Your date format
+                
+                var stringDate = dateFormatter.string(from: (StartB!))
+                
+                print("SELF CheckIN :: " + self.getCheckIn() + " NEW CheckIn :: "
+                    + stringDate)
+                
+                stringDate = dateFormatter.string(from: (EndB!))
+                
+                print("SELF CheckOut :: " + self.getCheckOut() + " NEW CheckIn :: "
+                    + stringDate)
+                
+                
+                if(self.CheckIn >= StartB!){
+                    print("Self.checkIN Greater than/= StartB")
+                } else {
+                    print("Self.checkIN LESS THAN than/= StartB")
+                }
+                
+                if(self.CheckOut <= EndB!){
+                    print("Self.checkOut LESS than/= ENDB")
+                } else {
+                    print("Self.checkOUT GREATER than/= ENdB")
+                }
+                
+                if (self.CheckIn >= StartB!) && (self.CheckOut <= EndB!)
+                {
+                    print("NEW BOOKING OVERLAP ENTIRE")
+                    return false
+                }else {
+                    print("Match booking available")
+                    
+                    return true
+                }
+                
+            }
+            
+            
             
         }
     }
@@ -150,3 +224,4 @@ class Booking {
         return aPay
     }
 }
+

@@ -17,12 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    override init() {
+        FirebaseApp.configure()
+       
+    }
     
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?)
         -> Bool {
             
-            FirebaseApp.configure()
+           // FirebaseApp.configure()
             
            STPPaymentConfiguration.shared().publishableKey = "pk_test_D5d9OgNCQ8OZStYlQNtDanFA"
         return true
