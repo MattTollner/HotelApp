@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Hotel Applicaiton/ViewControllers/ManageRoomViewController.swift"
-            timestampString = "548447483.520139"
+            timestampString = "548523045.394845"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
-            landmarkName = "prepare(for:sender:)"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
+            landmarkName = "getLastRoom()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Hotel Applicaiton/ViewControllers/ManageRoomViewController.swift"
-            timestampString = "548447483.520334"
+            timestampString = "548523045.394963"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "53"
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Hotel Applicaiton/ViewControllers/CreateRoomViewController.swift"
-            timestampString = "548447483.520432"
+            timestampString = "548523045.395483"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
             landmarkName = "numberOfComponents(in:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Hotel Applicaiton/ViewControllers/ManageStaffTableViewController.swift"
-            timestampString = "548183789.520368"
+            timestampString = "548523045.3956209"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "updateSeg()"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Hotel Applicaiton/ViewControllers/ManageStaffTableViewController.swift"
-            timestampString = "548183789.5204509"
+            timestampString = "548523045.395695"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "updateSeg()"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Hotel Applicaiton/ViewControllers/ManageStaffTableViewController.swift"
-            timestampString = "548183789.520519"
+            timestampString = "548523045.3958189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "updateSeg()"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,28 +106,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Hotel Applicaiton/ViewControllers/ManageStaffTableViewController.swift"
-            timestampString = "548183789.520582"
+            timestampString = "548523045.395885"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "viewWillAppear(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Hotel Applicaiton/ViewControllers/ManageStaffTableViewController.swift"
-            timestampString = "548183789.520714"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
-            landmarkName = "tableView(_:commit:forRowAt:)"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
+            landmarkName = "getStaff()"
             landmarkType = "7">
             <Locations>
                <Location
@@ -170,12 +154,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Hotel Applicaiton/ViewControllers/ManageStaffTableViewController.swift"
-            timestampString = "548183789.5207779"
+            timestampString = "548523045.395951"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "185"
-            endingLineNumber = "185"
-            landmarkName = "tableView(_:commit:forRowAt:)"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "getStaff()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -186,13 +170,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Hotel Applicaiton/ViewControllers/ManageStaffTableViewController.swift"
-            timestampString = "548183789.520839"
+            timestampString = "548523045.396016"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
-            landmarkName = "ManageStaffTableViewController"
-            landmarkType = "3">
+            startingLineNumber = "169"
+            endingLineNumber = "169"
+            landmarkName = "getStaff()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -202,12 +186,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Hotel Applicaiton/ViewControllers/ManageStaffTableViewController.swift"
-            timestampString = "548183789.5208991"
+            timestampString = "548523045.3960789"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
-            landmarkName = "tableView(_:commit:forRowAt:)"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
+            landmarkName = "getStaff()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -218,7 +202,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Hotel Applicaiton/ViewControllers/BookingSummaryViewController.swift"
-            timestampString = "548447483.5207551"
+            timestampString = "548523045.396144"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "133"
@@ -234,27 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Hotel Applicaiton/ViewControllers/BookingViewController.swift"
-            timestampString = "548447483.5208451"
+            timestampString = "548523045.396286"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "BookingViewController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Hotel Applicaiton/ViewControllers/BookingViewController.swift"
-            timestampString = "548447483.520973"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "BookingViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -266,7 +234,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Hotel Applicaiton/ViewControllers/PaymentViewController.swift"
-            timestampString = "548447483.521101"
+            timestampString = "548523045.396405"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "163"
@@ -282,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Hotel Applicaiton/ViewControllers/BookingViewController.swift"
-            timestampString = "548447483.52119"
+            timestampString = "548523045.397079"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "671"
-            endingLineNumber = "671"
+            startingLineNumber = "644"
+            endingLineNumber = "644"
             landmarkName = "promiseGetBookings()"
             landmarkType = "7">
          </BreakpointContent>
@@ -298,13 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Hotel Applicaiton/ViewControllers/BookingViewController.swift"
-            timestampString = "548447483.5213079"
+            timestampString = "548523045.39719"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "676"
-            endingLineNumber = "676"
-            landmarkName = "promiseGetBookings()"
-            landmarkType = "7">
+            startingLineNumber = "648"
+            endingLineNumber = "648">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -314,13 +280,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Hotel Applicaiton/ViewControllers/BookingViewController.swift"
-            timestampString = "548447483.52159"
+            timestampString = "548523045.397315"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "673"
-            endingLineNumber = "673"
-            landmarkName = "promiseGetBookings()"
-            landmarkType = "7">
+            startingLineNumber = "647"
+            endingLineNumber = "647">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -34,9 +34,9 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
     @IBAction func unwindToManageBookings(segue:UIStoryboardSegue) {
         print("Home page moved")
         APIClient.customerOkay = false
-        
     }
     
+    //Format table
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return refinedBookingList.count
     }
@@ -56,15 +56,12 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedIndex = indexPath.row
-        // updateRoom = true
         selectedBooking = refinedBookingList[selectedIndex]
         selectedCustomer = refinedCustomerList[selectedIndex]
-        //selectedStaff.append(staffList[selectedIndex])
         performSegue(withIdentifier: "updateBooking", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if  let destination = segue.destination as? UpdateBookingViewController {
             destination.selectedBooking = selectedBooking
             destination.selectedCustomer = selectedCustomer
@@ -76,7 +73,7 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
         activityIndicator.startAnimating()
         timeSegment.selectedSegmentIndex = 0
         checkInSegment.selectedSegmentIndex = 0
-        testQ(roomType: "<#T##String#>")
+        getBookingChain()
     }
     
     override func viewDidLoad() {
@@ -84,6 +81,7 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
         tableView.delegate = self
         tableView.dataSource = self
         
+        //Populate todays date
         let currentDate = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
@@ -91,15 +89,13 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
         dateFormatter.dateFormat = "dd/MM/yyyy"
         todayDateStr = dateFormatter.string(from: currentDate)
         print("Todays date is " + todayDateStr!)
-        
         calendar = dateFormatter.date(from: todayDateStr!)
-        testQ(roomType: "jh")
-        // Do any additional setup after loading the view.
+        
+        getBookingChain()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func updateTable(){
@@ -108,9 +104,6 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
         if bookingList[0].BookingID == ""{
             print("BOOKING LIST EMPTY :: ERROR CAUGHT")
         } else {
-            
-            
-            
             refinedCustomerList = []
             refinedBookingList  = []
             
@@ -229,12 +222,13 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
         refinedCustomerList = []
         checkInSegment.selectedSegmentIndex = 0
         timeSegment.selectedSegmentIndex = 0
-        testQ(roomType: "d")
+        getBookingChain()
     }
+    
     //Firebase Functions
-    func testQ(roomType : String)
+    func getBookingChain()
     {
-      
+        
         promiseGetBookings()
             
             .then { obj -> Void in
@@ -243,6 +237,7 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
                 bListCount = self.bookingList.count
                 print("bListCount :: " + String(bListCount))
                 
+                //Loop trough booking list fetching customer details of each
                 for i in self.bookingList {
                     
                     print("i Index :: " + String(describing: i))
@@ -252,18 +247,15 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
                         print("Searching for " + i.CustomerID)
                         if let error = error {
                             print(error.localizedDescription)
-                            //self.dispatchGroup.leave()
-                        } else {
+                        } else
+                        {
+                            //Customer found appending to list
                             let customer = Customer(dictionary: snapshot?.data() as! [String : AnyObject])
-                            print("Appending to customer list " + customer.Forename)
                             self.customerList.append(customer)
-                            //self.refinedCustomerList.append(customer)
-                            print("Index " + String(index))
                             index += 1
-                             print("Index " + String(index))
-                            print("List COunt " + String(bListCount))
+                            
+                            //Check if at end of loop
                             if index == bListCount{
-                                print("Bing")
                                 self.updateTable()
                                 self.activityIndicator.stopAnimating()
                                 self.tableView.reloadData()
@@ -272,11 +264,8 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
                             
                         }
                     })
-                   
-                   
                 }
                 
-                print("End of method??")
                 
             }
             .then { obj -> Void in
@@ -307,6 +296,7 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
     func promiseGetBookings() -> Promise<[Booking]>{
         return Promise { fulfil, reject in
             
+            //Get firebase bookings
             db.collection("Booking").getDocuments { (snapshot, error) in
                 if let error = error {
                     print("Error getting staff documents : \(error)")
@@ -317,13 +307,11 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
                     self.bookingList = []
                     print("Getting bookingss")
                     for document in snapshot!.documents {
-                        // print("\(document.documentID) => \(document.data())")
-                        
+                        //Popoulate booking list
                         let booking = Booking(dictionary: document.data() as [String : AnyObject])
                         print("Booking " + booking.RoomID[0])
                         self.bookingList.append(booking)
-                     //  self.refinedBookingList.append(booking)
-                        //  self.tableView.reloadData()
+                        
                     }
                     
                     fulfil(self.bookingList)

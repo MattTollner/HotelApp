@@ -27,7 +27,7 @@ class CreateRoomViewController: UIViewController, UITextFieldDelegate, UIPickerV
     // Hold Current array
     var currentArr : [String] = []
     var roomsNumberList : [String] = []
-    //Current text field
+    //Picker views
     var activeTextField : UITextField!
     let typeArray = ["Single", "Double", "Double Single", "Family"]
     @IBOutlet weak var labelOutput: UILabel!
@@ -35,43 +35,30 @@ class CreateRoomViewController: UIViewController, UITextFieldDelegate, UIPickerV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Inital setup
         roomPrice.keyboardType = UIKeyboardType.numberPad
-        
-        print("DB Reached")
-        
-        // Do any additional setup after loading the view.
-     
         roomType.delegate = self
-        
         thePickerView.delegate = self
         thePickerView.dataSource = self
         
-        
+        //Keyboard toolbar setup
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.default
         toolBar.tintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
         toolBar.sizeToFit()
-        
-        
-        
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(closePicker))
-  
-        
         toolBar.setItems([doneButton], animated: true)
         toolBar.isUserInteractionEnabled = true
         
-
+        //Input fields setup
         roomType.inputView = thePickerView
- 
         roomType.inputAccessoryView = toolBar
-    
         highRoomNumLabel.text = "Highest Room Number : " + String(topRoom)
      
+        //Pickerview toolbar setup
         let toolBarText = UIToolbar()
         toolBarText.sizeToFit()
         let doneButton2 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
-        
-        
         toolBar.setItems([doneButton], animated: true)
         toolBarText.setItems([doneButton2], animated: true)
         roomNumber.inputAccessoryView = toolBar
@@ -80,9 +67,17 @@ class CreateRoomViewController: UIViewController, UITextFieldDelegate, UIPickerV
         
     }
     
+    //Close keyboard
     @objc func doneClicked(){
         self.view.endEditing(true)
     }
+    
+    //Close picker
+    @objc func closePicker(){
+        
+        self.view.endEditing(true)
+    }
+    
     
     func fireError(titleText : String, lowerText : String){
         let alert = UIAlertController(title: titleText, message: lowerText, preferredStyle: .alert)
@@ -92,7 +87,6 @@ class CreateRoomViewController: UIViewController, UITextFieldDelegate, UIPickerV
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        
         activeTextField = textField
         switch textField {
         case roomType:
@@ -110,6 +104,7 @@ class CreateRoomViewController: UIViewController, UITextFieldDelegate, UIPickerV
         if checkLabels() {
             activityIndicator.startAnimating()
             addRoom.isEnabled = false
+            //Creat new room dict
             var roomDict : [String : Any] = ["Number" : roomNumber.text!, "Price" : roomPrice.text!,
                                              "RoomState" : "Clean", "RoomType" : roomType.text!, "RoomID" : "Nil"]
             
@@ -126,14 +121,15 @@ class CreateRoomViewController: UIViewController, UITextFieldDelegate, UIPickerV
                     
                 } else {
                     print("Document added with ID: \(ref!.documentID)")
-                    //self.activityIndicator.stopAnimating()
-                    //self.addRoom.isEnabled = true
                 }
             }
+            
+            //Set room with new id
             
             roomDict = ["Number" : roomNumber.text!, "Price" : roomPrice.text!,
                         "RoomState" : "Clean", "RoomType" : roomType.text!, "RoomID" : ref!.documentID]
             
+            //Update database data
             db.collection("Rooms").document(ref!.documentID).setData(roomDict) { (error) in
                 if let error = error {
                     print("Error adding document: \(error)")
@@ -163,7 +159,8 @@ class CreateRoomViewController: UIViewController, UITextFieldDelegate, UIPickerV
     func checkLabels( ) -> Bool{
         var isPass = true
         
-        
+        roomPrice.text  = roomPrice.text?.replacingOccurrences(of: " ", with: "")
+    
         
         if(roomNumber.text == ""){
             roomNumber.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
@@ -224,15 +221,6 @@ class CreateRoomViewController: UIViewController, UITextFieldDelegate, UIPickerV
         activeTextField.text = currentArr[row]
     }
     
-  
-    
-    
-    @objc func closePicker(){
-        
-        self.view.endEditing(true)
-    }
-  
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

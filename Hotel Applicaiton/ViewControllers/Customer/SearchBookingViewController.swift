@@ -46,32 +46,28 @@ class SearchBookingViewController: UIViewController, UITableViewDataSource, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Inital Setup
         tableView.delegate = self
         tableView.dataSource = self
         errorLabel.isHidden = true
         hideElements()
+        
+        //Keyboard done button setup
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
-        
         toolBar.setItems([doneButton], animated: true)
         searchBar.inputAccessoryView = toolBar
-        
-        
-        // docRef = Firestore.firestore().collection("Rooms")
-        //ref = db.collection
-        
-        print("view did load")
     }
     
     @objc func doneClicked(){
+        //Close keyboard
         view.endEditing(true)
     }
-    // Do any additional setup after loading the view.
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     
@@ -80,9 +76,10 @@ class SearchBookingViewController: UIViewController, UITableViewDataSource, UITa
             searchBar.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
             searchBar.placeholder?.append("Field cant be empty")
         } else {
+            //Search for booking
             searchBar.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             activityIndicator.startAnimating()
-            testQ()
+            searchBooking()
         }
         
     }
@@ -94,33 +91,38 @@ class SearchBookingViewController: UIViewController, UITableViewDataSource, UITa
         self.present(alert, animated: true)
     }
     
+    
+    func addToArchive(){
+        //Set booking to cancelled
+        self.booking?.setBookingState(state: 3)
+        let dict = self.booking?.getDict()
+        
+        //Add booking to archive and delete from booking database
+        self.db.collection("BookingArchive").document((self.booking?.BookingID)!).setData(dict!, completion: { (error) in
+            if error != nil {
+                print("Error adding to archive")
+                self.fireError(titleText: "Error adding booking to archive", lowerText: (error?.localizedDescription)!)
+            } else {
+                print("Adding booking to archive")
+                //Delete from booking database
+                self.db.collection("Booking").document((self.booking?.BookingID)!).delete() { (error) in
+                    if let error = error {
+                        print("Error deleting booking from booking table : \(error)")
+                        self.fireError(titleText: "Error deleting booking from table", lowerText: error.localizedDescription)
+                    } else {
+                        print("Booking Deleted From Booking Table")
+                        self.bookingStatusLabel.text = self.booking?.BookingStatus
+                    }
+                }
+            }
+        })
+    }
+    
     @IBAction func cancelBookingTapped(_ sender: Any) {
         let delAlert = UIAlertController(title: "Revoke Booking", message: "Are you sure you want to revoke the booking?", preferredStyle: UIAlertControllerStyle.alert)
         delAlert.addAction(UIAlertAction(title: "REVOKE", style: .default, handler: { (action: UIAlertAction!) in
             print("Setting booking to canceled")
-            self.booking?.setBookingState(state: 3)
-            let dict = self.booking?.getDict()
-            
-            self.db.collection("BookingArchive").document((self.booking?.BookingID)!).setData(dict!, completion: { (error) in
-                if error != nil {
-                    print("Error adding to archive")
-                    self.fireError(titleText: "Error adding booking to archive", lowerText: (error?.localizedDescription)!)
-                } else {
-                    print("Adding booking to archive")
-                    self.db.collection("Booking").document((self.booking?.BookingID)!).delete() { (error) in
-                        if let error = error {
-                            print("Error deleting booking from booking table : \(error)")
-                            self.fireError(titleText: "Error deleting booking from table", lowerText: error.localizedDescription)
-                        } else {
-                            print("Booking Deleted From Booking Table")
-                            self.bookingStatusLabel.text = self.booking?.BookingStatus
-                        }
-                    }
-                }
-            })
-            
-            
-            
+            self.addToArchive()
         }))
         
         delAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
@@ -131,6 +133,7 @@ class SearchBookingViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     @IBAction func testButton(_ sender: Any) {
+        //Populate data
         self.nameLabel.text = self.customer?.getFullName()
         self.checkInLabel.text = "Check In: " + (self.booking?.getCheckIn())!
         self.checkOutLabel.text = "Check Out: " + (self.booking?.getCheckOut())!
@@ -143,19 +146,18 @@ class SearchBookingViewController: UIViewController, UITableViewDataSource, UITa
     
         
         
-        //Firebase Functions
-        func testQ()
+        //Promise Chain firebase Functions
+        //Booking, room then customer
+        func searchBooking()
         {
             bookedRooms = []
-          //  print("TESTQ :: PromiseGetBookings")
             promiseGetBookings()
                 
                 .then { obj -> Void in
-                    //print("TESTQ :: PromiseGetRooms")
                     self.promiseGetRoom(roomIDs: (self.booking?.RoomID)!)
                 }
+                
                 .then { obj -> Void in
-                   // print("TESTQ :: PromiseGetCustomer")
                     self.promiseGetCustomer(customerID: (self.booking?.CustomerID)!)
                 }
                 .catch(){
@@ -167,9 +169,9 @@ class SearchBookingViewController: UIViewController, UITableViewDataSource, UITa
     func promiseGetRoom(roomIDs : [String]) -> Promise<Any>{
             return Promise { fulfil,reject in
                 let dispatchGroup = DispatchGroup()
-                for (i, id) in roomIDs.enumerated() {
+                for (_, id) in roomIDs.enumerated() {
                     dispatchGroup.enter()
-                    
+                    //Get rooms of booking
                     self.db.collection("Rooms").document(id).getDocument(completion: { (snapshot, error) in
                         print("Searching for room " + id)
                         if let error = error {
@@ -177,7 +179,7 @@ class SearchBookingViewController: UIViewController, UITableViewDataSource, UITa
                             reject(error)
                         } else {
                            // print(snapshot?.data() ?? "Default HIT")
-                            let room = Room(dictionary: snapshot?.data() as! [String : AnyObject])
+                            let room = Room(dictionary: snapshot?.data()! as! [String : AnyObject])
                             self.bookedRooms.append(room)
                             print("Appending to rooms list " + room.Number + " bookedRoomCount :: " + String(self.bookedRooms.count))
                             if(self.bookedRooms.count == roomIDs.count){
@@ -226,22 +228,23 @@ class SearchBookingViewController: UIViewController, UITableViewDataSource, UITa
                 
             }
         }
-        
+    
+    
         func promiseGetBookings() -> Promise<Booking>{
             return Promise { fulfil, reject in
                 
                 errorLabel.isHidden = true
-                var docRef = db.collection("Booking").document(searchBar.text!)
+                let docRef = db.collection("Booking").document(searchBar.text!)
                 
                 docRef.getDocument { (document, error) in
                     if let error = error {
-                        print("Error retriving document")
+                    
                         reject(error)
                     }
                     if let document = document {
                         if document.exists{
                             print("Booking Found on database")
-                            self.booking = Booking(dictionary: document.data() as! [String : AnyObject])
+                            self.booking = Booking(dictionary: document.data()! as [String : AnyObject])
                             if let booking = self.booking {
                                 if(booking.BookingStatus == "Cancelled")
                                 {
@@ -269,7 +272,6 @@ class SearchBookingViewController: UIViewController, UITableViewDataSource, UITa
     
     
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return bookedRooms.count
     }
@@ -281,13 +283,11 @@ class SearchBookingViewController: UIViewController, UITableViewDataSource, UITa
         if let booking = self.booking {
             cell.roomNumberLabel.text = bookedRooms[indexPath.row].Number
             cell.roomTypeLabel.text = "Type: " + bookedRooms[indexPath.row].RoomType
-            //cell.roomStatusLabel.text = bookedRooms[indexPath.row].RoomState
             
+            //Check breakfast
             if (booking.Breakfast.contains(bookedRooms[indexPath.row].RoomID)){
-                print("Room has payed for breakfast")
                 cell.roomBreakfastLabel.text = "Breakfast Included"
             } else {
-                print("Room has not payed for breakfast")
                 cell.roomBreakfastLabel.text = "No Breakfast"
             }
         }

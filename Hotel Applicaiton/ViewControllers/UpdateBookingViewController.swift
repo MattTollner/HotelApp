@@ -42,22 +42,17 @@ class UpdateBookingViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(bookedRooms == nil){
-            return 0
-        } else {
-            return bookedRooms.count
-        }
-        
+        return bookedRooms.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy" //Your date format
-        let cell = tableView.dequeueReusableCell(withIdentifier: "updateBookingRoomCell", for: indexPath) as! UpdateBookingRoomTableViewCell
+        dateFormatter.dateFormat = "dd/MM/yyyy"
         
-        cell.roomTypeLabel.text = bookedRooms[indexPath.row].RoomType
-        cell.roomNumberLabel.text = bookedRooms[indexPath.row].Number
-        cell.roomStatusLabel.text = bookedRooms[indexPath.row].RoomState
+        let cell = tableView.dequeueReusableCell(withIdentifier: "updateBookingRoomCell", for: indexPath) as! UpdateBookingRoomTableViewCell
+        cell.roomTypeLabel.text = "Type: " + bookedRooms[indexPath.row].RoomType
+        cell.roomNumberLabel.text = "Number: " + bookedRooms[indexPath.row].Number
+        cell.roomStatusLabel.text = "Status: " + bookedRooms[indexPath.row].RoomState
         
         if (selectedBooking?.Breakfast.contains(bookedRooms[indexPath.row].RoomID))!{
             print("Room has payed for breakfast")
@@ -67,11 +62,10 @@ class UpdateBookingViewController: UIViewController, UITableViewDataSource, UITa
             cell.roomBreakfastLabel.text = "No Breakfast"
         }
         
-        
-        
-        
         return cell
     }
+    
+    
     func colourPrice(){
         
         if let booking = selectedBooking {
@@ -115,6 +109,8 @@ class UpdateBookingViewController: UIViewController, UITableViewDataSource, UITa
         // Dispose of any resources that can be recreated.
     }
     
+   
+    
     @IBAction func cancelTapped(_ sender: Any) {
         if let booking = selectedBooking{
             if (booking.BookingStatus != "Checked Out" || booking.BookingStatus != "Cancelled") {
@@ -134,8 +130,10 @@ class UpdateBookingViewController: UIViewController, UITableViewDataSource, UITa
                                 self.fireError(titleText: "Error adding booking to archive", lowerText: error.localizedDescription)
                             } else {
                                 print("Booking Deleted From Booking Table")
-                                self.setRoomsUnclean()
+                               // self.setRoomsUnclean()
                                 self.bookingStatusLabel.text = self.selectedBooking?.BookingStatus
+                                self.fireError(titleText: "Booking Cancelled", lowerText: "Booking added to archive")
+                                self.performSegue(withIdentifier: "unwindUpdateBooking", sender: self)
                             }
                         }
                     }
@@ -166,6 +164,7 @@ class UpdateBookingViewController: UIViewController, UITableViewDataSource, UITa
                         self.fireError(titleText: "Unable to set room status to unclean", lowerText: error.localizedDescription)
                     } else {
                         print("Room Status Updated")
+                        
                     }
                 })
             }
@@ -258,6 +257,30 @@ class UpdateBookingViewController: UIViewController, UITableViewDataSource, UITa
                     print("Update BOOKING STATUS")
                     selectedBooking?.setBookingState(state: 2)
                     updateBooking()
+                    let dict = book.getDict()
+                    //First upload copy to booking archive
+                    self.db.collection("BookingArchive").document(book.BookingID).setData(dict, completion: { (error) in
+                        if error != nil {
+                            print("Error adding to archive")
+                            self.fireError(titleText: "Error adding booking to archive", lowerText: (error?.localizedDescription)!)
+                        } else {
+                            print("Adding booking to archive")
+                            //Delete from main booking table
+                            self.db.collection("Booking").document(book.BookingID).delete() { (error) in
+                                if let error = error {
+                                    print("Error deleting booking from booking table : \(error)")
+                                    self.fireError(titleText: "Error adding booking to archive", lowerText: error.localizedDescription)
+                                } else {
+                                    print("Booking Deleted From Booking Table")
+                                    self.setRoomsUnclean()
+                                    self.bookingStatusLabel.text = self.selectedBooking?.BookingStatus
+                                    self.fireError(titleText: "Booking Completed", lowerText: "Booking added to archive")
+                                    
+                                }
+                            }
+                        }
+                    })
+                    
                 } else {
                     payedAlert(state: 2)
                 }

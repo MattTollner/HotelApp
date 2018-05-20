@@ -37,20 +37,15 @@ class UpdateAccountViewController: UIViewController {
         // Do any additional setup after loading the view.
         //Keyboard observer
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
-        
         getStaff()
         
         
-     
         
+        //Tool bar setup
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
-        
-        
         toolBar.setItems([doneButton], animated: true)
         
         foreNameInput.inputAccessoryView = toolBar
@@ -227,7 +222,7 @@ class UpdateAccountViewController: UIViewController {
             
             docRef.getDocument { (document, error) in
                 if let document = document, document.exists {
-                     self.staff = Staff(dictionary: document.data() as! [String : AnyObject])                    
+                    self.staff = Staff(dictionary: document.data() as! [String : AnyObject])
                     print("Staff EMAIL " + (self.staff?.Email)!)
                     self.populateFields()
                 } else {
@@ -248,7 +243,7 @@ class UpdateAccountViewController: UIViewController {
             
         }
         
-
+        
     }
     
     func failAlert(){
@@ -296,7 +291,7 @@ class UpdateAccountViewController: UIViewController {
         
         self.present(successAlert, animated: true, completion: nil)
         
-       
+        
     }
     
     func fireError(titleText : String, lowerText : String){
@@ -314,34 +309,29 @@ class UpdateAccountViewController: UIViewController {
             
             if let newStaff = staff {
                 
-            
-            
-            
-            let staff : [String : Any] = ["Forename" : foreNameInput.text!,
-                                          "Sirname" : sirNameInput.text!,
-                                          "Email" : emailInput.text!,
-                                          "Address" : addressInput.text!,
-                                          "Postcode" : postcodeInput.text!,
-                                          "Phone" : phoneNumberInput.text!,
-                                          "StaffType" : newStaff.StaffType,
-                                          "StaffID" : newStaff.StaffID]
-            
-            db.collection("Staff").document(newStaff.StaffID).setData(staff) { (error) in
-                if let error = error {
-                    print("Error updating staff document: \(error)")
-                    self.fireError(titleText: "Error updating staff", lowerText: error.localizedDescription)
-                } else {
-                    
-                    self.confirmAlert()
+                
+                
+                
+                let staff : [String : Any] = ["Forename" : foreNameInput.text!,
+                                              "Sirname" : sirNameInput.text!,
+                                              "Email" : emailInput.text!,
+                                              "Address" : addressInput.text!,
+                                              "Postcode" : postcodeInput.text!,
+                                              "Phone" : phoneNumberInput.text!,
+                                              "StaffType" : newStaff.StaffType,
+                                              "StaffID" : newStaff.StaffID]
+                
+                db.collection("Staff").document(newStaff.StaffID).setData(staff) { (error) in
+                    if let error = error {
+                        print("Error updating staff document: \(error)")
+                        self.fireError(titleText: "Error updating staff", lowerText: error.localizedDescription)
+                    } else {
+                        
+                        self.confirmAlert()
+                    }
                 }
+                
             }
-            
-        }
         }
     }
-    
-    
-    
-    
-    
 }

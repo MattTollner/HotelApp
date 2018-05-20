@@ -27,59 +27,61 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
    
     
     
-    var roomsList = [Room]()
-    var bookingList = [Booking]()
-    let db = Firestore.firestore()
-    var potentailBookings = [Booking]()
-    
-    var roomTypeArrIndex = 0
-    var roomIDs = [String]()
-    var potentialRooms = [Room]()
-    var unavailableRooms = [String]()
-    var unavailableRoomType = [String]()
-    //var reservedRoom = [potentialRooms]
-    
+   
+
+    //UI Elemements
+    @IBOutlet weak var mainStackView: UIStackView!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var nightsTextField: UITextField!
     @IBOutlet weak var roomCountTextFiled: UITextField!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var stepper: UIStepper!
-    let refreshControl = UIRefreshControl()
-    
     @IBOutlet weak var checkButton: UIButton!
-    var roomIndex = 0
-    var potentailRoomIndex = 0
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var stepper: UIStepper!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    let refreshControl = UIRefreshControl()
+    let picker = UIDatePicker()
+    let thePicker = UIPickerView()
     
+    //Data arrays
+    var bookingList = [Booking]()
+    var potentailBookings = [Booking]()
+    var roomIDs = [String]()
+    
+    var unavailableRooms = [String]()
+    var unavailableRoomType = [String]()
+    
+    var roomIndex = 0
+    var roomsList = [Room]()
+    var potentailRoomIndex = 0
+    var potentialRooms = [Room]()
+    var roomTypeArrIndex = 0
     var roomTypeArr = [String]()
+    
+    //Populated by room types requested by user
     var tempRoomTypeArr = ["","","","",""]
     var nights = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"]
     var rooms = ["1","2","3","4"]
     var nightsSelected = true
     var dataSource = [String]()
-    //  var cellsArr = [BookingRoomTableViewCell]()
-   // var roomTypeArr = [String]()
+    
+    var db = Firestore.firestore()
+    
     func testTapped(_ sender: Any) {
         tableView.reloadData()
     }
     
     
-    let picker = UIDatePicker()
-     let thePicker = UIPickerView()
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Inital Setup
         tableView.delegate = self
         tableView.dataSource = self
-        //pickerView.delegate = self
         thePicker.delegate = self
-        
-        
-        //tableView.isUserInteractionEnabled = false
         setUpDatePicker()
-        // getBookings(roomID: "FFPxRPUt0mBJrsBVJ8Sd")
-        // getRooms(roomType:"")
         
         if #available(iOS 10.0, *) {
             tableView.refreshControl = refreshControl
@@ -88,20 +90,16 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         refreshControl.addTarget(self, action: #selector(updateTheTable(_:)), for: .valueChanged)
         
-        
-       
+        //Keyboard done button setup
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
-        
         toolBar.setItems([doneButton], animated: true)
+        
         nightsTextField.inputAccessoryView = toolBar
         roomCountTextFiled.inputAccessoryView = toolBar
-        
         nightsTextField.inputView = thePicker
         roomCountTextFiled.inputView = thePicker
-        
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -110,11 +108,9 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @objc func doneClicked(){
+        //Close keyboard
         view.endEditing(true)
     }
-    
-    
-    
     
     @objc private func updateTheTable(_ sender: Any) {
         tableView.reloadData()
@@ -123,6 +119,7 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.reloadData()
     }
     
+    //Picker view setup
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -145,10 +142,8 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if(nightsSelected){
-            print("nights did select row " + nights[row])
             nightsTextField.text = nights[row]
         }else{
-            print("room did select row " + rooms[row])
             roomCountTextFiled.text = rooms[row]
         }
     }
@@ -159,25 +154,17 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
         nightsTextField.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         dateTextField.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         roomCountTextFiled.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        roomCountTextFiled.placeholder = ""
-        nightsTextField.placeholder = ""
-        
-      
         
         //Checking Room Count Text Filed
         if let roomsCount = roomCountTextFiled.text{
             if(!roomsCount.isNumeric){
-                //FAIL room count not a number
-                print("Room count not a number")
                 roomCountTextFiled.backgroundColor = #colorLiteral(red: 1, green: 0.2551919259, blue: 0.1199331933, alpha: 1)
                 valuesValid = false
             }else {
                 let testInt : Int
                 testInt = Int(roomsCount)!
-                if(testInt > 15){
-                    print("Cant book more than 15 rooms at once")
+                if(testInt > 4){
                     roomCountTextFiled.backgroundColor = #colorLiteral(red: 1, green: 0.2551919259, blue: 0.1199331933, alpha: 1)
-                    roomCountTextFiled.placeholder = "Max 15"
                     valuesValid = false
                 }
             }
@@ -202,7 +189,6 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
                 if(testInt > 28){
                     print("Cant book more than 28 nights at once")
                     nightsTextField.backgroundColor = #colorLiteral(red: 1, green: 0.2551919259, blue: 0.1199331933, alpha: 1)
-                    nightsTextField.placeholder = "Max 28"
                     valuesValid = false
                 }
             }
@@ -236,8 +222,6 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
             valuesValid = false
         }
         
-        
-        
         if valuesValid {
             return true
         } else {
@@ -251,13 +235,14 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.present(alert, animated: true)
     }
     
-    @IBAction func testButton(_ sender: Any) {
+    @IBAction func checkButton(_ sender: Any) {
         
         if(checkValues()){
             
             
             if(nightsTextField.text != "")
             {
+                //Reset arrays
                 activityIndicator.startAnimating()
                 enableControl(binary: 0)
                 roomTypeArrIndex = 0
@@ -266,8 +251,9 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
                 unavailableRooms = []
                 unavailableRoomType = []
                 roomTypeArr = []
-                //getRooms(roomType: roomTypeArr2[roomIndex])
                 tableView.reloadData()
+                
+                //Set room types ignorin blanks
                 for i in tempRoomTypeArr {
                     if i == "" {
                         
@@ -281,19 +267,17 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
                 }
                 
                 if roomTypeArr.count != 0{
-                    testQ(roomType: roomTypeArr[roomTypeArrIndex])
+                    //Check availabity for first time in roomTypeArr
+                    checkAvailability(roomType: roomTypeArr[roomTypeArrIndex])
                 } else {
+                    //No cells
                     print("roomTypeEmpty")
                     activityIndicator.stopAnimating()
-                    
                     tableView.reloadData()
                     checkButton.isEnabled = true
                     fireError(titleText: "Error table not loaded", lowerText: "Please try again")
-                    //testQ(roomType: roomTypeArr[roomTypeArrIndex])
+                   
                 }
-                
-                
-                
             }
         }
     }
@@ -377,58 +361,35 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "bookingCell", for: indexPath) as! BookingRoomTableViewCell
         //let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cellId")
-        cell.roomIteration .text = "Room " + String(indexPath.row)
+        let id = indexPath.row + 1
+        cell.roomIteration.text = "Room " + String(id)
         
-        
-        //cell.roomType.text = roomsList[indexPath.row].RoomType
-        cell.priceTextField.text = "N/A"
-        
-     
+        //If start reset room array
         if(indexPath.row == 0){
             tempRoomTypeArr =  ["","","",""]
         }
         
         self.tempRoomTypeArr[indexPath.row] = cell.roomTypeLabel.text!
-       // self.roomTypeArr.insert(cell.roomTypeLabel.text!, at: indexPath.row)
-        
-
-     //   roomTypeArr.append(cell.roomTypeLabel.text!)
-       // roomTypeArr[indexPath.row] = cell.roomTypeLabel.text!
+     
         for i in tempRoomTypeArr{
             print("TEMP Room Type : " + i)
         }
         
         if (!potentialRooms.isEmpty){
-            var makeRed = -1
-            
             print("CHECKING CELL DATA " + cell.roomTypeLabel.text!)
             
             if unavailableRoomType.contains(cell.roomTypeLabel.text!) {
-                makeRed = 1
-                
                 for i in 0...unavailableRoomType.endIndex{
                     if(unavailableRoomType[i] == cell.roomTypeLabel.text!){
                         unavailableRoomType.remove(at: i)
                         break
                     }
                 }
-            } else {
-                makeRed = 0
             }
-   
-            
-            if makeRed == 1 {
-                cell.backgroundColor = UIColor.red
-                print("Unable to book " + String(cell.roomIteration.text!))
-            } else if makeRed == 0 {
-                cell.backgroundColor = UIColor.green
-            } else {
-                cell.backgroundColor  = UIColor.gray
-            }
+           
         } else{
             print("Potentail Rooms Empty")
         }
-        
         return cell
     }
     
@@ -487,11 +448,12 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.view.endEditing(true)
     }
     
-    func testQ(roomType : String)
+    func checkAvailability(roomType : String)
     {
         promiseGetBookings()
         .then() {
                 bookings in
+                //Get get all rooms of set type (currentTypeIndex)
                 return self.promiseGetRooms(roomType: roomType)
         }
         .then { obj -> Void in
@@ -504,6 +466,7 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
                     }
                     continue
                 } else {
+                    //Does the potentail room match the room type looking for
                     if i.RoomType == self.roomTypeArr[self.roomTypeArrIndex]{
                         if self.roomIDs.contains(i.RoomID){
                             print("Room " + i.RoomID + " in roomIDS list")
@@ -573,26 +536,7 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-    func endResultPromise() -> Promise<String>{
-        return Promise { fulfil, reject in
-            
-            
-            if(roomIDs.isEmpty){
-                print("Unable to book requested room types for chosen date")
-                fulfil("Unable to book requested room types for chosen date")
-            }
-            else if(!roomIDs.isEmpty && !unavailableRooms.isEmpty){
-                print("Some room types were unavailable")
-                fulfil("Some rooms types were unnavailalbe")
-                 performSegue(withIdentifier: "toSummary", sender: self)
-            }
-            else if(!roomIDs.isEmpty && unavailableRooms.isEmpty){
-                print("All rooms available to book")
-                fulfil("All rooms available to book")
-                performSegue(withIdentifier: "toSummary", sender: self)
-            }
-        }
-    }
+    
     
     func getNextRoomType() -> Promise<String>{
         return Promise { fulfil, reject in
@@ -611,7 +555,7 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
             } else {
                 print("Moving on to next room type " + self.roomTypeArr[self.roomTypeArrIndex])
                 fulfil("Success")
-                self.testQ(roomType: self.roomTypeArr[self.roomTypeArrIndex])
+                self.checkAvailability(roomType: self.roomTypeArr[self.roomTypeArrIndex])
             }
             
         }
@@ -650,17 +594,19 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func promiseGetBookings() -> Promise<[Booking]>{
         return Promise { fulfil, reject in
+            
+            //Calculate end date
             let dateFormatter = DateFormatter()
-           
             dateFormatter.dateFormat = "dd-MM-yyyy"
             let sDate = dateTextField!.text
             let StartB = dateFormatter.date(from: sDate!)
             var dateComponent = DateComponents ()
-            dateComponent.day = 3
+            dateComponent.day = Int(nightsTextField.text!)
             let EndB = Calendar.current.date(byAdding: dateComponent, to: StartB!)
             
             print("END B DATE :: " + dateFormatter.string(from: EndB!))
             
+            //Skips bookings reserved after checkout of enqury
             self.db.collection("Booking").whereField("CheckIn", isLessThanOrEqualTo: EndB!).getDocuments(completion: { (snapshot, error) in
                 if let error = error {
                     self.fireError(titleText: "Error fetching rooms", lowerText: error.localizedDescription)
@@ -668,31 +614,29 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
                 }else
                 {
                     
-                    print("BOOKING RETRIVED ::  " + String(snapshot!.documents.count))
+                    print("Bookings Count ::  " + String(snapshot!.documents.count))
                     
+                    //For each booking check availability
                     for document in snapshot!.documents{
-                        
                         let booking = Booking(dictionary : document.data() as [String : AnyObject])
-                        print("BOOKING :: " + booking.getCheckIn())
-                        //print("Booking documetn for room " + booking.RoomID)
                 
-                        if booking.checkAvailability(sDate: sDate!){
+                        //Checks if booking clashses
+                        if booking.checkAvailability(sDate: sDate!, nights: self.nightsTextField.text!){
+                            //Add booking room ids to array
                             for e in booking.RoomID {
                                 self.potentailBookings.append(booking)
                                 print("Booking available for room " + e)
                             }
-                            
-                            break
+                            //break
                         } else {
+                            //Add booking room ids to array
                             for ez in booking.RoomID {
                                 self.unavailableRooms.append(ez)
                                 print("Booking not availalbe for room " + ez)
                             }
-                           
                             continue
                         }
-                    }
-                    print("FULFIL PROMISE GET BOOKING")
+                    }                
                     fulfil(self.potentailBookings)
                 }
             })

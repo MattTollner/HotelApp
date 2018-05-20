@@ -12,40 +12,48 @@ import Firebase
 
 class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
 
+    
+    //UI Elements
     @IBOutlet weak var roomPrice: UITextField!
     @IBOutlet weak var roomNumber: UITextField!
     @IBOutlet weak var roomType: UITextField!
     @IBOutlet weak var roomState: UITextField!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var addRoomButton: UIButton!
-      let db = Firestore.firestore()
- 
+    @IBOutlet weak var updateRoomButton: UIButton!
+    @IBOutlet weak var addRoom: UIButton!
+    @IBOutlet weak var labelOutput: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    let thePickerView = UIPickerView()
+    
+    
+    let db = Firestore.firestore()
+    
+    //Room data
     var roomToUpdate : Room?
     var topRoom : Int?
- 
-      var roomsNumberList : [String] = []
-    @IBOutlet weak var addRoom: UIButton!
-    let thePickerView = UIPickerView()
+    var roomsNumberList : [String] = []
+    
+   
+    
     
     // Hold Current array
     var currentArr : [String] = []
+    
     //Current text field
     var activeTextField : UITextField!
+    
     let stateArray = ["Clean", "Unclean"]
     let typeArray = ["Single", "Double", "Double Single", "Family"]
-    @IBOutlet weak var labelOutput: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        print("DB Reached")
-        
+  
+        //Keyboard bar button setup
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
-       
-        
         toolBar.setItems([doneButton], animated: true)
         
         roomNumber.inputAccessoryView = toolBar
@@ -55,7 +63,7 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
        
         
         
-        // Do any additional setup after loading the view.
+        //Inital setup
         roomState.delegate = self
         roomType.delegate = self
         
@@ -65,6 +73,7 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         roomState.inputView = thePickerView
         roomType.inputView = thePickerView
         
+        //Check room exists
         if let room = roomToUpdate{
             roomPrice.text = room.Price as? String
             roomNumber.text = room.Number
@@ -73,10 +82,8 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
             addRoomButton.setTitle("Update Room", for: .normal)
         } else {
             print("ROOM TO UPDATE EMPTY REWIND SEGUE")
+            self.performSegue(withIdentifier: "unwindEditRoom", sender: self)
         }
-        
-     
-  
     }
     
     @objc func doneClicked(){
@@ -86,7 +93,7 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        
+        //Populate picker with correct data
         activeTextField = textField
         switch textField {
         case roomType:
@@ -101,8 +108,13 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         return true
     }
     
+    //Check input validity
     func checkLabels( ) -> Bool{
         var isPass = true
+        
+        roomPrice.text  = roomPrice.text?.replacingOccurrences(of: " ", with: "")
+        roomState.text  = roomState.text?.replacingOccurrences(of: " ", with: "")
+        
         
         if(roomNumber.text == ""){
             roomNumber.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
@@ -111,11 +123,9 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
             roomNumber.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
         }
         if(roomPrice.text?.isNumeric != true){
-            print("ROOM PRICE NOT GOOD")
             roomPrice.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
             isPass = false
         }else {
-            print("ROOM PRICE GOOD")
             roomPrice.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
         }
         
@@ -163,7 +173,7 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
             if(roomsNumberList.contains(roomNum)){
                 if(roomNum == roomToUpdate?.Number)
                 {
-                    isPass = true
+                  
                 } else {
                     isPass = false
                     fireError(titleText: "Room Number Exist", lowerText: "That room number appears to be on the database already")
@@ -186,13 +196,10 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         
     }
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     @IBAction func addRoom(_ sender: Any) {
         
         if let room = roomToUpdate{
-            
-        
-        
         if checkLabels() {
             activityIndicator.startAnimating()
             self.updateRoomButton.isEnabled = false
@@ -200,6 +207,7 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
                                              "RoomState" : roomState.text!, "RoomType" : roomType.text!, "RoomID" : room.RoomID]
             
           
+            //Add room to fire base
             db.collection("Rooms").document(room.RoomID).setData(roomDict) { err in
                 if let err = err {
                     print("Error adding document: \(err)")
@@ -220,33 +228,31 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     }
     
     func confirmAlert(){
-        let successAlert = UIAlertController(title: "Account Updated", message: "Updated account information is now live", preferredStyle: UIAlertControllerStyle.alert)
+        let successAlert = UIAlertController(title: "Room Updated", message: "Updated room information is now live", preferredStyle: UIAlertControllerStyle.alert)
         
         successAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
             self.performSegue(withIdentifier: "unwindEditRoom", sender: self)
         }))
         
-        
         self.present(successAlert, animated: true, completion: nil)
     }
     
     func deleteRoom(){
-        
+        //Delete alert setup
         let delAlert = UIAlertController(title: "Delete Staff", message: "Are you sure you want to delete the staff account?", preferredStyle: UIAlertControllerStyle.alert)
         delAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
             self.activityIndicator.startAnimating()
-            //self.mainStackView.isHidden = true
+            
+            
+            //Delete firebase room
             self.db.collection("Room").document((self.roomToUpdate?.RoomID)!).delete() { err in
                 if let err = err {
                     print("Error removing staff document: \(err)")
                     self.activityIndicator.stopAnimating()
-                    //self.mainStackView.isHidden = false
                     self.fireError(titleText: "Error deleting staff!", lowerText: err.localizedDescription)
                 } else {
                     self.activityIndicator.stopAnimating()
-                    //self.mainStackView.isHidden = false
                     self.confirmAlert()
-                    
                 }
             }
         }))
@@ -270,9 +276,6 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         self.present(alert, animated: true)
     }
     
-    @IBOutlet weak var updateRoomButton: UIButton!
-    //-- Picker View
-    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -289,8 +292,6 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         print("Selected Items", currentArr[row])
         activeTextField.text = currentArr[row]
     }
-    
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -298,14 +299,5 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -20,6 +20,7 @@ extension String {
 
 class PaymentViewController: UIViewController, STPPaymentContextDelegate {
     
+    //UI Elements
     @IBOutlet weak var buttonOutet: UIButton!
     @IBOutlet weak var forenameLabel: UITextField!
     @IBOutlet weak var sirnameLabel: UITextField!
@@ -34,8 +35,10 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
     @IBOutlet weak var deskPaymentDescriptorLabel: UILabel!
     @IBOutlet weak var paymentAtDeskLabel: UILabel!
     @IBOutlet weak var footnoteLabel: UILabel!
-    
     @IBOutlet weak var bottonConstraint: NSLayoutConstraint!
+    @IBOutlet weak var elementsStack: UIStackView!
+    @IBOutlet weak var priceStack: UIStackView!
+    
     //Segue Vars
     var amount : Double = 0.0
     var poundAmount : Double = 0.0
@@ -50,20 +53,17 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
     var depositAmount = 0.0
     var breakfastAmount = 0.0
     var deskPayment = 0.0
-    
     var moveUpAmount = 0.0
     
     let db = Firestore.firestore()
-    
-    //  let paymentTextField = STPPaymentCardTextField()
     var thePaymentContext = STPPaymentContext()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
         //Keyboard observer
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         buttonOutet.isEnabled = false
@@ -93,15 +93,13 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
             print("Payment In Pennys : " + String(paymentInPennys))
         }
         
-       // poundAmount = amount / 100
-        //amountLabel.text = "£" + String(describing: fullBookingCost)
+      
         self.buttonOutet.isHidden = false
-        // Do any additional setup after loading the view.
+       
+        //Tool bar setup
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
-        
-        
         toolBar.setItems([doneButton], animated: true)
         
         forenameLabel.inputAccessoryView = toolBar
@@ -114,6 +112,7 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
         
     }
     
+    //Move view up
     @objc func keyboardWillShow(notification: NSNotification) {
         if let info = notification.userInfo {
             let rect:CGRect = info["UIKeyboardFrameEndUserInfoKey"] as! CGRect
@@ -128,6 +127,7 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
         }
     }
     
+    //Move view to orig
     @objc func keyboardWillHide(notification: NSNotification) {
         if let info = notification.userInfo {
             self.view.layoutIfNeeded()
@@ -139,8 +139,7 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
         }
     }
     
-    @IBOutlet weak var elementsStack: UIStackView!
-    @IBOutlet weak var priceStack: UIStackView!
+    
     
     func enableElements(enable : Bool){
         if enable {
@@ -158,7 +157,6 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     func fireError(titleText : String, lowerText : String){
         let alert = UIAlertController(title: titleText, message: lowerText, preferredStyle: .alert)
@@ -166,15 +164,20 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true)
     }
-    
    
-    
+    //Pay pressed get stripe context
     @IBAction func testPayButton(_ sender: Any) {
         self.thePaymentContext.requestPayment()
     }
 
     func checkLabels( ) -> Bool{
         var isPass = true
+        
+        forenameLabel.text  = forenameLabel.text?.replacingOccurrences(of: " ", with: "")
+        sirnameLabel.text  = sirnameLabel.text?.replacingOccurrences(of: " ", with: "")
+        emailLabel.text  = emailLabel.text?.replacingOccurrences(of: " ", with: "")
+        confirmEmailLabel.text  = confirmEmailLabel.text?.replacingOccurrences(of: " ", with: "")
+        
         
         if(forenameLabel.text == ""){
             forenameLabel.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
@@ -309,15 +312,12 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
     }
     
     func paymentContextDidChange(_ paymentContext: STPPaymentContext) {
-        print("Hello")
-        
         if APIClient.customerOkay == true {
             print("CUSOTMER OKAY :: Ready to pay")
             buttonOutet.isEnabled = true
         } else {
             buttonOutet.isEnabled = false
-        }
-       
+        }       
     }
     
     func paymentContext(_ paymentContext: STPPaymentContext, didFinishWith status: STPPaymentStatus, error: Error?) {

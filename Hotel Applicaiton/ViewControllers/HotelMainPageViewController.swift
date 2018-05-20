@@ -13,7 +13,7 @@ import Firebase
 
 class HotelMainPageViewController: UIViewController {
 
-    
+    //UI Elements
     @IBOutlet weak var addressTextView: UITextView!
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
@@ -22,24 +22,18 @@ class HotelMainPageViewController: UIViewController {
     @IBOutlet weak var breakfastTimeLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var loadingLabel: UILabel!
-    
+    @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var phoneStack: UIStackView!
-    
     @IBOutlet weak var infoStack: UIStackView!
+    @IBOutlet weak var breakfastLabel: UILabel!
     
    let db = Firestore.firestore()
      var hotelInfo : HotelInfo?
-
-    
-    @IBOutlet weak var breakfastLabel: UILabel!
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-      
-       
+        
+        //Retrives hotel information
         disableElements()
         activityIndicator.startAnimating()
         loadingLabel.isHidden = false
@@ -62,6 +56,7 @@ class HotelMainPageViewController: UIViewController {
         infoStack.isHidden = false
         activityIndicator.stopAnimating()
         loadingLabel.isHidden = true
+        addressLabel.isHidden = false
         activityIndicator.isHidden = true
         addressTextView.isHidden = false
         
@@ -71,6 +66,7 @@ class HotelMainPageViewController: UIViewController {
     func disableElements(){
         print("disabling elements")
         infoStack.isHidden = true
+        addressLabel.isHidden = true
         addressTextView.isHidden = true
     }
    
@@ -85,41 +81,8 @@ class HotelMainPageViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func testEmailButton(_ sender: Any) {
-        formEmail()
-    }
-    func formEmail(){
-        var baseURLString: String? = "https://evening-garden-46354.herokuapp.com"
-        var baseURL: URL {
-            if let urlString = baseURLString, let url = URL(string: urlString) {
-                return url
-            } else {
-                fatalError()
-            }
-        }
-        
-        let url = baseURL.appendingPathComponent("email")
-        
-        
-        Alamofire.request(url, method: .post, parameters: [
-
-            "customerEmail" : "matt.tollners@gmail.com",
-            "senderEmail" : "matt.tollner@live.co.uk"
-         
-            ])
-            .validate(statusCode: 200..<300)
-            .responseJSON { responseJSON in
-                switch responseJSON.result {
-                case .success(let json):
-                 //   completion(json as? [String: AnyObject], nil)
-                    print("SUCCESS :: Email Sent ::")
-                case .failure(let error):
-                   // completion(nil, error)
-                    print("FAILURE :: Email Failed :: " + error.localizedDescription)
-                }
-        }
-    }
-    
+  
+    //Pulls hotel information displays and stores
     func retriveInformation(){
         print("Retriving Info")
         disableElements()

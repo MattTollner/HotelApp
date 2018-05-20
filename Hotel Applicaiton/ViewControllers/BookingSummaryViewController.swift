@@ -4,21 +4,21 @@ import Firebase
 class BookingSummaryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     
-    
+    //UI Elements
     @IBOutlet weak var checkInLabel: UILabel!
     @IBOutlet weak var checkOutLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var theButton: UIButton!
-    
     @IBOutlet weak var extraPriceLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var paymentSegment: UISegmentedControl!
     @IBOutlet weak var payButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var checkInSmallLabel: UILabel!
-    
     @IBOutlet weak var checkOutSmallLabel: UILabel!
     @IBOutlet weak var breakfastSegment: UISegmentedControl!
+    @IBOutlet weak var percentageAmountLabel: UILabel!
+    
     var roomIDs = [String]()
     var breakfastRoomIDs  = ["","","",""]
     var breakfastArray = ["n","n","n","n"]
@@ -31,7 +31,7 @@ class BookingSummaryViewController: UIViewController, UITableViewDelegate, UITab
     var checkOut : String = ""
     var breakfastTotalAmount = 0.0
     
-    @IBOutlet weak var percentageAmountLabel: UILabel!
+    
     
     var roomPerNightCost = 0
     
@@ -61,12 +61,10 @@ class BookingSummaryViewController: UIViewController, UITableViewDelegate, UITab
         tableView.dataSource = self
         percentageAmountLabel.isHidden = true
         getRooms()
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     func fireError(titleText : String, lowerText : String){
@@ -77,7 +75,7 @@ class BookingSummaryViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     @IBAction func paySegmentChanged(_ sender: Any) {
-        //totalPrice(segmentIndex: paymentSegment.selectedSegmentIndex)
+        //Colour price labels
         price()
     }
     

@@ -44,7 +44,7 @@ class Booking {
     }
     
     
-    func checkAvailability(sDate : String) -> Bool{
+    func checkAvailability(sDate : String, nights : String) -> Bool{
         
         //Check Status
         
@@ -59,7 +59,7 @@ class Booking {
             var StartB = dateFormatter.date(from: sDate)
             StartB = Calendar.current.date(byAdding: dateComponent2, to: StartB!)
             var dateComponent = DateComponents ()
-            dateComponent.day = 3
+            dateComponent.day = Int(nights)
             
             let EndB = Calendar.current.date(byAdding: dateComponent, to: StartB!)
             

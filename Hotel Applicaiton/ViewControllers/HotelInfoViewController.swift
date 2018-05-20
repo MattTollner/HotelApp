@@ -32,6 +32,7 @@ class HotelInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         detailStack.isHidden = true
+        updateButton.isHidden = true
         getInfo()
         // Do any additional setup after loading the view.
         let toolBar = UIToolbar()
@@ -137,6 +138,7 @@ class HotelInfoViewController: UIViewController {
     
     func populateInfo(){
         detailStack.isHidden = false
+        updateButton.isHidden = false
         if let data = self.info {
             addressInput.text = data.Address
             breakfastPeriod.text = data.Breakfast
@@ -145,6 +147,7 @@ class HotelInfoViewController: UIViewController {
             checkOutInput.text = data.CheckOut
             phoneInput.text = data.Phone
             detailStack.isHidden = false
+            updateButton.isHidden = false
         }
     }
     
@@ -194,6 +197,9 @@ class HotelInfoViewController: UIViewController {
     
     func checkLabels( ) -> Bool{
         var isPass = true
+        emailInput.text  = emailInput.text?.replacingOccurrences(of: " ", with: "")
+        phoneInput.text  = phoneInput.text?.replacingOccurrences(of: " ", with: "")
+      
         
         if(addressInput.text == "" || addressInput.text == nil){
             addressInput.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.2189437212, blue: 0.1137813288, alpha: 0.548965669)
@@ -239,7 +245,7 @@ class HotelInfoViewController: UIViewController {
         
         if(phoneInput.text == "" || (phoneInput.text?.isAlphaCharacter)!){
             phoneInput.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.2189437212, blue: 0.1137813288, alpha: 0.548965669)
-            return false
+            isPass =  false
         }else {
             phoneInput.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         }

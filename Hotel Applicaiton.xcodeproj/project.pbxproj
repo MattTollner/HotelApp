@@ -54,7 +54,6 @@
 		F07563CA204DBC780069D42A /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07563C9204DBC770069D42A /* APIClient.swift */; };
 		F09140E12043276700D0BC68 /* BookingSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09140E02043276700D0BC68 /* BookingSummaryViewController.swift */; };
 		F09140E320433AB700D0BC68 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09140E220433AB700D0BC68 /* PaymentViewController.swift */; };
-		F0DAA7522048572600267029 /* ManageBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DAA7512048572600267029 /* ManageBookingViewController.swift */; };
 		F0DAA7542048C4AE00267029 /* ManageBookingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DAA7532048C4AE00267029 /* ManageBookingTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -132,7 +131,6 @@
 		F07563C9204DBC770069D42A /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		F09140E02043276700D0BC68 /* BookingSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingSummaryViewController.swift; sourceTree = "<group>"; };
 		F09140E220433AB700D0BC68 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
-		F0DAA7512048572600267029 /* ManageBookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageBookingViewController.swift; sourceTree = "<group>"; };
 		F0DAA7532048C4AE00267029 /* ManageBookingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageBookingTableViewCell.swift; sourceTree = "<group>"; };
 		F2C6EF6BA333D1AFC2D82DC4 /* Pods-Hotel Applicaiton.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hotel Applicaiton.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hotel Applicaiton/Pods-Hotel Applicaiton.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -210,7 +208,6 @@
 				F02CF82E2045ACF900D3CCDE /* ManageCleaningViewController.swift */,
 				F02CF8322045C00000D3CCDE /* UpdateRoomStatusViewController.swift */,
 				F02CF8342045D42D00D3CCDE /* StaffHomeViewController.swift */,
-				F0DAA7512048572600267029 /* ManageBookingViewController.swift */,
 				F01F82DF2049ABBA00335F74 /* ManageBookingsViewController.swift */,
 				F01F82E12049B56600335F74 /* UpdateBookingViewController.swift */,
 				0B435F012092077B00ADDDF0 /* HotelInfoViewController.swift */,
@@ -558,7 +555,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B0C3858203A0A3300CC3CA8 /* BookingRoomTableViewCell.swift in Sources */,
-				F0DAA7522048572600267029 /* ManageBookingViewController.swift in Sources */,
 				0B435F002091F22300ADDDF0 /* HotelInfo.swift in Sources */,
 				0B78E40F2039A115003661FA /* Staff.swift in Sources */,
 				0B78E4152039CF0D003661FA /* EditStaffViewController.swift in Sources */,

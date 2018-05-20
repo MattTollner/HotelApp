@@ -11,7 +11,7 @@ import Firebase
 
 class CreateAccountViewController: UIViewController {
 
-    
+    //UI Elements
     @IBOutlet weak var foreNameInput: UITextField!
     @IBOutlet weak var sirNameInput: UITextField!
     @IBOutlet weak var emailInput: UITextField!
@@ -22,18 +22,16 @@ class CreateAccountViewController: UIViewController {
     @IBOutlet weak var stackConstraint: NSLayoutConstraint!
     @IBOutlet weak var accountType: UISegmentedControl!
     
+    //Keyboard move boolean
     var moveStack = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        
+        //Keyborad tool bar setup
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
-        
-        
         toolBar.setItems([doneButton], animated: true)
         
         foreNameInput.inputAccessoryView = toolBar
@@ -45,7 +43,6 @@ class CreateAccountViewController: UIViewController {
         
         //Keyboard observer
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
     }
@@ -53,7 +50,9 @@ class CreateAccountViewController: UIViewController {
     @objc func keyboardWillShow(notification: NSNotification) {
         if let info = notification.userInfo {
             let rect:CGRect = info["UIKeyboardFrameEndUserInfoKey"] as! CGRect
-            print("KEYBOARD ADJUST")
+            
+            //Move stack above keybaord
+            
             if(moveStack){
                 self.view.layoutIfNeeded()
                 UIView.animate(withDuration: 0.25) {
@@ -67,6 +66,9 @@ class CreateAccountViewController: UIViewController {
     
     @objc func keyboardWillHide(notification: NSNotification) {
         moveStack = false
+        
+        //Move stack back to original pos
+        
         if let info = notification.userInfo {
             self.view.layoutIfNeeded()
             UIView.animate(withDuration: 0.25) {
@@ -102,8 +104,8 @@ class CreateAccountViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
+    
     func fireError(titleText : String, lowerText : String){
         let alert = UIAlertController(title: titleText, message: lowerText, preferredStyle: .alert)
         
@@ -112,23 +114,15 @@ class CreateAccountViewController: UIViewController {
     }
     
     @IBAction func createAccountTapped(_ sender: Any) {
-        if (foreNameInput.text == "" ||
-            sirNameInput.text == "" ||
-            emailInput.text == "" ||
-            addressInput.text == "" ||
-            phoneNumberInput.text == "" ||
-            postcodeInput.text == "")
+        if (!checkLabels())
         {
             print("All fields need to be entered")
-            //ADD ALERT
-        } else
-        {
+        } else {
+            //Create Account
             Auth.auth().createUser(withEmail: emailInput.text!, password: "changeme", completion: { (user, error) in
                 
                 if let err = error {
                     self.fireError(titleText: "Unable to change create user", lowerText: err.localizedDescription)
-                    
-                    
                 } else {
                     print("Created account")
                     self.createAccount()

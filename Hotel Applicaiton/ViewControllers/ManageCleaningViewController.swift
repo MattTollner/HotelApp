@@ -11,6 +11,8 @@ import Firebase
 
 class ManageCleaningViewController: UITableViewController {
     
+    @IBOutlet weak var segmentControl: UISegmentedControl!
+    
     var roomsList = [Room]()
     var selectedRoomList = [Room]()
     var updateRoom = false;
@@ -19,8 +21,6 @@ class ManageCleaningViewController: UITableViewController {
 
     
     @IBAction func unwindToManageCleaning(segue:UIStoryboardSegue) {
-        
-        
     }
     
     func fireError(titleText : String, lowerText : String){
@@ -33,15 +33,21 @@ class ManageCleaningViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getRooms()
-        // Do any additional setup after loading the view.
+       
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("VEW DID APPEAR ")
+        getRooms()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-    @IBOutlet weak var segmentControl: UISegmentedControl!
+    
+    //Filters table list
     @IBAction func segmentChange(_ sender: Any) {
         print("segment chagne")
         selectedRoomList.removeAll()
@@ -64,7 +70,6 @@ class ManageCleaningViewController: UITableViewController {
                     }
                 }
             }
-            
             tableView.reloadData()
         }
         
@@ -84,16 +89,11 @@ class ManageCleaningViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "roomCellCleaning", for: indexPath) as! RoomCleaningTableViewCell
-        //let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cellId")
-        
     
-        cell.roomTypeLabel.text = selectedRoomList[indexPath.row].RoomType
-        cell.roomNumberLabel.text = selectedRoomList[indexPath.row].Number
-        cell.roomStatusLabel.text = selectedRoomList[indexPath.row].RoomState
-            
-      
+        cell.roomTypeLabel.text = "Room Type: " + selectedRoomList[indexPath.row].RoomType
+        cell.roomNumberLabel.text =  selectedRoomList[indexPath.row].Number
+        cell.roomStatusLabel.text = "Room Status: " +  selectedRoomList[indexPath.row].RoomState
         
         return cell
         
@@ -106,35 +106,43 @@ class ManageCleaningViewController: UITableViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-  
             if  let destination = segue.destination as? UpdateRoomStatusViewController {
                 destination.roomToUpdate = selectedRoom
             }
-        
     }
     
     
     func getRooms(){
+        
+        //Clears arrays
+        roomsList.removeAll()
+        selectedRoomList.removeAll()
+        segmentControl.selectedSegmentIndex = 0
+        
+        //Pulls firebase rooms
         db.collection("Rooms").getDocuments { (snapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
                 self.fireError(titleText: "Error fetching rooms", lowerText: error.localizedDescription)
             } else {
                 for document in snapshot!.documents {
-                    //print("\(document.documentID) => \(document.data())")
                     
                     let rooms = Room(dictionary: document.data() as [String : AnyObject])
                     print(rooms.RoomType + " " + rooms.Price + " " + rooms.RoomState )
           
                     self.roomsList.append(rooms)
                    
+                    //If not clean append to selected
                     if(rooms.RoomState != "Clean"){
                         print("Detected unclean room adding to selectedRoomList")
                         self.selectedRoomList.append(rooms)
                         print("Count " + String(self.selectedRoomList.count))
                     }
                     
-                    
+                    if self.roomsList.count == snapshot!.documents.count {
+                        print("EN D OF LOP <><> >>>")
+                        self.tableView.reloadData()
+                    }
                 }
             }
             

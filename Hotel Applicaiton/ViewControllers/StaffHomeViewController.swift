@@ -10,34 +10,28 @@ import UIKit
 import Firebase
 
 class StaffHomeViewController: UIViewController {
-
+    
     let alert = UIAlertController(title: "Permission Denied", message: "Account permissions unable to view content", preferredStyle: UIAlertControllerStyle.alert)
-  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Checks if user logged in
         if (HelperClass.userTypeRefernce.userID == "NIL" || HelperClass.userTypeRefernce.userType == "NIL"){
             print("USER NOT LOGGED IN PERFROM SEGUE")
         }
         
         alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
-      
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
-
-    @IBAction func unwindToStaffHome(segue:UIStoryboardSegue) {
-                
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
-
-    @IBAction func dasf(_ sender: Any) {
-       
+    
+    
+    @IBAction func unwindToStaffHome(segue:UIStoryboardSegue) {
+        
     }
     
     @IBAction func signOutTapped(_ sender: Any) {
@@ -105,9 +99,4 @@ class StaffHomeViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
-    
-    
-    
-    
-    
 }

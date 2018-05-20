@@ -20,12 +20,7 @@ class ManageStaffTableViewController: UITableViewController {
     @IBOutlet weak var segmentPicker: UISegmentedControl!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    override func viewWillAppear(_ animated: Bool) {
-       
-        activityIndicator.startAnimating()
-        //getStaff()
-        //tableView.reloadData()
-    }
+   
     @IBAction func unwindToManageStaff(segue:UIStoryboardSegue) {
         print("Update Tables")
         activityIndicator.startAnimating()
@@ -55,12 +50,7 @@ class ManageStaffTableViewController: UITableViewController {
        activityIndicator.startAnimating()
         segmentPicker.isEnabled = false
         getStaff()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,8 +58,7 @@ class ManageStaffTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-
+   //Segment chage
     func updateSeg(){
         selectedStaff.removeAll()
         let segValue = segmentPicker.titleForSegment(at: segmentPicker.selectedSegmentIndex)
@@ -141,16 +130,8 @@ class ManageStaffTableViewController: UITableViewController {
         if  let destination = segue.destination as? EditStaffViewController {
             destination.staffToUpdate = selectedStaff
         }
-        
     }
- 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
+
 
     
     // Override to support editing the table view.
@@ -197,7 +178,7 @@ class ManageStaffTableViewController: UITableViewController {
                 self.fireError(titleText: "Unable to fetch staff", lowerText: error.localizedDescription)
             } else
             {
-                print("DOC COUNT " + String(describing: snapshot?.documents.count))
+                print("Staff document count:  " + String(describing: snapshot?.documents.count))
                 for document in snapshot!.documents {
                    // print("\(document.documentID) => \(document.data())")
                     

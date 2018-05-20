@@ -12,7 +12,7 @@ import Firebase
 
 class ManageRoomViewController: UITableViewController {
 
-    var specifiedRoomList = [Room]()
+    var filteredRoomList = [Room]()
     var roomsList = [Room]()
     var roomNumberList : [String] = []
     var updateRoom = false;
@@ -22,6 +22,7 @@ class ManageRoomViewController: UITableViewController {
   
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var daf: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,16 +32,15 @@ class ManageRoomViewController: UITableViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-    @IBOutlet weak var daf: UIBarButtonItem!
+    
     
     @IBAction func unwindSegue(_ sender: UIStoryboardSegue){
-        print("Room Created")
+        print("Uwind")
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return specifiedRoomList.count
+        return filteredRoomList.count
     }
     
     func fireError(titleText : String, lowerText : String){
@@ -53,53 +53,45 @@ class ManageRoomViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
         let cell = tableView.dequeueReusableCell(withIdentifier: "roomCell", for: indexPath) as! RoomTableViewCell
-        //let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cellId")
-        cell.roomNumber.text = "Number : " + specifiedRoomList[indexPath.row].Number
-        cell.roomType.text =   "Type   : " + specifiedRoomList[indexPath.row].RoomType
-        cell.roomPrice.text =  "Per/N  :£" + specifiedRoomList[indexPath.row].Price as? String
+        cell.roomNumber.text = "Number : " + filteredRoomList[indexPath.row].Number
+        cell.roomType.text =   "Type   : " + filteredRoomList[indexPath.row].RoomType
+        cell.roomPrice.text =  "Night  :£" + filteredRoomList[indexPath.row].Price as? String
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //Populate selected room data
         let selectedIndex = indexPath.row
         updateRoom = true
-        selectedRoom = specifiedRoomList[selectedIndex]
+        selectedRoom = filteredRoomList[selectedIndex]
         performSegue(withIdentifier: "editRoom", sender: self)
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        //Delete Room
         if editingStyle == .delete {
-            let rID = specifiedRoomList[indexPath.row].RoomID
+            let rID = filteredRoomList[indexPath.row].RoomID
+            
+            //Firebase ID delete
             db.collection("Rooms").document(rID).delete() { err in
+                //Error
                 if let err = err {
                     print("Error removing document: \(err)")
                     self.fireError(titleText: "Error deleting room!", lowerText: err.localizedDescription)
-                } else {
+                }
+                else
+                {
                     let delAlert = UIAlertController(title: "Delete Room", message: "Are you sure you want to delete the room?", preferredStyle: UIAlertControllerStyle.alert)
                     delAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
                         print("Document successfully removed!")
                         
+                        //Refresh data
                         self.activityIndicator.startAnimating()
                         self.getRooms()
                         self.segmentControl.selectedSegmentIndex = 0
                         self.segmentControl.isEnabled = false
-                        
-                        /*
-                        for i in 1...self.roomsList.count{
-                            print("roomsList count : " + String(self.roomsList.count))
-                            if self.specifiedRoomList[indexPath.row].RoomID == self.roomsList[i].RoomID
-                            {
-                                print("Found Same ID at index :: " + String(i))
-                                self.roomsList.remove(at: i)
-                                break
-                            }
-                        }
- */
-                        
-                        //self.specifiedRoomList.remove(at: indexPath.row)
-                        
-                        //tableView.reloadData()
                     }))
                     
                     delAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
@@ -115,23 +107,24 @@ class ManageRoomViewController: UITableViewController {
     }
     
     func roomChangeFunc(){
-        specifiedRoomList = []
+        //Filter room table by type
+        filteredRoomList = []
         for i in roomsList {
             if segmentControl.selectedSegmentIndex == 0 {
                 if i.RoomType == "Single" {
-                    specifiedRoomList.append(i)
+                    filteredRoomList.append(i)
                 }
             } else if segmentControl.selectedSegmentIndex == 1 {
                 if i.RoomType == "Double Single" {
-                    specifiedRoomList.append(i)
+                    filteredRoomList.append(i)
                 }
             } else if segmentControl.selectedSegmentIndex == 2 {
                 if i.RoomType == "Double" {
-                    specifiedRoomList.append(i)
+                    filteredRoomList.append(i)
                 }
             } else if segmentControl.selectedSegmentIndex == 3 {
                 if i.RoomType == "Family" {
-                    specifiedRoomList.append(i)
+                    filteredRoomList.append(i)
                 }
             } else {
                 print("INCORRECT ROOM TYPE :: ERROR")
@@ -147,8 +140,9 @@ class ManageRoomViewController: UITableViewController {
     @IBAction func newRoomTapped(_ sender: Any) {
         performSegue(withIdentifier: "addRoom", sender: self)
     }
+    
     @IBAction func unwindToManageRoom(segue:UIStoryboardSegue) {
-       print("Update Tables")
+       print("Refreshing Tables")
         activityIndicator.startAnimating()
         getRooms()
         segmentControl.selectedSegmentIndex = 0
@@ -168,6 +162,7 @@ class ManageRoomViewController: UITableViewController {
     }
   
     func getLastRoom(){
+        //Gets hightest room number
         activityIndicator.stopAnimating()
         var end : Int = roomsList.endIndex
         end -= 1
@@ -188,6 +183,7 @@ class ManageRoomViewController: UITableViewController {
     }
     
     @IBAction func refreshPressed(_ sender: Any) {
+        //Refresh table data
         activityIndicator.startAnimating()
         getRooms()
         segmentControl.selectedSegmentIndex = 0
@@ -196,7 +192,7 @@ class ManageRoomViewController: UITableViewController {
     
     func getRooms(){
         self.roomsList.removeAll()
-        self.specifiedRoomList.removeAll()
+        self.filteredRoomList.removeAll()
         db.collection("Rooms").getDocuments { (snapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
@@ -210,13 +206,11 @@ class ManageRoomViewController: UITableViewController {
                     self.roomsList.append(rooms)
                     self.roomNumberList.append(rooms.Number)
                     if(rooms.RoomType == "Single"){
-                       self.specifiedRoomList.append(rooms)
+                       self.filteredRoomList.append(rooms)
                     }
                     self.segmentControl.isEnabled = true
-                    self.tableView.reloadData()                    
-                    
+                    self.tableView.reloadData()
                 }
-                
             }
             
             if self.roomsList.count > 0 {
@@ -224,9 +218,6 @@ class ManageRoomViewController: UITableViewController {
             } else {
                 self.activityIndicator.stopAnimating()
             }
-            
-            print(self.roomsList.count)
-           
         }
     }
 }

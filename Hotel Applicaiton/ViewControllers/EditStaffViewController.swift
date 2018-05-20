@@ -16,7 +16,7 @@ extension String {
 }
 class EditStaffViewController: UIViewController {
 
-  
+    //UI Elements
     @IBOutlet weak var stackConstraint: NSLayoutConstraint!
     @IBOutlet weak var foreNameInput: UITextField!
     @IBOutlet weak var sirNameInput: UITextField!
@@ -25,18 +25,18 @@ class EditStaffViewController: UIViewController {
     @IBOutlet weak var phoneNumberInput: UITextField!
     @IBOutlet weak var postcodeInput: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
+    @IBOutlet weak var accountType: UISegmentedControl!
+    @IBOutlet weak var mainStackView: UIStackView!
    var moveStack = false
     
-               let db = Firestore.firestore()
+    let db = Firestore.firestore()
      var staffToUpdate = [Staff]()
     
-    @IBOutlet weak var accountType: UISegmentedControl!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
         //Keyboard observer
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
@@ -44,11 +44,9 @@ class EditStaffViewController: UIViewController {
         
         
         
-        
+        //Populate fields
         if(!staffToUpdate.isEmpty)
         {
-            
-            
             foreNameInput.text = staffToUpdate[0].Forename
             sirNameInput.text = staffToUpdate[0].Sirname
             emailInput.text = staffToUpdate[0].Email
@@ -69,16 +67,18 @@ class EditStaffViewController: UIViewController {
                 accountType.selectedSegmentIndex = 2
             } else {
                 print("No staff type detected")
+                fireError(titleText: "No staff detected", lowerText: "Please try again...")
+                self.performSegue(withIdentifier: "unwindToManageStaff", sender: self)
+                
             }
             
             
         }
         
+        //Toolbar setup
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
-        
-        
         toolBar.setItems([doneButton], animated: true)
         
         foreNameInput.inputAccessoryView = toolBar
@@ -90,6 +90,7 @@ class EditStaffViewController: UIViewController {
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
+        //Move stack up
         if let info = notification.userInfo {
             let rect:CGRect = info["UIKeyboardFrameEndUserInfoKey"] as! CGRect
             print("KEYBOARD ADJUST")
@@ -106,6 +107,7 @@ class EditStaffViewController: UIViewController {
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
+        //Move stack back to original
         if let info = notification.userInfo {
             self.view.layoutIfNeeded()
             UIView.animate(withDuration: 0.25) {
@@ -115,12 +117,10 @@ class EditStaffViewController: UIViewController {
         }
     }
     
-    
-    
+    //Close keyboard
     @objc func doneClicked(){
         self.view.endEditing(true)
     }
-    
     
     @IBAction func fornameInputEdit(_ sender: Any) {
         moveStack = false
@@ -148,13 +148,15 @@ class EditStaffViewController: UIViewController {
         deleteStaff()
     }
     
-    @IBOutlet weak var mainStackView: UIStackView!
+    
     func deleteStaff(){
         
         let delAlert = UIAlertController(title: "Delete Staff", message: "Are you sure you want to delete the staff account?", preferredStyle: UIAlertControllerStyle.alert)
         delAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
             self.activityIndicator.startAnimating()
             self.mainStackView.isHidden = true
+            
+            //Delete from firebase
             self.db.collection("Staff").document(self.staffToUpdate[0].StaffID).delete() { err in
                 if let err = err {
                     print("Error removing staff document: \(err)")
@@ -173,10 +175,7 @@ class EditStaffViewController: UIViewController {
         delAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
             
         }))
-        
         self.present(delAlert, animated: true, completion: nil)
-        
-        
     }
     
     func checkLabels( ) -> Bool{
@@ -237,15 +236,11 @@ class EditStaffViewController: UIViewController {
         } else {
             return false
         }
-        
-        
-        
     }
     
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func confirmAlert(){
@@ -254,8 +249,6 @@ class EditStaffViewController: UIViewController {
         successAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
             self.performSegue(withIdentifier: "unwindToManageStaff", sender: self)
         }))
-        
-        
         self.present(successAlert, animated: true, completion: nil)
     }
     
@@ -271,8 +264,7 @@ class EditStaffViewController: UIViewController {
         {
             print("All fields need to be entered")
         } else {
-            
- 
+            //Create dict
             let staffType = accountType.titleForSegment(at: accountType.selectedSegmentIndex)
             let staff : [String : Any] = ["Forename" : foreNameInput.text!,
                                           "Sirname" : sirNameInput.text!,
@@ -283,6 +275,7 @@ class EditStaffViewController: UIViewController {
                                           "StaffType" : staffType!,
                                           "StaffID" : staffToUpdate[0].StaffID]
             
+            //Update firebase document
             db.collection("Staff").document(staffToUpdate[0].StaffID).setData(staff) { (error) in
                 if let error = error {
                     print("Error updating staff document: \(error)")
