@@ -33,6 +33,7 @@ class SearchBookingViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var bookedRoomsLabel: UILabel!
     @IBOutlet weak var amountPayedMiniLabel: UILabel!
     @IBOutlet weak var totalAmountMiniLabel: UILabel!
+    @IBOutlet weak var cancelBookingButton: UIButton!
     
     
     
@@ -309,6 +310,8 @@ class SearchBookingViewController: UIViewController, UITableViewDataSource, UITa
         self.totalAmountMiniLabel.isHidden = true
         self.amountPayedMiniLabel.isHidden = true
         self.bookedRoomsLabel.isHidden = true
+        self.cancelBookingButton.isHidden = true
+        
     }
     
     func showElements() {
@@ -326,6 +329,7 @@ class SearchBookingViewController: UIViewController, UITableViewDataSource, UITa
         self.totalAmountMiniLabel.isHidden = false
         self.amountPayedMiniLabel.isHidden = false
         self.bookedRoomsLabel.isHidden = false
+        self.cancelBookingButton.isHidden = false
     }
 
 

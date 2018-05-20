@@ -19,6 +19,9 @@
         <array key="Lato-Heavy.ttf">
             <string>Lato-Heavy</string>
         </array>
+        <array key="Lato-Light.ttf">
+            <string>Lato-Light</string>
+        </array>
         <array key="Lato-Medium.ttf">
             <string>Lato-Medium</string>
         </array>
@@ -49,7 +52,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="TR2-Kk-KQA">
-                                <rect key="frame" x="104" y="375" width="167" height="29"/>
+                                <rect key="frame" x="104" y="369" width="167" height="29"/>
                                 <segments>
                                     <segment title="Clean"/>
                                     <segment title="Unclean"/>
@@ -59,43 +62,44 @@
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Number" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KZU-Bk-u7T">
-                                <rect key="frame" x="20" y="104" width="335" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="20" y="104" width="335" height="20"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jpJ-1K-k0a">
-                                <rect key="frame" x="20" y="135" width="335" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="20" y="134" width="335" height="20"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xlw-9c-PlC">
-                                <rect key="frame" x="20" y="211" width="335" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="20" y="208" width="335" height="20"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clean" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFO-he-1zN">
-                                <rect key="frame" x="20" y="287" width="335" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="20" y="282" width="335" height="20"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="avz-Bp-Dy5">
-                                <rect key="frame" x="20" y="180" width="335" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="20" y="178" width="335" height="20"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room State" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="baE-wc-tf4">
-                                <rect key="frame" x="20" y="256" width="335" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="20" y="252" width="335" height="20"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I0V-OR-Hgm">
-                                <rect key="frame" x="132" y="577" width="111" height="30"/>
+                                <rect key="frame" x="20" y="574" width="335" height="33"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <state key="normal" title="Update Status"/>
                                 <connections>
                                     <action selector="updateStatus:" destination="PTJ-dM-VIt" eventType="touchUpInside" id="FVJ-UW-8gY"/>
@@ -114,7 +118,7 @@
                             <constraint firstItem="gIh-Jj-39H" firstAttribute="trailing" secondItem="baE-wc-tf4" secondAttribute="trailing" constant="20" id="Grf-PF-lKu"/>
                             <constraint firstItem="Xlw-9c-PlC" firstAttribute="top" secondItem="avz-Bp-Dy5" secondAttribute="bottom" constant="10" id="Hxi-oT-U8e"/>
                             <constraint firstItem="gIh-Jj-39H" firstAttribute="trailing" secondItem="jpJ-1K-k0a" secondAttribute="trailing" constant="20" id="Ill-7z-wZL"/>
-                            <constraint firstItem="gIh-Jj-39H" firstAttribute="trailing" secondItem="I0V-OR-Hgm" secondAttribute="trailing" constant="132" id="JyW-zf-Qq9"/>
+                            <constraint firstItem="gIh-Jj-39H" firstAttribute="trailing" secondItem="I0V-OR-Hgm" secondAttribute="trailing" constant="20" id="JyW-zf-Qq9"/>
                             <constraint firstItem="KZU-Bk-u7T" firstAttribute="leading" secondItem="gIh-Jj-39H" secondAttribute="leading" constant="20" id="L7m-gR-8lN"/>
                             <constraint firstItem="Xlw-9c-PlC" firstAttribute="leading" secondItem="gIh-Jj-39H" secondAttribute="leading" constant="20" id="M8B-aV-usb"/>
                             <constraint firstItem="DFO-he-1zN" firstAttribute="top" secondItem="baE-wc-tf4" secondAttribute="bottom" constant="10" id="Oee-yF-0AM"/>
@@ -125,7 +129,7 @@
                             <constraint firstItem="avz-Bp-Dy5" firstAttribute="top" secondItem="jpJ-1K-k0a" secondAttribute="bottom" constant="24" id="UW8-9k-1Ra"/>
                             <constraint firstItem="avz-Bp-Dy5" firstAttribute="leading" secondItem="gIh-Jj-39H" secondAttribute="leading" constant="20" id="aTo-03-p2S"/>
                             <constraint firstItem="gIh-Jj-39H" firstAttribute="trailing" secondItem="TR2-Kk-KQA" secondAttribute="trailing" constant="104" id="aWK-J5-zMX"/>
-                            <constraint firstItem="I0V-OR-Hgm" firstAttribute="leading" secondItem="gIh-Jj-39H" secondAttribute="leading" constant="132" id="eX0-qP-bWe"/>
+                            <constraint firstItem="I0V-OR-Hgm" firstAttribute="leading" secondItem="gIh-Jj-39H" secondAttribute="leading" constant="20" id="eX0-qP-bWe"/>
                             <constraint firstItem="TR2-Kk-KQA" firstAttribute="top" secondItem="DFO-he-1zN" secondAttribute="bottom" constant="67" id="oIe-qO-qxt"/>
                             <constraint firstItem="gIh-Jj-39H" firstAttribute="bottom" secondItem="I0V-OR-Hgm" secondAttribute="bottom" constant="60" id="slo-ga-ZlC"/>
                             <constraint firstItem="gIh-Jj-39H" firstAttribute="trailing" secondItem="avz-Bp-Dy5" secondAttribute="trailing" constant="20" id="uWw-yB-Fug"/>
@@ -611,39 +615,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="0Ta-wI-NuP">
-                                <rect key="frame" x="106.5" y="274.5" width="162" height="182"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="0Ta-wI-NuP">
+                                <rect key="frame" x="99" y="234" width="177" height="263"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RhZ-s9-iR7">
-                                        <rect key="frame" x="0.0" y="0.0" width="162" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="177" height="33"/>
+                                        <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                         <state key="normal" title="Manage Rooms"/>
                                         <connections>
                                             <action selector="manageRoomsTapped:" destination="lvA-Qc-nFD" eventType="touchUpInside" id="S5R-4M-WyE"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nL9-JE-tzx">
-                                        <rect key="frame" x="0.0" y="38" width="162" height="30"/>
+                                        <rect key="frame" x="0.0" y="46" width="177" height="33"/>
+                                        <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                         <state key="normal" title="Manage Staff"/>
                                         <connections>
                                             <action selector="manageStaffTapped:" destination="lvA-Qc-nFD" eventType="touchUpInside" id="BHF-N1-MWE"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AjN-Zw-yM1">
-                                        <rect key="frame" x="0.0" y="76" width="162" height="30"/>
-                                        <state key="normal" title="Manage Bookings"/>
-                                        <connections>
-                                            <action selector="manageBookingsTapped:" destination="lvA-Qc-nFD" eventType="touchUpInside" id="qzJ-7n-hgb"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jXn-hw-paE">
-                                        <rect key="frame" x="0.0" y="114" width="162" height="30"/>
+                                        <rect key="frame" x="0.0" y="92" width="177" height="33"/>
+                                        <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                         <state key="normal" title="Manage Room Cleaning"/>
                                         <connections>
                                             <action selector="manageRoomCleaningTapped:" destination="lvA-Qc-nFD" eventType="touchUpInside" id="qg0-Pl-A6z"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lqK-y8-DBP">
+                                        <rect key="frame" x="0.0" y="138" width="177" height="33"/>
+                                        <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
+                                        <state key="normal" title="Manage Bookings"/>
+                                        <connections>
+                                            <segue destination="huO-fG-qXG" kind="show" id="CF0-Xd-7Yi"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AjN-Zw-yM1">
+                                        <rect key="frame" x="0.0" y="184" width="177" height="33"/>
+                                        <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
+                                        <state key="normal" title="Create Booking"/>
+                                        <connections>
+                                            <action selector="manageBookingsTapped:" destination="lvA-Qc-nFD" eventType="touchUpInside" id="qzJ-7n-hgb"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="alR-Ux-vZH">
-                                        <rect key="frame" x="0.0" y="152" width="162" height="30"/>
+                                        <rect key="frame" x="0.0" y="230" width="177" height="33"/>
+                                        <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                         <state key="normal" title="Edit Hotel Information"/>
                                         <connections>
                                             <action selector="editInfoTapped:" destination="lvA-Qc-nFD" eventType="touchUpInside" id="FzY-BA-ACP"/>
@@ -658,23 +675,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lqK-y8-DBP">
-                                <rect key="frame" x="90" y="107" width="195" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Manage Bookings"/>
-                                <connections>
-                                    <segue destination="huO-fG-qXG" kind="show" id="CF0-Xd-7Yi"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cps-9c-uOq">
-                                <rect key="frame" x="20" y="617" width="57" height="30"/>
+                                <rect key="frame" x="20" y="614" width="63" height="33"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <state key="normal" title="Account"/>
                                 <connections>
                                     <segue destination="rQb-Ug-LDJ" kind="show" id="IFG-oN-0nI"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XVv-yG-d7A">
-                                <rect key="frame" x="299" y="617" width="60" height="30"/>
+                                <rect key="frame" x="293" y="614" width="66" height="33"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <state key="normal" title="Sign Out">
                                     <color key="titleColor" red="1" green="0.26665945682132264" blue="0.14323187508216362" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -1083,42 +1094,42 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="GJb-MM-0p9">
-                                <rect key="frame" x="16" y="86" width="343" height="38.5"/>
+                                <rect key="frame" x="16" y="86" width="343" height="43"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checking In" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Bo-Ls-se5">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="16"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
+                                        <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="17"/>
                                         <color key="textColor" red="0.27489475388601037" green="0.27489475388601037" blue="0.27489475388601037" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunday 15th Feb 2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Fi-js-FCb">
-                                        <rect key="frame" x="0.0" y="18" width="343" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="0.0" y="22.5" width="343" height="20.5"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="xv0-DM-WXk">
-                                <rect key="frame" x="16" y="140" width="343" height="38.5"/>
+                                <rect key="frame" x="16" y="144.5" width="343" height="43"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checking Out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xk9-Nc-KOh">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="16"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
+                                        <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="17"/>
                                         <color key="textColor" red="0.27489475390000001" green="0.27489475390000001" blue="0.27489475390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunday 15th Feb 2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ydq-7Z-EDe">
-                                        <rect key="frame" x="0.0" y="18" width="343" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="0.0" y="22.5" width="343" height="20.5"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7m4-Nv-t77">
-                                <rect key="frame" x="16" y="509.5" width="343" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="16" y="506.5" width="343" height="20.5"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1127,20 +1138,21 @@
                                 <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGA-gF-MHJ">
-                                <rect key="frame" x="16" y="538.5" width="343" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="16" y="535.5" width="343" height="20.5"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gb0-Pl-S5p">
-                                <rect key="frame" x="16" y="617" width="343" height="30"/>
+                                <rect key="frame" x="16" y="614" width="343" height="33"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                 <state key="normal" title="Enter Details"/>
                                 <connections>
                                     <action selector="payButton:" destination="KPz-B4-Scc" eventType="touchUpInside" id="kef-rj-rkl"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jhc-j4-BSz">
-                                <rect key="frame" x="0.0" y="197" width="375" height="304"/>
+                                <rect key="frame" x="0.0" y="206" width="375" height="292"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="bookingCell" rowHeight="84" id="36d-ar-wed" customClass="BookingSummaryTableViewCell" customModule="Hotel_Applicaiton" customModuleProvider="target">
@@ -1210,7 +1222,7 @@
                                 </prototypes>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="udX-wh-Vqo">
-                                <rect key="frame" x="74" y="579" width="226" height="29"/>
+                                <rect key="frame" x="74" y="576" width="226" height="29"/>
                                 <segments>
                                     <segment title="Pay Now"/>
                                     <segment title="Pay at desk"/>
@@ -1301,7 +1313,7 @@
                                 <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEa-qd-A35">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEa-qd-A35">
                                 <rect key="frame" x="4" y="93" width="90" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Lato-Semibold" family="Lato" pointSize="17"/>
@@ -1314,7 +1326,7 @@
                                 <rect key="frame" x="169" y="347" width="37" height="37"/>
                                 <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNs-BF-iAu">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNs-BF-iAu">
                                 <rect key="frame" x="235" y="123" width="52" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Lato-Semibold" family="Lato" pointSize="17"/>
@@ -1483,45 +1495,45 @@
                                 <rect key="frame" x="25" y="79" width="325" height="478"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Forename" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aqP-Bm-JN1">
-                                        <rect key="frame" x="0.0" y="0.0" width="325" height="38"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="325" height="33"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="24"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="fornemaeEdit:" destination="AmL-au-I4y" eventType="editingDidBegin" id="T8L-Hh-o4H"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Sirname" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="L5w-7F-FZb">
-                                        <rect key="frame" x="0.0" y="66" width="325" height="38"/>
+                                        <rect key="frame" x="0.0" y="65" width="325" height="33"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="24"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="sirNameEdt:" destination="AmL-au-I4y" eventType="editingDidBegin" id="ATO-sl-GxR"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pBB-kL-TMe">
-                                        <rect key="frame" x="0.0" y="131.5" width="325" height="38"/>
+                                        <rect key="frame" x="0.0" y="129.5" width="325" height="33"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="24"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                                         <connections>
                                             <action selector="emailEdit:" destination="AmL-au-I4y" eventType="editingDidBegin" id="ip1-Br-Nam"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dHd-h2-H9G">
-                                        <rect key="frame" x="0.0" y="197.5" width="325" height="38"/>
+                                        <rect key="frame" x="0.0" y="194.5" width="325" height="33"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="24"/>
                                         <textInputTraits key="textInputTraits" textContentType="street-address"/>
                                         <connections>
                                             <action selector="addressEdit:" destination="AmL-au-I4y" eventType="editingDidBegin" id="HOm-00-Td3"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Postcode" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VSD-dY-fXe">
-                                        <rect key="frame" x="0.0" y="263" width="325" height="38"/>
+                                        <rect key="frame" x="0.0" y="259.5" width="325" height="33"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="24"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" textContentType="postal-code"/>
                                         <connections>
                                             <action selector="phoneNumberEdit:" destination="AmL-au-I4y" eventType="editingDidBegin" id="N2X-gd-ut6"/>
@@ -1529,17 +1541,17 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aCf-uc-9rN">
-                                        <rect key="frame" x="0.0" y="329" width="325" height="38"/>
+                                        <rect key="frame" x="0.0" y="324.5" width="325" height="33"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="24"/>
                                         <textInputTraits key="textInputTraits" keyboardType="phonePad" textContentType="tel"/>
                                         <connections>
                                             <action selector="phoneNumberEdit:" destination="AmL-au-I4y" eventType="editingDidEnd" id="pX4-xx-NZT"/>
                                         </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c3I-nC-6pn">
-                                        <rect key="frame" x="0.0" y="394.5" width="325" height="27.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <rect key="frame" x="0.0" y="389" width="325" height="29"/>
+                                        <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1554,7 +1566,8 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJ5-gY-XqC">
-                                <rect key="frame" x="125" y="617" width="125" height="30"/>
+                                <rect key="frame" x="125" y="614" width="125" height="33"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <state key="normal" title="Create Account"/>
                                 <connections>
                                     <action selector="createAccountTapped:" destination="AmL-au-I4y" eventType="touchUpInside" id="vD9-kY-r71"/>
@@ -1710,44 +1723,44 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jwl-rY-L3K">
-                                <rect key="frame" x="87" y="121" width="109.5" height="20"/>
-                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
+                                <rect key="frame" x="87" y="121" width="202" height="20"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Price" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="etM-eO-xk2">
-                                <rect key="frame" x="87" y="225" width="202" height="30"/>
+                                <rect key="frame" x="87" y="224" width="202" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price (£)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rbd-aq-RDQ">
-                                <rect key="frame" x="87" y="196" width="66" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="87" y="196" width="202" height="20"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Room State" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3dO-ck-GMi">
-                                <rect key="frame" x="87" y="303" width="202" height="30"/>
+                                <rect key="frame" x="87" y="301" width="202" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8wW-S3-3aO">
-                                <rect key="frame" x="87" y="274" width="89" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="87" y="273" width="202" height="20"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Room Type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="31U-84-B0T">
-                                <rect key="frame" x="87" y="381" width="202" height="30"/>
+                                <rect key="frame" x="87" y="378" width="202" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RSJ-u8-1H0">
-                                <rect key="frame" x="87" y="352" width="87" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="87" y="350" width="202" height="20"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1755,7 +1768,8 @@
                                 <rect key="frame" x="0.0" y="451" width="375" height="216"/>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NqG-dT-cRy">
-                                <rect key="frame" x="16" y="481" width="343" height="30"/>
+                                <rect key="frame" x="16" y="478" width="343" height="33"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <state key="normal" title="Update Room"/>
                                 <connections>
                                     <action selector="addRoom:" destination="bFJ-Pc-jl8" eventType="touchUpInside" id="szv-Tc-Qog"/>
@@ -1780,11 +1794,13 @@
                             <constraint firstItem="RSJ-u8-1H0" firstAttribute="leading" secondItem="3dO-ck-GMi" secondAttribute="leading" id="00t-u6-cxl"/>
                             <constraint firstItem="RSJ-u8-1H0" firstAttribute="leading" secondItem="Rbd-aq-RDQ" secondAttribute="leading" id="0bQ-Gg-nWS"/>
                             <constraint firstItem="RSJ-u8-1H0" firstAttribute="leading" secondItem="k3r-IM-F1u" secondAttribute="leading" id="0dg-Yg-EkH"/>
+                            <constraint firstItem="RSJ-u8-1H0" firstAttribute="width" secondItem="31U-84-B0T" secondAttribute="width" id="1rk-Ye-cFx"/>
                             <constraint firstItem="31U-84-B0T" firstAttribute="centerX" secondItem="dBi-PS-SMW" secondAttribute="centerX" id="3uC-fN-20T"/>
                             <constraint firstItem="RSJ-u8-1H0" firstAttribute="top" secondItem="3dO-ck-GMi" secondAttribute="bottom" constant="19" id="5JT-p1-Aiu"/>
                             <constraint firstItem="31U-84-B0T" firstAttribute="top" secondItem="RSJ-u8-1H0" secondAttribute="bottom" constant="8" id="9kg-HH-mdp"/>
                             <constraint firstItem="0ML-Xg-ohe" firstAttribute="leading" secondItem="dBi-PS-SMW" secondAttribute="leading" id="Arh-su-c6H"/>
                             <constraint firstItem="etM-eO-xk2" firstAttribute="centerX" secondItem="dBi-PS-SMW" secondAttribute="centerX" id="CEZ-Cs-Zas"/>
+                            <constraint firstItem="8wW-S3-3aO" firstAttribute="width" secondItem="3dO-ck-GMi" secondAttribute="width" id="EyX-vo-JYe"/>
                             <constraint firstItem="O97-XS-8Ut" firstAttribute="centerY" secondItem="dBi-PS-SMW" secondAttribute="centerY" id="LD1-fb-ZAQ"/>
                             <constraint firstItem="RSJ-u8-1H0" firstAttribute="leading" secondItem="dBi-PS-SMW" secondAttribute="leading" constant="87" id="LXu-Fr-OKL"/>
                             <constraint firstItem="GuR-fa-2ii" firstAttribute="top" secondItem="NqG-dT-cRy" secondAttribute="bottom" constant="63" id="OOg-jT-Dvb"/>
@@ -1795,6 +1811,7 @@
                             <constraint firstItem="NqG-dT-cRy" firstAttribute="top" secondItem="31U-84-B0T" secondAttribute="bottom" constant="70" id="R0Q-yC-vVD"/>
                             <constraint firstItem="NqG-dT-cRy" firstAttribute="leading" secondItem="dBi-PS-SMW" secondAttribute="leading" constant="16" id="Rl8-ba-5s1"/>
                             <constraint firstItem="8wW-S3-3aO" firstAttribute="top" secondItem="etM-eO-xk2" secondAttribute="bottom" constant="19" id="S2z-6z-0el"/>
+                            <constraint firstItem="jwl-rY-L3K" firstAttribute="width" secondItem="k3r-IM-F1u" secondAttribute="width" id="SRa-rr-qbs"/>
                             <constraint firstItem="jwl-rY-L3K" firstAttribute="top" secondItem="dBi-PS-SMW" secondAttribute="top" constant="57" id="V2Z-ms-Ifb"/>
                             <constraint firstItem="k3r-IM-F1u" firstAttribute="centerX" secondItem="dBi-PS-SMW" secondAttribute="centerX" id="VAy-Et-Qb0"/>
                             <constraint firstItem="dBi-PS-SMW" firstAttribute="trailing" secondItem="NqG-dT-cRy" secondAttribute="trailing" constant="16" id="WSF-RX-LHw"/>
@@ -1806,6 +1823,7 @@
                             <constraint firstItem="GuR-fa-2ii" firstAttribute="centerX" secondItem="dBi-PS-SMW" secondAttribute="centerX" id="jsf-Rw-n15"/>
                             <constraint firstItem="RSJ-u8-1H0" firstAttribute="leading" secondItem="8wW-S3-3aO" secondAttribute="leading" id="jvU-UY-8HF"/>
                             <constraint firstItem="etM-eO-xk2" firstAttribute="top" secondItem="Rbd-aq-RDQ" secondAttribute="bottom" constant="8" id="kXS-sv-9Lv"/>
+                            <constraint firstItem="Rbd-aq-RDQ" firstAttribute="width" secondItem="etM-eO-xk2" secondAttribute="width" id="oy9-18-ibQ"/>
                             <constraint firstItem="3dO-ck-GMi" firstAttribute="top" secondItem="8wW-S3-3aO" secondAttribute="bottom" constant="8" id="qMF-Eb-zNn"/>
                             <constraint firstItem="NqG-dT-cRy" firstAttribute="centerX" secondItem="dBi-PS-SMW" secondAttribute="centerX" id="rYA-dU-cJu"/>
                             <constraint firstItem="0ML-Xg-ohe" firstAttribute="trailing" secondItem="dBi-PS-SMW" secondAttribute="trailing" id="vYb-Ve-rjM"/>
@@ -2023,31 +2041,32 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Room Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rJz-pb-TJ4">
-                                <rect key="frame" x="86" y="166" width="203" height="30"/>
+                                <rect key="frame" x="86" y="165" width="203" height="30"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e61-bR-OpE">
-                                <rect key="frame" x="86" y="137" width="111" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="86" y="137" width="203" height="20"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Room Price" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R9K-Pd-ldy">
                                 <rect key="frame" x="86" y="249" width="203" height="30"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price (£)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RiL-gz-qKh">
-                                <rect key="frame" x="86" y="220" width="66" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="86" y="221" width="203" height="20"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQx-29-IlZ">
-                                <rect key="frame" x="16" y="473" width="343" height="30"/>
+                                <rect key="frame" x="16" y="470" width="343" height="33"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <state key="normal" title="Add Room"/>
                                 <connections>
                                     <action selector="addRoom:" destination="7Be-hJ-DDf" eventType="touchUpInside" id="niS-G2-dr4"/>
@@ -2060,9 +2079,9 @@
                                 </constraints>
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Highest Room Number :" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RQV-Y4-3GY">
-                                <rect key="frame" x="85.5" y="198" width="203" height="15"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="85.5" y="197" width="203" height="17"/>
+                                <fontDescription key="fontDescription" name="Lato-Thin" family="Lato" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="bdA-mW-eEb">
@@ -2070,14 +2089,14 @@
                                 <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Room Type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8HQ-D2-co2">
-                                <rect key="frame" x="86" y="326" width="203" height="30"/>
+                                <rect key="frame" x="86" y="325" width="203" height="30"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zQc-pD-qus">
-                                <rect key="frame" x="86" y="297" width="87" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="86" y="297" width="203" height="20"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -2085,6 +2104,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="R9K-Pd-ldy" firstAttribute="top" secondItem="RiL-gz-qKh" secondAttribute="bottom" constant="8" id="0gg-Ya-eAH"/>
+                            <constraint firstItem="RiL-gz-qKh" firstAttribute="width" secondItem="R9K-Pd-ldy" secondAttribute="width" id="1o9-G6-4NW"/>
                             <constraint firstItem="U6S-S9-B2l" firstAttribute="centerX" secondItem="RQV-Y4-3GY" secondAttribute="centerX" id="2q4-u0-fhV"/>
                             <constraint firstItem="zQc-pD-qus" firstAttribute="top" secondItem="R9K-Pd-ldy" secondAttribute="bottom" constant="18" id="42Y-8n-znW"/>
                             <constraint firstItem="U6S-S9-B2l" firstAttribute="leading" secondItem="HQH-Ql-hRP" secondAttribute="leading" id="5gq-N1-tra"/>
@@ -2111,8 +2131,10 @@
                             <constraint firstItem="RQV-Y4-3GY" firstAttribute="top" secondItem="rJz-pb-TJ4" secondAttribute="bottom" constant="2" id="llo-On-qju"/>
                             <constraint firstAttribute="bottom" secondItem="U6S-S9-B2l" secondAttribute="bottom" id="nlB-p8-ZAC"/>
                             <constraint firstItem="rJz-pb-TJ4" firstAttribute="top" secondItem="e61-bR-OpE" secondAttribute="bottom" constant="8" id="nyn-3D-Ypi"/>
+                            <constraint firstItem="zQc-pD-qus" firstAttribute="width" secondItem="8HQ-D2-co2" secondAttribute="width" id="o2g-4Q-39y"/>
                             <constraint firstItem="e61-bR-OpE" firstAttribute="leading" secondItem="Li2-Kj-mhi" secondAttribute="leading" constant="86" id="o4o-PU-mPY"/>
                             <constraint firstItem="CQx-29-IlZ" firstAttribute="leading" secondItem="Li2-Kj-mhi" secondAttribute="leading" constant="16" id="osx-UO-fTu"/>
+                            <constraint firstItem="e61-bR-OpE" firstAttribute="width" secondItem="rJz-pb-TJ4" secondAttribute="width" id="r7N-tQ-Yv4"/>
                             <constraint firstItem="U6S-S9-B2l" firstAttribute="trailing" secondItem="Li2-Kj-mhi" secondAttribute="trailing" id="uq3-JE-xZM"/>
                             <constraint firstItem="RiL-gz-qKh" firstAttribute="top" secondItem="RQV-Y4-3GY" secondAttribute="bottom" constant="7.5" id="vRO-6I-CKz"/>
                         </constraints>
@@ -2147,62 +2169,62 @@
                                 <rect key="frame" x="25" y="79" width="325" height="478"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Forename" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="84U-HG-Zd4">
-                                        <rect key="frame" x="0.0" y="0.0" width="325" height="38"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="325" height="33"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="24"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="fornameInputEdit:" destination="RXH-2Y-dKM" eventType="editingDidBegin" id="1df-OP-BiW"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Sirname" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7IY-mV-3zJ">
-                                        <rect key="frame" x="0.0" y="66" width="325" height="38"/>
+                                        <rect key="frame" x="0.0" y="65" width="325" height="33"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="24"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="sirnameInputEdit:" destination="RXH-2Y-dKM" eventType="editingDidBegin" id="dE5-Az-Z2I"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gbh-9p-sx1">
-                                        <rect key="frame" x="0.0" y="131.5" width="325" height="38"/>
+                                        <rect key="frame" x="0.0" y="129.5" width="325" height="33"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="24"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                                         <connections>
                                             <action selector="emailInputEdit:" destination="RXH-2Y-dKM" eventType="editingDidBegin" id="VM1-zK-nQC"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="89Y-NB-uqG">
-                                        <rect key="frame" x="0.0" y="197.5" width="325" height="38"/>
+                                        <rect key="frame" x="0.0" y="194.5" width="325" height="33"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="24"/>
                                         <textInputTraits key="textInputTraits" textContentType="street-address"/>
                                         <connections>
                                             <action selector="addressInputEdit:" destination="RXH-2Y-dKM" eventType="editingDidBegin" id="Hap-k5-K65"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Postcode" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m7A-2K-AeV">
-                                        <rect key="frame" x="0.0" y="263" width="325" height="38"/>
+                                        <rect key="frame" x="0.0" y="259.5" width="325" height="33"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="24"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" textContentType="postal-code"/>
                                         <connections>
                                             <action selector="postcodeInputEdit:" destination="RXH-2Y-dKM" eventType="editingDidBegin" id="Y1E-KK-KEb"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fQR-Hg-dws">
-                                        <rect key="frame" x="0.0" y="329" width="325" height="38"/>
+                                        <rect key="frame" x="0.0" y="324.5" width="325" height="33"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="24"/>
                                         <textInputTraits key="textInputTraits" keyboardType="phonePad" textContentType="tel"/>
                                         <connections>
                                             <action selector="phoneNubmerEdit:" destination="RXH-2Y-dKM" eventType="editingDidBegin" id="C6C-MC-Jd5"/>
                                         </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r58-da-vvi">
-                                        <rect key="frame" x="0.0" y="394.5" width="325" height="27.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <rect key="frame" x="0.0" y="389" width="325" height="29"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -2221,7 +2243,8 @@
                                 <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lEH-To-JEz">
-                                <rect key="frame" x="20" y="617" width="52" height="30"/>
+                                <rect key="frame" x="20" y="614" width="50" height="33"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <state key="normal" title="Delete">
                                     <color key="titleColor" red="1" green="0.26665945680000003" blue="0.14323187509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -2230,7 +2253,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5la-hW-paH">
-                                <rect key="frame" x="162" y="617" width="51" height="30"/>
+                                <rect key="frame" x="160" y="614" width="55" height="33"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <state key="normal" title="Update"/>
                                 <connections>
                                     <action selector="updateAccountTapped:" destination="RXH-2Y-dKM" eventType="touchUpInside" id="gWO-Cv-Irx"/>
@@ -2303,19 +2327,9 @@
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Booking Reference" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TxF-EI-aVY">
                                 <rect key="frame" x="16" y="81" width="268" height="30"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k8o-Ud-ait">
-                                <rect key="frame" x="297" y="81" width="62" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="62" id="wX7-kS-hu1"/>
-                                </constraints>
-                                <state key="normal" title="Search &gt;"/>
-                                <connections>
-                                    <action selector="searchButtonTapped:" destination="VT6-Dq-lPM" eventType="touchUpInside" id="QVg-Gz-LeL"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nzF-Q2-DOu">
                                 <rect key="frame" x="0.0" y="404" width="375" height="206"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2456,7 +2470,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Frt-Xc-IV1">
-                                <rect key="frame" x="129" y="617" width="116" height="30"/>
+                                <rect key="frame" x="20" y="617" width="335" height="30"/>
                                 <state key="normal" title="Cancel Booking">
                                     <color key="titleColor" red="1" green="0.25519192590000001" blue="0.1199331933" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -2515,10 +2529,20 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k8o-Ud-ait">
+                                <rect key="frame" x="297" y="81" width="62" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="62" id="wX7-kS-hu1"/>
+                                </constraints>
+                                <state key="normal" title="Search &gt;"/>
+                                <connections>
+                                    <action selector="searchButtonTapped:" destination="VT6-Dq-lPM" eventType="touchUpInside" id="QVg-Gz-LeL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Frt-Xc-IV1" firstAttribute="leading" secondItem="4Dx-5U-x28" secondAttribute="leading" constant="129" id="0jn-RM-ppc"/>
+                            <constraint firstItem="Frt-Xc-IV1" firstAttribute="leading" secondItem="4Dx-5U-x28" secondAttribute="leading" constant="20" id="0jn-RM-ppc"/>
                             <constraint firstItem="ztk-ja-QeD" firstAttribute="trailing" secondItem="D0a-Ai-ReF" secondAttribute="trailing" id="3zZ-yj-Q45"/>
                             <constraint firstItem="qQj-q8-4kh" firstAttribute="centerX" secondItem="nzF-Q2-DOu" secondAttribute="centerX" id="4kd-iN-6dy"/>
                             <constraint firstItem="nzF-Q2-DOu" firstAttribute="centerX" secondItem="4Dx-5U-x28" secondAttribute="centerX" id="5Rs-1N-ow1"/>
@@ -2532,6 +2556,7 @@
                             <constraint firstItem="nzF-Q2-DOu" firstAttribute="leading" secondItem="4Dx-5U-x28" secondAttribute="leading" id="Ke2-hu-dFA"/>
                             <constraint firstItem="S7Q-Bq-juK" firstAttribute="top" secondItem="e6J-2f-b76" secondAttribute="bottom" constant="7" id="MkV-Tp-rYD"/>
                             <constraint firstItem="TxF-EI-aVY" firstAttribute="top" secondItem="k8o-Ud-ait" secondAttribute="top" id="Re6-JL-EvB"/>
+                            <constraint firstItem="mar-Kf-wld" firstAttribute="centerX" secondItem="4Dx-5U-x28" secondAttribute="centerX" id="UFI-0m-4hv"/>
                             <constraint firstItem="qQj-q8-4kh" firstAttribute="top" secondItem="bSu-Op-7al" secondAttribute="bottom" constant="8" symbolic="YES" id="UNQ-an-xaK"/>
                             <constraint firstItem="BNy-zK-40W" firstAttribute="centerY" secondItem="ztk-ja-QeD" secondAttribute="centerY" id="UQh-uZ-DNx"/>
                             <constraint firstItem="4Dx-5U-x28" firstAttribute="bottom" secondItem="Frt-Xc-IV1" secondAttribute="bottom" constant="20" id="Uj0-pa-i0W"/>
@@ -2542,6 +2567,7 @@
                             <constraint firstItem="BNy-zK-40W" firstAttribute="firstBaseline" secondItem="ztk-ja-QeD" secondAttribute="firstBaseline" id="akY-Cb-ySL"/>
                             <constraint firstItem="4Dx-5U-x28" firstAttribute="bottom" secondItem="nzF-Q2-DOu" secondAttribute="bottom" constant="57" id="apO-PS-p4Y"/>
                             <constraint firstItem="D0a-Ai-ReF" firstAttribute="top" secondItem="ztk-ja-QeD" secondAttribute="bottom" constant="5" id="azO-RV-6Gv"/>
+                            <constraint firstItem="nzF-Q2-DOu" firstAttribute="trailing" secondItem="4Dx-5U-x28" secondAttribute="trailing" id="dXu-x2-bQJ"/>
                             <constraint firstItem="YMS-pA-QGV" firstAttribute="trailing" secondItem="ztk-ja-QeD" secondAttribute="trailing" id="dfa-zd-N0C"/>
                             <constraint firstItem="e6J-2f-b76" firstAttribute="leading" secondItem="S7Q-Bq-juK" secondAttribute="leading" id="edj-Z2-0Yv"/>
                             <constraint firstItem="Tky-fU-15K" firstAttribute="top" secondItem="mar-Kf-wld" secondAttribute="bottom" constant="2" id="ejA-e8-30b"/>
@@ -2549,14 +2575,16 @@
                             <constraint firstItem="Rs8-u2-o2f" firstAttribute="top" secondItem="D0a-Ai-ReF" secondAttribute="bottom" constant="46" id="fSq-bf-Xp1"/>
                             <constraint firstItem="mar-Kf-wld" firstAttribute="centerX" secondItem="Tky-fU-15K" secondAttribute="centerX" id="gEY-aE-NeV"/>
                             <constraint firstItem="Tky-fU-15K" firstAttribute="centerX" secondItem="qQj-q8-4kh" secondAttribute="centerX" id="hSR-Zn-2yl"/>
+                            <constraint firstItem="bSu-Op-7al" firstAttribute="centerX" secondItem="4Dx-5U-x28" secondAttribute="centerX" id="iQn-5f-4Ee"/>
                             <constraint firstItem="Rs8-u2-o2f" firstAttribute="centerX" secondItem="mar-Kf-wld" secondAttribute="centerX" id="jXd-gE-01i"/>
                             <constraint firstItem="D0a-Ai-ReF" firstAttribute="trailing" secondItem="qQj-q8-4kh" secondAttribute="trailing" id="k7D-Fg-ahe"/>
-                            <constraint firstItem="4Dx-5U-x28" firstAttribute="trailing" secondItem="Frt-Xc-IV1" secondAttribute="trailing" constant="130" id="lb1-lG-4bY"/>
+                            <constraint firstItem="4Dx-5U-x28" firstAttribute="trailing" secondItem="Frt-Xc-IV1" secondAttribute="trailing" constant="20" id="lb1-lG-4bY"/>
                             <constraint firstItem="mar-Kf-wld" firstAttribute="top" secondItem="Rs8-u2-o2f" secondAttribute="bottom" constant="23" id="nes-w4-JWU"/>
                             <constraint firstItem="nzF-Q2-DOu" firstAttribute="top" secondItem="qQj-q8-4kh" secondAttribute="bottom" constant="6" id="niW-5s-W71"/>
                             <constraint firstItem="nzF-Q2-DOu" firstAttribute="trailing" secondItem="4Dx-5U-x28" secondAttribute="trailing" id="nma-qE-0X9"/>
                             <constraint firstItem="mar-Kf-wld" firstAttribute="top" secondItem="S7Q-Bq-juK" secondAttribute="bottom" constant="72" id="oBo-gD-20C"/>
                             <constraint firstItem="mar-Kf-wld" firstAttribute="centerX" secondItem="bSu-Op-7al" secondAttribute="centerX" id="oYj-ah-rpk"/>
+                            <constraint firstItem="nzF-Q2-DOu" firstAttribute="leading" secondItem="4Dx-5U-x28" secondAttribute="leading" id="s1k-9t-BRC"/>
                             <constraint firstItem="YMS-pA-QGV" firstAttribute="leading" secondItem="BNy-zK-40W" secondAttribute="leading" id="vqZ-7b-sxQ"/>
                             <constraint firstItem="YMS-pA-QGV" firstAttribute="top" secondItem="Alw-Rb-2ws" secondAttribute="bottom" constant="8" symbolic="YES" id="wyk-SM-GxX"/>
                             <constraint firstItem="e6J-2f-b76" firstAttribute="top" secondItem="BNy-zK-40W" secondAttribute="bottom" constant="7" id="wzr-Ah-TvW"/>
@@ -2574,6 +2602,7 @@
                         <outlet property="bookingDatesLabel" destination="BNy-zK-40W" id="RTo-7q-J3N"/>
                         <outlet property="bookingStatusLabel" destination="D0a-Ai-ReF" id="3h3-7e-Rt5"/>
                         <outlet property="bookingStatusMiniLabel" destination="ztk-ja-QeD" id="dsC-mi-IuL"/>
+                        <outlet property="cancelBookingButton" destination="Frt-Xc-IV1" id="c4C-9J-xBy"/>
                         <outlet property="checkInLabel" destination="e6J-2f-b76" id="ZC3-qq-pXx"/>
                         <outlet property="checkInTimeLabel" destination="nRR-KC-efx" id="Zsx-gu-nNO"/>
                         <outlet property="checkOutLabel" destination="S7Q-Bq-juK" id="YD4-xO-PLO"/>
@@ -2779,62 +2808,62 @@
                                 <rect key="frame" x="25" y="79" width="325" height="478"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Forename" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EAD-Mh-etU">
-                                        <rect key="frame" x="0.0" y="0.0" width="325" height="38"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="325" height="33"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="24"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="fornameInputEdit:" destination="rQb-Ug-LDJ" eventType="editingDidBegin" id="oho-LH-AEX"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Sirname" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LrN-c2-mdB">
-                                        <rect key="frame" x="0.0" y="75" width="325" height="38"/>
+                                        <rect key="frame" x="0.0" y="75" width="325" height="33"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="24"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="sirnameInputEdit:" destination="rQb-Ug-LDJ" eventType="editingDidBegin" id="ZSQ-cP-egU"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="17U-iZ-Tye">
-                                        <rect key="frame" x="0.0" y="150" width="325" height="38"/>
+                                        <rect key="frame" x="0.0" y="149.5" width="325" height="33"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="24"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                                         <connections>
                                             <action selector="emailInputEdit:" destination="rQb-Ug-LDJ" eventType="editingDidBegin" id="rYQ-gd-VkP"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xvu-kk-SwI">
-                                        <rect key="frame" x="0.0" y="225.5" width="325" height="38"/>
+                                        <rect key="frame" x="0.0" y="224.5" width="325" height="33"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="24"/>
                                         <textInputTraits key="textInputTraits" textContentType="street-address"/>
                                         <connections>
                                             <action selector="addressInputEdit:" destination="rQb-Ug-LDJ" eventType="editingDidBegin" id="AZA-mz-i8Y"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Postcode" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vYN-T8-H90">
-                                        <rect key="frame" x="0.0" y="300.5" width="325" height="38"/>
+                                        <rect key="frame" x="0.0" y="299.5" width="325" height="33"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="24"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" textContentType="postal-code"/>
                                         <connections>
                                             <action selector="postcodeInputEdit:" destination="rQb-Ug-LDJ" eventType="editingDidBegin" id="Pyc-UA-ap4"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ql3-la-rSl">
-                                        <rect key="frame" x="0.0" y="375.5" width="325" height="38"/>
+                                        <rect key="frame" x="0.0" y="374" width="325" height="33"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="24"/>
                                         <textInputTraits key="textInputTraits" keyboardType="phonePad" textContentType="tel"/>
                                         <connections>
                                             <action selector="phoneNubmerEdit:" destination="rQb-Ug-LDJ" eventType="editingDidBegin" id="ZJu-F4-WKe"/>
                                         </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6gp-cq-wRX">
-                                        <rect key="frame" x="0.0" y="450.5" width="325" height="27.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <rect key="frame" x="0.0" y="449" width="325" height="29"/>
+                                        <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -2845,7 +2874,8 @@
                                 <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8kg-AI-6tW">
-                                <rect key="frame" x="16" y="617" width="343" height="30"/>
+                                <rect key="frame" x="16" y="614" width="343" height="33"/>
+                                <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                 <state key="normal" title="Update"/>
                                 <connections>
                                     <action selector="updateAccountTapped:" destination="rQb-Ug-LDJ" eventType="touchUpInside" id="vZk-9Y-dvl"/>
@@ -2890,7 +2920,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="XF7-Or-AfF"/>
+        <segue reference="YKu-8j-iqZ"/>
         <segue reference="0SG-2j-ofD"/>
         <segue reference="dGD-JH-ld0"/>
     </inferredMetricsTieBreakers>

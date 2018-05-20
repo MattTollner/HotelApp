@@ -397,7 +397,7 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
                                      self.fireError(titleText: "Error setting booking data", lowerText: error.localizedDescription)
                                 } else {
                                     print("Booking ID updated stored id: \(bID)")
-                                    self.performSegue(withIdentifier: "unwindBooking", sender: self)
+                                    
                                 }
                             }
                         }
@@ -408,8 +408,10 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
         case .userCancellation:
             return
         }
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let alertController = UIAlertController(title: title, message: "Email summary sent to " + emailLabel.text!, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Okay", style: .default) { action in
+            self.performSegue(withIdentifier: "unwindBooking", sender: self)
+        }
         alertController.addAction(action)
         self.present(alertController, animated: true, completion: nil)
     }
