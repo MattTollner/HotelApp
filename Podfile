@@ -7,8 +7,7 @@ target 'Hotel Applicaiton' do
 	pod ‘Firebase/Firestore’
 	pod "PromiseKit" , “~>4.0”
 	pod 'Stripe'
-	pod ‘Alamofire’
-	pod 'TextFieldEffects'
+	pod ‘Alamofire’	
 	pod 'SendGrid', :git => 'https://github.com/scottkawai/sendgrid-swift.git'
 
 	use_frameworks!

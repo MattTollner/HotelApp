@@ -84,7 +84,6 @@ PODS:
   - Protobuf (3.5.0)
   - SendGrid (1.1.0)
   - Stripe (12.1.2)
-  - TextFieldEffects (1.4.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -94,7 +93,6 @@ DEPENDENCIES:
   - PromiseKit (~> 4.0)
   - SendGrid (from `https://github.com/scottkawai/sendgrid-swift.git`)
   - Stripe
-  - TextFieldEffects
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -117,7 +115,6 @@ SPEC REPOS:
     - PromiseKit
     - Protobuf
     - Stripe
-    - TextFieldEffects
 
 EXTERNAL SOURCES:
   SendGrid:
@@ -149,8 +146,7 @@ SPEC CHECKSUMS:
   Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
   SendGrid: 1b2a3beb1f2b6df0ffba83c6d1b1f4587a51def0
   Stripe: 3230cdf8a8b0c04902e45e86f222fb82a926239c
-  TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
 
-PODFILE CHECKSUM: b068b32bac528abde242c0e285143633031ef7fe
+PODFILE CHECKSUM: 21fff95b1c5472c5b42d5a88e42905f9708677ce
 
 COCOAPODS: 1.5.0

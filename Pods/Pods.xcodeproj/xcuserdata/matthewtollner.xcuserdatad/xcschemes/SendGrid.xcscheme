@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BC21E26727F5B3D171147D93C5B9BDCD"
+               BlueprintIdentifier = "4083DF39A9E21D31924E9C53E5467848"
                BlueprintName = "SendGrid"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "SendGrid.framework">
