@@ -19,7 +19,9 @@ class HotelInfoViewController: UIViewController {
     @IBOutlet weak var checkInInput: UITextField!
     @IBOutlet weak var phoneInput: UITextField!
     
+    @IBOutlet weak var topStackConstraint: NSLayoutConstraint!
     @IBOutlet weak var stackConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var detailStack: UIStackView!
     let db = Firestore.firestore()
     var info : HotelInfo?
@@ -64,6 +66,7 @@ class HotelInfoViewController: UIViewController {
                 UIView.animate(withDuration: 0.25) {
                     self.view.layoutIfNeeded()
                     self.stackConstraint.constant = (rect.height)
+                    self.topStackConstraint.constant -= (rect.height)
                 }
             }
         } else{
@@ -78,6 +81,7 @@ class HotelInfoViewController: UIViewController {
             UIView.animate(withDuration: 0.25) {
                 self.view.layoutIfNeeded()
                 self.stackConstraint.constant = 30
+                self.topStackConstraint.constant = 13
             }
         }
     }

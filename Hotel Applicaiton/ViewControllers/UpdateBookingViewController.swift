@@ -93,7 +93,7 @@ class UpdateBookingViewController: UIViewController, UITableViewDataSource, UITa
         
         colourPrice()
         
-        bookingDateLabel.text = selectedBooking?.BookingDate
+     
         checkInLabel.text = selectedBooking?.getCheckIn()
         checkOutLabel.text = selectedBooking?.getCheckOut()
         bookingStatusLabel.text = selectedBooking?.BookingStatus
@@ -144,7 +144,7 @@ class UpdateBookingViewController: UIViewController, UITableViewDataSource, UITa
             }
         }
     }
-    
+  
     func showAlert(warning : String, status : String){
         let theAlert = UIAlertController(title: "Invalid Request", message: "Unable to " + warning + " due to booking status already being " + status, preferredStyle: UIAlertControllerStyle.alert)
         
@@ -274,7 +274,14 @@ class UpdateBookingViewController: UIViewController, UITableViewDataSource, UITa
                                     print("Booking Deleted From Booking Table")
                                     self.setRoomsUnclean()
                                     self.bookingStatusLabel.text = self.selectedBooking?.BookingStatus
-                                    self.fireError(titleText: "Booking Completed", lowerText: "Booking added to archive")
+                                    let canAlert = UIAlertController(title: "Booking Cancelled", message: "Booking added to archive", preferredStyle: UIAlertControllerStyle.alert)
+                                    
+                                    canAlert.addAction(UIAlertAction(title: "OK", style: .default , handler: { (action: UIAlertAction!) in
+                                        
+                                       // self.performSegue(withIdentifier: "unwindUpdateBooking", sender: self)
+                                    }))
+                                    
+                                    
                                     
                                 }
                             }
@@ -294,7 +301,7 @@ class UpdateBookingViewController: UIViewController, UITableViewDataSource, UITa
     func refreshTable(_ sender: Any) {
         print("Room Count " + String(describing: bookedRooms.count))
         print("Booking status " + (selectedBooking?.BookingStatus)!)
-        bookingDateLabel.text = selectedBooking?.BookingDate
+    
         checkInLabel.text = selectedBooking?.getCheckIn()
         checkOutLabel.text = selectedBooking?.getCheckOut()
         bookingStatusLabel.text = selectedBooking?.BookingStatus

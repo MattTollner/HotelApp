@@ -88,6 +88,7 @@ class EditStaffViewController: UIViewController {
         postcodeInput.inputAccessoryView = toolBar
         phoneNumberInput.inputAccessoryView = toolBar
     }
+    @IBOutlet weak var bottomStackConstraint: NSLayoutConstraint!
     
     @objc func keyboardWillShow(notification: NSNotification) {
         //Move stack up
@@ -100,7 +101,8 @@ class EditStaffViewController: UIViewController {
                            
                 UIView.animate(withDuration: 0.25) {
                     self.view.layoutIfNeeded()
-                    self.stackConstraint.constant = -35
+                    self.stackConstraint.constant -= 80
+                    self.bottomStackConstraint.constant += 80
                 }
             }
         }
@@ -113,6 +115,7 @@ class EditStaffViewController: UIViewController {
             UIView.animate(withDuration: 0.25) {
                 self.view.layoutIfNeeded()
                 self.stackConstraint.constant = 15
+                self.bottomStackConstraint.constant = 110
             }
         }
     }

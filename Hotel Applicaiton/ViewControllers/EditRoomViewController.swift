@@ -155,19 +155,9 @@ class EditRoomViewController: UIViewController, UITextFieldDelegate, UIPickerVie
             roomType.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
         }
         
-        let types = ["Single", "Doulbe Single", "Double", "Family"]
+        let types = ["Single", "Double Single", "Double", "Family"]
         
-        for i in types {
-            if roomType.text == i {           
-                roomType.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
-                break
-            } else {
-                print("DB TYPE :: " + roomType.text!)
-                print("OS TYPE :: " + i)
-                roomType.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
-                isPass = false
-            }
-        }
+    
         
         if let roomNum = roomNumber.text{
             if(roomsNumberList.contains(roomNum)){

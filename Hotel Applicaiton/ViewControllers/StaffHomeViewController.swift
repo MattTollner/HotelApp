@@ -19,6 +19,7 @@ class StaffHomeViewController: UIViewController {
         //Checks if user logged in
         if (HelperClass.userTypeRefernce.userID == "NIL" || HelperClass.userTypeRefernce.userType == "NIL"){
             print("USER NOT LOGGED IN PERFROM SEGUE")
+            performSegue(withIdentifier: "unwindStaffHome", sender: nil)
         }
         
         alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
@@ -45,6 +46,7 @@ class StaffHomeViewController: UIViewController {
         
         HelperClass.userTypeRefernce.userID = "NIL"
         HelperClass.userTypeRefernce.userType = "NIL"
+        print("Signing Out " + HelperClass.userTypeRefernce.userID + " " + HelperClass.userTypeRefernce.userType)
         self.performSegue(withIdentifier: "unwindStaffHome", sender: self)
         
     }

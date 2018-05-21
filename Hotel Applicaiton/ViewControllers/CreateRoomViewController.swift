@@ -178,7 +178,7 @@ class CreateRoomViewController: UIViewController, UITextFieldDelegate, UIPickerV
         }
       
         
-        let types = ["Single", "Doulbe Single", "Double", "Family"]
+        let types = ["Single", "Double Single", "Double", "Family"]
         
         for i in types {
             if roomType.text == i {

@@ -10,13 +10,14 @@ import UIKit
 import Firebase
 import PromiseKit
 
-class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     //Outlets
     @IBOutlet weak var checkInSegment: UISegmentedControl!
     @IBOutlet weak var timeSegment: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var searchBar: UISearchBar!
     //Data
     var refinedBookingList = [Booking]()
     var refinedCustomerList = [Customer]()
@@ -28,6 +29,9 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
     var calendar : Date?
     var todayDateStr : String?
     
+    //Serach bar
+    var isSearching = false
+    
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -36,20 +40,35 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
         APIClient.customerOkay = false
     }
     
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        print("searach end edit " + searchBar.text!)
+        if(searchBar.text != ""){
+            print("Searching true")
+            isSearching = true
+            updateTable()
+            
+        } else {
+            print("Searching FALSE <<<>>><<>>>")
+            isSearching = false
+            updateTable()
+        }
+    }
+    
     //Format table
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return refinedBookingList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("Table Set")
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy" //Your date format
         let cell = tableView.dequeueReusableCell(withIdentifier: "manageBookingCell", for: indexPath) as! ManageBookingTableViewCell
         
-        cell.nameLabel.text = refinedCustomerList[indexPath.row].getFullName()
-        cell.checkInLabel.text = dateFormatter.string(from: refinedBookingList[indexPath.row].CheckIn)
-        cell.checkOutLabel.text = dateFormatter.string(from: refinedBookingList[indexPath.row].CheckOut)
-        cell.statusLabel.text = refinedBookingList[indexPath.row].BookingStatus
+        cell.nameLabel.text =     "Name:  " + refinedCustomerList[indexPath.row].getFullName()
+        cell.checkInLabel.text =  "Check In:  " + dateFormatter.string(from: refinedBookingList[indexPath.row].CheckIn)
+        cell.checkOutLabel.text = "Check Out:  " + dateFormatter.string(from: refinedBookingList[indexPath.row].CheckOut)
+        cell.statusLabel.text =   "Status:  " + refinedBookingList[indexPath.row].BookingStatus
         return cell
         
     }
@@ -81,6 +100,17 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
         tableView.delegate = self
         tableView.dataSource = self
         
+        
+        //Tool bar setup
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
+        
+        
+        toolBar.setItems([doneButton], animated: true)
+        
+        searchBar.inputAccessoryView = toolBar
+        
         //Populate todays date
         let currentDate = Date()
         let dateFormatter = DateFormatter()
@@ -91,6 +121,9 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
         print("Todays date is " + todayDateStr!)
         calendar = dateFormatter.date(from: todayDateStr!)
         
+        searchBar.delegate = self
+        searchBar.returnKeyType = UIReturnKeyType.done
+        
         getBookingChain()
     }
     
@@ -98,12 +131,24 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
         super.didReceiveMemoryWarning()
     }
     
+    @objc func doneClicked(){
+        self.view.endEditing(true)
+    }
+ 
+   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("SErach bar button CLIKDED <><><>")
+        searchBar.resignFirstResponder()
+    }
+    
+  
     func updateTable(){
         
         
-        if bookingList[0].BookingID == ""{
+        if bookingList.isEmpty{
             print("BOOKING LIST EMPTY :: ERROR CAUGHT")
         } else {
+            
+            print("Updateing Table FUnc")
             refinedCustomerList = []
             refinedBookingList  = []
             
@@ -117,90 +162,121 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
             //ERROR WAS ERE
             print("Booking 1 date : " + dateFormatter.string(from: bookingList[0].CheckIn))
             
-            if checkInSegment.selectedSegmentIndex == 0 {
-                //Check In
-                if timeSegment.selectedSegmentIndex == 0 {
-                    //All
-                    print("All")
-                    for i in 0...a {
+            if(isSearching){
+                //Filter by search
+                checkInSegment.isEnabled = false
+                timeSegment.isEnabled = false
+                
+                print("Customer List Count " + String(customerList.count))
+                print("Booking List Count " + String(bookingList.count))
+                for i in 0...(customerList.count - 1) {
+                    if (customerList[i].Email == searchBar.text){
                         refinedBookingList.append(bookingList[i])
                         refinedCustomerList.append(customerList[i])
+                        print("Refined booking count " + String(refinedBookingList.count))
                     }
-                } else if timeSegment.selectedSegmentIndex == 1 {
-                    //Past
-                    print("Past")
-                    for i in 0...a {
-                        if bookingList[i].CheckIn.compare(theDate!) == .orderedAscending {
-                            refinedBookingList.append(bookingList[i])
-                            refinedCustomerList.append(customerList[i])
-                        }
-                    }
-                } else if timeSegment.selectedSegmentIndex == 2 {
-                    //Present
-                    print("Present")
-                    for i in 0...a{
-                        if bookingList[i].CheckIn.compare(theDate!) == .orderedSame {
-                            refinedBookingList.append(bookingList[i])
-                            refinedCustomerList.append(customerList[i])
-                        }
-                    }
-                } else if timeSegment.selectedSegmentIndex == 3 {
-                    //Future
-                    print("Future")
-                    for i in 0...a {
-                        if bookingList[i].CheckIn.compare(theDate!) == .orderedDescending {
-                            refinedBookingList.append(bookingList[i])
-                            refinedCustomerList.append(customerList[i])
-                        }
-                    }
-                } else  {
-                    print("Nothing")
                 }
+                tableView.reloadData()
             } else {
-                //Check Out
-                if timeSegment.selectedSegmentIndex == 0 {
-                    //All
-                    print("All")
-                    for i in 0...a {
-                        refinedBookingList.append(bookingList[i])
-                        refinedCustomerList.append(customerList[i])
-                    }
-                } else if timeSegment.selectedSegmentIndex == 1 {
-                    //Past
-                    print("Past")
-                    for i in 0...a {
-                        if bookingList[i].CheckOut.compare(theDate!) == .orderedAscending {
+                checkInSegment.isEnabled = true
+                timeSegment.isEnabled = true
+                //USE segments
+                if checkInSegment.selectedSegmentIndex == 0 {
+                    //Check In
+                    if timeSegment.selectedSegmentIndex == 0 {
+                        //All
+                        print("All")
+                        for i in 0...a {
                             refinedBookingList.append(bookingList[i])
                             refinedCustomerList.append(customerList[i])
                         }
+                        tableView.reloadData()
+                    } else if timeSegment.selectedSegmentIndex == 1 {
+                        //Past
+                        print("Past")
+                        for i in 0...a {
+                            if bookingList[i].CheckIn.compare(theDate!) == .orderedAscending {
+                                refinedBookingList.append(bookingList[i])
+                                refinedCustomerList.append(customerList[i])
+                            }
+                        }
+                        tableView.reloadData()
+                    } else if timeSegment.selectedSegmentIndex == 2 {
+                        //Present
+                        print("Present")
+                        for i in 0...a{
+                            if bookingList[i].CheckIn.compare(theDate!) == .orderedSame {
+                                refinedBookingList.append(bookingList[i])
+                                refinedCustomerList.append(customerList[i])
+                            }
+                        }
+                        tableView.reloadData()
+                    } else if timeSegment.selectedSegmentIndex == 3 {
+                        //Future
+                        print("Future")
+                        for i in 0...a {
+                            if bookingList[i].CheckIn.compare(theDate!) == .orderedDescending {
+                                refinedBookingList.append(bookingList[i])
+                                refinedCustomerList.append(customerList[i])
+                            }
+                        }
+                        tableView.reloadData()
+                    } else  {
+                        print("Nothing")
                     }
-                } else if timeSegment.selectedSegmentIndex == 2 {
-                    //Present
-                    print("Present")
-                    for i in 0...a{
-                        if bookingList[i].CheckOut.compare(theDate!) == .orderedSame {
+                } else {
+                    //Check Out
+                    if timeSegment.selectedSegmentIndex == 0 {
+                        //All
+                        print("All")
+                        for i in 0...a {
                             refinedBookingList.append(bookingList[i])
                             refinedCustomerList.append(customerList[i])
                         }
-                    }
-                } else if timeSegment.selectedSegmentIndex == 3 {
-                    //Future
-                    print("Future")
-                    for i in 0...a {
-                        if bookingList[i].CheckOut.compare(theDate!) == .orderedDescending {
-                            refinedBookingList.append(bookingList[i])
-                            refinedCustomerList.append(customerList[i])
+                        tableView.reloadData()
+                    } else if timeSegment.selectedSegmentIndex == 1 {
+                        //Past
+                        print("Past")
+                        for i in 0...a {
+                            if bookingList[i].CheckOut.compare(theDate!) == .orderedAscending {
+                                refinedBookingList.append(bookingList[i])
+                                refinedCustomerList.append(customerList[i])
+                            }
                         }
+                        tableView.reloadData()
+                    } else if timeSegment.selectedSegmentIndex == 2 {
+                        //Present
+                        print("Present")
+                        for i in 0...a{
+                            if bookingList[i].CheckOut.compare(theDate!) == .orderedSame {
+                                refinedBookingList.append(bookingList[i])
+                                refinedCustomerList.append(customerList[i])
+                            }
+                        }
+                        tableView.reloadData()
+                    } else if timeSegment.selectedSegmentIndex == 3 {
+                        //Future
+                        print("Future")
+                        for i in 0...a {
+                            if bookingList[i].CheckOut.compare(theDate!) == .orderedDescending {
+                                refinedBookingList.append(bookingList[i])
+                                refinedCustomerList.append(customerList[i])
+                            }
+                        }
+                        tableView.reloadData()
+                    } else  {
+                        print("Nothing")
                     }
-                } else  {
-                    print("Nothing")
-                }
+                    
+                    tableView.reloadData()
+           
             }
+        }
         }
         
     }
     
-    
+    //Called when segment changed
     @IBAction func checkInChanged(_ sender: Any) {
         if(bookingList.isEmpty){
             print("No bookings to filter")
@@ -254,8 +330,11 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
                             self.customerList.append(customer)
                             index += 1
                             
+                            print("Customer LIst COunt : " + String(self.customerList.count))
+                            
                             //Check if at end of loop
                             if index == bListCount{
+                                print("End of loop")
                                 self.updateTable()
                                 self.activityIndicator.stopAnimating()
                                 self.tableView.reloadData()
@@ -270,6 +349,15 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
             }
             .then { obj -> Void in
                 print("ENd :: Custerom List : " + String(self.customerList.count) + " BookingList :: " + String(self.bookingList.count))
+                self.activityIndicator.stopAnimating()
+                if self.bookingList.count == 0{
+                    print("no bookings")
+                    self.timeSegment.isEnabled = false
+                    self.checkInSegment.isEnabled = false
+                } else {
+                    self.timeSegment.isEnabled = true
+                    self.checkInSegment.isEnabled = true
+                }
             }
             .catch(){
                 err in
@@ -286,6 +374,7 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
                 } else {
                     let customer = Customer(dictionary: snapshot?.data() as! [String : AnyObject])
                     self.customerList.append(customer)
+                    print("Customer added :" + String( self.customerList.count))
                     fulfil(customer)
                 }
             })

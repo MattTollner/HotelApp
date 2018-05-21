@@ -160,7 +160,7 @@ class ViewController: UIViewController {
                 HelperClass.userTypeRefernce.userType = staff.StaffType
                 print("UID " + HelperClass.userTypeRefernce.userID)
                 print("U TYPE " + HelperClass.userTypeRefernce.userType)
-                self.performSegue(withIdentifier: "toStaffHome", sender: self)
+                //self.performSegue(withIdentifier: "toStaffHome", sender: self)
                 
             }
         }

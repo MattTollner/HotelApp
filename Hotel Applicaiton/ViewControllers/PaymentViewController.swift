@@ -48,6 +48,8 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
     var checkInDate : Date = Date()
     var checkOutDate : Date = Date()
     
+    var moveUp = false
+    
     var paymentInPennys = 0
     var fullBookingCost = 0.0
     var depositAmount = 0.0
@@ -111,18 +113,23 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
         cityLabel.inputAccessoryView = toolBar
         
     }
+    @IBOutlet weak var topStackContraint: NSLayoutConstraint!
     
     //Move view up
     @objc func keyboardWillShow(notification: NSNotification) {
-        if let info = notification.userInfo {
-            let rect:CGRect = info["UIKeyboardFrameEndUserInfoKey"] as! CGRect
-            print("KEYBOARD ADJUST")
-            enableElements(enable: false)
-            self.view.layoutIfNeeded()
-            UIView.animate(withDuration: 0.25) {
+        
+        if(moveUp){
+            if let info = notification.userInfo {
+                let rect:CGRect = info["UIKeyboardFrameEndUserInfoKey"] as! CGRect
+                print("KEYBOARD ADJUST")
+                enableElements(enable: false)
                 self.view.layoutIfNeeded()
-                print("MOVE UP AMOUNT :: " + String(self.moveUpAmount))
-                self.bottonConstraint.constant = (rect.height + 20)
+                UIView.animate(withDuration: 0.25) {
+                    self.view.layoutIfNeeded()
+                    print("MOVE UP AMOUNT :: " + String(self.moveUpAmount))
+                    self.topStackContraint.constant -= (rect.height)
+                    self.bottonConstraint.constant = (rect.height)
+                }
             }
         }
     }
@@ -134,7 +141,9 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
             enableElements(enable: true)
             UIView.animate(withDuration: 0.25) {
                 self.view.layoutIfNeeded()
-                self.bottonConstraint.constant = 87
+                //self.topStackContraint.isActive = true
+                self.bottonConstraint.constant = 30
+                self.topStackContraint.constant = 20
             }
         }
     }
@@ -183,63 +192,63 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
             forenameLabel.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
             isPass = false
         } else {
-            forenameLabel.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
+            forenameLabel.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         }
         if(forenameLabel.text?.isAlpha == false){
             forenameLabel.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
             isPass = false
         }else {
-            forenameLabel.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
+            forenameLabel.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         }
        
         if(sirnameLabel.text == ""){
             sirnameLabel.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
             isPass = false
         }else {
-            sirnameLabel.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
+            sirnameLabel.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         }
         if(sirnameLabel.text?.isAlpha == false){
             sirnameLabel.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
             isPass = false
         }else {
-            sirnameLabel.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
+            sirnameLabel.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         }
         if(emailLabel.text == ""){
             emailLabel.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
             isPass = false
         }else {
-            emailLabel.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
+            emailLabel.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         }
         if(confirmEmailLabel.text == ""){
             confirmEmailLabel.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
             isPass = false
         }else {
-            confirmEmailLabel.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
+            confirmEmailLabel.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         }
         if(addressLabel.text == ""){
             addressLabel.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
             isPass = false
         }else {
-            addressLabel.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
+            addressLabel.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         }
         if(postcodeLabel.text == ""){
             isPass = false
         }else {
-            postcodeLabel.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
+            postcodeLabel.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         }
         if(cityLabel.text == ""){
             cityLabel.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
             return false
         }else {
-            cityLabel.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
+            cityLabel.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         }
         if(emailLabel.text != confirmEmailLabel.text){
             emailLabel.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
             confirmEmailLabel.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
             isPass = false
         }else {
-            emailLabel.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
-            confirmEmailLabel.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
+            emailLabel.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            confirmEmailLabel.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         }
         if(isPass){
             return true
@@ -251,6 +260,34 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
         
     }
     
+    
+    @IBAction func foreNameBegin(_ sender: Any) {
+        moveUp = false
+    }
+
+    
+    
+    @IBAction func sirnameBegin(_ sender: Any) {
+        moveUp = false
+    }
+    @IBAction func emailBegin(_ sender: Any) {
+        moveUp = true
+    }
+    
+    @IBAction func emailConfBegin(_ sender: Any) {
+        moveUp = true
+    }
+    
+    @IBAction func addressBegin(_ sender: Any) {
+        moveUp = true
+    }
+    
+    @IBAction func postcodeBegin(_ sender: Any) {
+        moveUp = true
+    }
+    @IBAction func cityBegin(_ sender: Any) {
+        moveUp = true
+    }
     @IBOutlet weak var confirmDetails: UIButton!
     @IBAction func confrimDetails(_ sender: Any) {
         //paymentTextField.isHidden = false

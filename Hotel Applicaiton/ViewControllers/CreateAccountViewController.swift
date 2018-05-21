@@ -46,34 +46,35 @@ class CreateAccountViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
     }
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var bottomStackConstraint: NSLayoutConstraint!
     @objc func keyboardWillShow(notification: NSNotification) {
+        //Move stack up
         if let info = notification.userInfo {
             let rect:CGRect = info["UIKeyboardFrameEndUserInfoKey"] as! CGRect
+            print("KEYBOARD ADJUST")
             
-            //Move stack above keybaord
-            
+            self.view.layoutIfNeeded()
             if(moveStack){
-                self.view.layoutIfNeeded()
+                
                 UIView.animate(withDuration: 0.25) {
                     self.view.layoutIfNeeded()
-                    self.stackConstraint.constant = -80
+                    self.stackConstraint.constant -= 80
+                    self.bottomStackConstraint.constant += 80
                 }
             }
-            
         }
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        moveStack = false
-        
-        //Move stack back to original pos
-        
+        //Move stack back to original
         if let info = notification.userInfo {
             self.view.layoutIfNeeded()
             UIView.animate(withDuration: 0.25) {
                 self.view.layoutIfNeeded()
                 self.stackConstraint.constant = 15
+                self.bottomStackConstraint.constant = 110
             }
         }
     }

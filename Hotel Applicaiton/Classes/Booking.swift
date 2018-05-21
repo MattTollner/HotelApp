@@ -12,7 +12,6 @@ import UIKit
 class Booking {
     var RoomID : [String]
     var CustomerID : String
-    var BookingDate : String
     var CheckIn : Date
     var CheckOut : Date
     //var CheckInStamp : Timestamp
@@ -28,7 +27,6 @@ class Booking {
     {
         self.RoomID = dictionary["RoomID"] as! [String]
         self.CustomerID  = dictionary["CustomerID"] as! String
-        self.BookingDate = dictionary["BookingDate"] as! String
         // self.CheckInStamp = dictionary["CheckIn"] as! Timestamp
         //  self.CheckOutStamp = dictionary["CheckOut"] as! Timestamp
         self.BookingStatus = dictionary["Status"] as! String
@@ -140,8 +138,7 @@ class Booking {
     
     func getDict() -> Dictionary<String, Any> {
         
-        let dict = ["BookingDate" : self.BookingDate,
-                    "CheckIn" : self.CheckIn ,
+        let dict = ["CheckIn" : self.CheckIn ,
                     "CheckOut" : self.CheckOut,
                     "CustomerID" : self.CustomerID ,
                     "RoomID" : self.RoomID,

@@ -9,28 +9,32 @@
 import UIKit
 import Firebase
 
-class ManageStaffTableViewController: UITableViewController {
+class ManageStaffTableViewController: UITableViewController, UISearchBarDelegate {
 
     var staffList = [Staff]()
     var selectedStaff = [Staff]()
     let db = Firestore.firestore()    
  
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet var tblView: UITableView!
-    
-    @IBOutlet weak var segmentPicker: UISegmentedControl!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    let tempView = UIView()
+    let spinner = UIActivityIndicatorView()
+    let loadLabel = UILabel()
+    
+    @IBOutlet weak var segmentPicker: UISegmentedControl!
    
+    
+   var isSearching = false
     @IBAction func unwindToManageStaff(segue:UIStoryboardSegue) {
         print("Update Tables")
-        activityIndicator.startAnimating()
         segmentPicker.selectedSegmentIndex = 0
         segmentPicker.isEnabled = false
         getStaff()
     }
     
     @IBAction func refreshStaff(_ sender: Any) {
-        activityIndicator.startAnimating()
         segmentPicker.selectedSegmentIndex = 0
         segmentPicker.isEnabled = false
         getStaff()
@@ -47,10 +51,46 @@ class ManageStaffTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         segmentPicker.selectedSegmentIndex = 0
-       activityIndicator.startAnimating()
+        activityIndicator.startAnimating()
+        searchBar.delegate = self
+        searchBar.returnKeyType = UIReturnKeyType.done
+        
+        self.searchBar.isHidden = true
         segmentPicker.isEnabled = false
+        
+        //Tool bar setup
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
+        
+        toolBar.setItems([doneButton], animated: true)
+        searchBar.inputAccessoryView = toolBar
+        
         getStaff()
         
+    }
+    
+    @objc func doneClicked(){
+        self.view.endEditing(true)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("SErach bar button CLIKDED <><><>")
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        print("searach end edit " + searchBar.text!)
+        if(searchBar.text != ""){
+            print("Searching true")
+            isSearching = true
+            updateSeg()
+            
+        } else {
+            print("Searching FALSE <<<>>><<>>>")
+            isSearching = false
+            updateSeg()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,21 +101,35 @@ class ManageStaffTableViewController: UITableViewController {
    //Segment chage
     func updateSeg(){
         selectedStaff.removeAll()
-        let segValue = segmentPicker.titleForSegment(at: segmentPicker.selectedSegmentIndex)
-        print("Staff list count "  + String(staffList.count))
-        if segmentPicker.selectedSegmentIndex == 3 {
-            for staff in staffList
-            {
-                selectedStaff.append(staff)
-            }
-        } else {
-            for staff in staffList
-            {
-                if(staff.StaffType == segValue){
-                    selectedStaff.append(staff)
+        
+        if(isSearching){
+            segmentPicker.isEnabled = false
+            for i in staffList {
+                if(i.Email == searchBar.text){
+                    selectedStaff.append(i)
                 }
             }
         }
+        else
+        {
+            segmentPicker.isEnabled = true
+            let segValue = segmentPicker.titleForSegment(at: segmentPicker.selectedSegmentIndex)
+            print("Staff list count "  + String(staffList.count))
+            if segmentPicker.selectedSegmentIndex == 3 {
+                for staff in staffList
+                {
+                    selectedStaff.append(staff)
+                }
+            } else {
+                for staff in staffList
+                {
+                    if(staff.StaffType == segValue){
+                        selectedStaff.append(staff)
+                    }
+                }
+            }
+        }
+        
         
         print(selectedStaff.count)
         
@@ -149,6 +203,7 @@ class ManageStaffTableViewController: UITableViewController {
                         print("s staff type " + self.selectedStaff[indexPath.row].Email)
                         print("Staff type " + self.staffList[indexPath.row].Email )
                         self.activityIndicator.startAnimating()
+                        self.searchBar.isHidden = true
                         self.segmentPicker.selectedSegmentIndex = 0
                         self.segmentPicker.isEnabled = false
                         self.getStaff()
@@ -192,6 +247,7 @@ class ManageStaffTableViewController: UITableViewController {
                 }
                 print("stopping activiyt indicaotr")
                 self.activityIndicator.stopAnimating()
+                self.searchBar.isHidden = false
             }
         }
         

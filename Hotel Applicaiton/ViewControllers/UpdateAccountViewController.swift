@@ -13,6 +13,7 @@ import Firebase
 class UpdateAccountViewController: UIViewController {
     
     
+    @IBOutlet weak var bottomStackConstraint: NSLayoutConstraint!
     @IBOutlet weak var stackConstraint: NSLayoutConstraint!
     @IBOutlet weak var foreNameInput: UITextField!
     @IBOutlet weak var sirNameInput: UITextField!
@@ -66,7 +67,8 @@ class UpdateAccountViewController: UIViewController {
                 
                 UIView.animate(withDuration: 0.25) {
                     self.view.layoutIfNeeded()
-                    self.stackConstraint.constant = -35
+                    self.stackConstraint.constant -= 80
+                    self.bottomStackConstraint.constant += 80
                 }
             }
         }
@@ -78,6 +80,7 @@ class UpdateAccountViewController: UIViewController {
             UIView.animate(withDuration: 0.25) {
                 self.view.layoutIfNeeded()
                 self.stackConstraint.constant = 15
+                self.bottomStackConstraint.constant = 110
             }
         }
     }

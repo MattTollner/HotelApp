@@ -13,7 +13,7 @@ class HelperClass {
     static var hotelInfo : HotelInfo?
 
         struct userTypeRefernce {
-            static var userType : String = "Admin"
+            static var userType : String = "NIL"
             static var userID : String = "NIL"
         }
     

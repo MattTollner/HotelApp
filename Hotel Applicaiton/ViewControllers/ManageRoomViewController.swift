@@ -10,8 +10,8 @@ import UIKit
 import FirebaseFirestore
 import Firebase
 
-class ManageRoomViewController: UITableViewController {
-
+class ManageRoomViewController: UITableViewController, UISearchBarDelegate {
+    
     var filteredRoomList = [Room]()
     var roomsList = [Room]()
     var roomNumberList : [String] = []
@@ -19,17 +19,59 @@ class ManageRoomViewController: UITableViewController {
     var selectedRoom : Room?
     var topRoom = 0
     let db = Firestore.firestore()
-  
+    
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var daf: UIBarButtonItem!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    var isSearching = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        segmentControl.selectedSegmentIndex = 0
         activityIndicator.startAnimating()
+        searchBar.delegate = self
+        searchBar.returnKeyType = UIReturnKeyType.done
+        
+        self.searchBar.isHidden = true
+        segmentControl.isEnabled = false
+        
+        //Tool bar setup
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
+        
+        toolBar.setItems([doneButton], animated: true)
+        searchBar.inputAccessoryView = toolBar
         getRooms()
     }
-
+    
+    @objc func doneClicked(){
+        self.view.endEditing(true)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("SErach bar button CLIKDED <><><>")
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        print("searach end edit " + searchBar.text!)
+        if(searchBar.text != ""){
+            print("Searching true")
+            isSearching = true
+            roomChangeFunc()
+            
+        } else {
+            print("Searching FALSE <<<>>><<>>>")
+            isSearching = false
+            roomChangeFunc()
+            
+        }
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -51,11 +93,11 @@ class ManageRoomViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "roomCell", for: indexPath) as! RoomTableViewCell
-        cell.roomNumber.text = "Number : " + filteredRoomList[indexPath.row].Number
-        cell.roomType.text =   "Type   : " + filteredRoomList[indexPath.row].RoomType
-        cell.roomPrice.text =  "Night  :£" + filteredRoomList[indexPath.row].Price as? String
+        cell.roomNumber.text = "Number: " + filteredRoomList[indexPath.row].Number
+        cell.roomType.text =   "Type: " + filteredRoomList[indexPath.row].RoomType
+        cell.roomPrice.text =  "Night: £" + filteredRoomList[indexPath.row].Price as? String
         
         return cell
     }
@@ -92,6 +134,7 @@ class ManageRoomViewController: UITableViewController {
                         self.getRooms()
                         self.segmentControl.selectedSegmentIndex = 0
                         self.segmentControl.isEnabled = false
+                        self.searchBar.isHidden = false
                     }))
                     
                     delAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
@@ -99,7 +142,7 @@ class ManageRoomViewController: UITableViewController {
                     }))
                     
                     self.present(delAlert, animated: true, completion: nil)
-
+                    
                     
                 }
             }
@@ -109,27 +152,47 @@ class ManageRoomViewController: UITableViewController {
     func roomChangeFunc(){
         //Filter room table by type
         filteredRoomList = []
-        for i in roomsList {
-            if segmentControl.selectedSegmentIndex == 0 {
-                if i.RoomType == "Single" {
+        
+        if(isSearching){
+            //Filer using seach
+            print("Using search")
+            for i in roomsList{
+                if (i.Number == searchBar.text){
+                    print("Added Room To Filtered")
                     filteredRoomList.append(i)
                 }
-            } else if segmentControl.selectedSegmentIndex == 1 {
-                if i.RoomType == "Double Single" {
-                    filteredRoomList.append(i)
+            }
+            print("Relaoding table")
+            tableView.reloadData()
+            segmentControl.isEnabled = false
+            
+        } else {
+            segmentControl.isEnabled   = true
+            //Filter with segment
+            for i in roomsList {
+                if segmentControl.selectedSegmentIndex == 0 {
+                    if i.RoomType == "Single" {
+                        filteredRoomList.append(i)
+                    }
+                } else if segmentControl.selectedSegmentIndex == 1 {
+                    if i.RoomType == "Double Single" {
+                        filteredRoomList.append(i)
+                    }
+                } else if segmentControl.selectedSegmentIndex == 2 {
+                    if i.RoomType == "Double" {
+                        filteredRoomList.append(i)
+                    }
+                } else if segmentControl.selectedSegmentIndex == 3 {
+                    if i.RoomType == "Family" {
+                        filteredRoomList.append(i)
+                    }
+                } else {
+                    print("INCORRECT ROOM TYPE :: ERROR")
                 }
-            } else if segmentControl.selectedSegmentIndex == 2 {
-                if i.RoomType == "Double" {
-                    filteredRoomList.append(i)
-                }
-            } else if segmentControl.selectedSegmentIndex == 3 {
-                if i.RoomType == "Family" {
-                    filteredRoomList.append(i)
-                }
-            } else {
-                print("INCORRECT ROOM TYPE :: ERROR")
+                
             }
             
+            tableView.reloadData()
         }
     }
     
@@ -142,11 +205,13 @@ class ManageRoomViewController: UITableViewController {
     }
     
     @IBAction func unwindToManageRoom(segue:UIStoryboardSegue) {
-       print("Refreshing Tables")
+        print("Refreshing Tables")
         activityIndicator.startAnimating()
         getRooms()
         segmentControl.selectedSegmentIndex = 0
     }
+    
+    //Populates edit room vars
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(updateRoom == true) {
             if  let destination = segue.destination as? EditRoomViewController {
@@ -160,7 +225,7 @@ class ManageRoomViewController: UITableViewController {
             destination.roomsNumberList = roomNumberList
         }
     }
-  
+    
     func getLastRoom(){
         //Gets hightest room number
         activityIndicator.stopAnimating()
@@ -188,6 +253,7 @@ class ManageRoomViewController: UITableViewController {
         getRooms()
         segmentControl.selectedSegmentIndex = 0
         segmentControl.isEnabled = false
+        searchBar.isHidden = true
     }
     
     func getRooms(){
@@ -206,9 +272,10 @@ class ManageRoomViewController: UITableViewController {
                     self.roomsList.append(rooms)
                     self.roomNumberList.append(rooms.Number)
                     if(rooms.RoomType == "Single"){
-                       self.filteredRoomList.append(rooms)
+                        self.filteredRoomList.append(rooms)
                     }
                     self.segmentControl.isEnabled = true
+                    self.searchBar.isHidden = false
                     self.tableView.reloadData()
                 }
             }
