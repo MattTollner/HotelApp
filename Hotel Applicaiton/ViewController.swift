@@ -131,7 +131,7 @@ class ViewController: UIViewController {
                         print("Success Logged In!")
                         self.hideElements(value: false)
                         self.storeSignInDetails()
-                        self.performSegue(withIdentifier: "toStaffHome", sender: self)
+                       // self.performSegue(withIdentifier: "toStaffHome", sender: self)
                     }
                     
                 })
@@ -152,17 +152,49 @@ class ViewController: UIViewController {
             } else
             {
                 
-                print("Populating global singletons")
-                let staff = Staff(dictionary: snapshot?.data()! as! [String : AnyObject])
-                //Sets global Singleton vars
-                let userID = Auth.auth().currentUser?.uid
-                HelperClass.userTypeRefernce.userID = userID!
-                HelperClass.userTypeRefernce.userType = staff.StaffType
-                print("UID " + HelperClass.userTypeRefernce.userID)
-                print("U TYPE " + HelperClass.userTypeRefernce.userType)
+                if let document = snapshot {
+                    if document.exists{
+                        print("Populating global singletons")
+                        
+                        
+                        
+                        let staff = Staff(dictionary: snapshot?.data()! as! [String : AnyObject])
+                        //Sets global Singleton vars
+                        let userID = Auth.auth().currentUser?.uid
+                        HelperClass.userTypeRefernce.userID = userID!
+                        HelperClass.userTypeRefernce.userType = staff.StaffType
+                        print("UID " + HelperClass.userTypeRefernce.userID)
+                        print("U TYPE " + HelperClass.userTypeRefernce.userType)
+                        self.performSegue(withIdentifier: "toStaffHome", sender: self)
+                    } else {
+                        self.hideElements(value: false)
+
+                        print("Staff not in database")
+                        let errorAlert = UIAlertController(title: "Old Account", message: "The details you signed in are no longer on the staff database.", preferredStyle: .alert)
+                        
+                        errorAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action) in
+                            let firebaseAuth = Auth.auth()
+                            do {
+                                try firebaseAuth.signOut()
+                            } catch let signOutError as NSError {
+                                print ("Error signing out: %@", signOutError)
+                            }
+                            
+                            HelperClass.userTypeRefernce.userID = "NIL"
+                            HelperClass.userTypeRefernce.userType = "NIL"
+                            print("Signing Out " + HelperClass.userTypeRefernce.userID + " " + HelperClass.userTypeRefernce.userType)
+                        }))
+                        
+                        //PRESENT ALERT
+                        self.present(errorAlert, animated: true, completion: nil)
+                }
+                        
+                    }
+                }
+               
                 //self.performSegue(withIdentifier: "toStaffHome", sender: self)
                 
-            }
+            
         }
         
       

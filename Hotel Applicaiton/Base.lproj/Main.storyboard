@@ -25,6 +25,9 @@
         <array key="Lato-Medium.ttf">
             <string>Lato-Medium</string>
         </array>
+        <array key="Lato-MediumItalic.ttf">
+            <string>Lato-MediumItalic</string>
+        </array>
         <array key="Lato-Regular.ttf">
             <string>Lato-Regular</string>
         </array>
@@ -1916,17 +1919,9 @@
                                 <color key="textColor" white="0.1709263392857143" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Md8-3M-E6q">
-                                <rect key="frame" x="249" y="614" width="106" height="33"/>
-                                <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="17"/>
-                                <state key="normal" title="View Booking"/>
-                                <connections>
-                                    <segue destination="VT6-Dq-lPM" kind="show" id="E5O-Pe-hF8"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXG-Qk-Yxd">
                                 <rect key="frame" x="20" y="131" width="335" height="20.5"/>
-                                <fontDescription key="fontDescription" name="Lato-Thin" family="Lato" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1948,7 +1943,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Address at Mutley Plain, BS2133, Devon, Plymouth. Apartment 3 buliding 2" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fi4-wd-LSL">
                                 <rect key="frame" x="16" y="167.5" width="343" height="59.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="Lato-Thin" family="Lato" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Lato-MediumItalic" family="Lato" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="43" translatesAutoresizingMaskIntoConstraints="NO" id="BlM-aV-fXb">
@@ -1959,13 +1954,13 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eri-0J-mFh">
                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="20.5"/>
-                                                <fontDescription key="fontDescription" name="Lato-Thin" family="Lato" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="07800777221" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yfo-YU-aDV">
                                                 <rect key="frame" x="0.0" y="20.5" width="335" height="20.5"/>
-                                                <fontDescription key="fontDescription" name="Lato-Thin" family="Lato" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Lato-Semibold" family="Lato" pointSize="17"/>
                                                 <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -1976,13 +1971,13 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRV-5c-pjB">
                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="20.5"/>
-                                                <fontDescription key="fontDescription" name="Lato-Thin" family="Lato" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hotelApp@live.co.uk" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Drf-XZ-Vp5">
                                                 <rect key="frame" x="0.0" y="20.5" width="335" height="20.5"/>
-                                                <fontDescription key="fontDescription" name="Lato-Thin" family="Lato" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Lato-Semibold" family="Lato" pointSize="17"/>
                                                 <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -1993,19 +1988,19 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arrival/Depature" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3i4-0e-vR4">
                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="20.5"/>
-                                                <fontDescription key="fontDescription" name="Lato-Thin" family="Lato" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check In : 2pm" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eB8-QU-kZg">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check Out : 12pm" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m3U-df-gyD">
                                                 <rect key="frame" x="0.0" y="22.5" width="335" height="20.5"/>
-                                                <fontDescription key="fontDescription" name="Lato-Thin" family="Lato" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Lato-Semibold" family="Lato" pointSize="17"/>
                                                 <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check Out : 12pm" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m3U-df-gyD">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check In : 2pm" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eB8-QU-kZg">
                                                 <rect key="frame" x="0.0" y="45" width="335" height="20.5"/>
-                                                <fontDescription key="fontDescription" name="Lato-Thin" family="Lato" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Lato-Semibold" family="Lato" pointSize="17"/>
                                                 <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -2016,13 +2011,13 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Breakfast Period" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qye-86-irw">
                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="20.5"/>
-                                                <fontDescription key="fontDescription" name="Lato-Thin" family="Lato" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7am - 9am" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GaE-f1-7u8">
                                                 <rect key="frame" x="0.0" y="23.5" width="335" height="20.5"/>
-                                                <fontDescription key="fontDescription" name="Lato-Thin" family="Lato" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Lato-Semibold" family="Lato" pointSize="17"/>
                                                 <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -2030,14 +2025,35 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ghm-dA-AAY">
-                                <rect key="frame" x="20" y="614" width="36" height="33"/>
-                                <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="17"/>
-                                <state key="normal" title="Staff"/>
-                                <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="9JA-9V-DwE"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="kd1-zC-o2d">
+                                <rect key="frame" x="20" y="615" width="335" height="32"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ghm-dA-AAY">
+                                        <rect key="frame" x="0.0" y="0.0" width="34" height="32"/>
+                                        <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="16"/>
+                                        <state key="normal" title="Staff"/>
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="show" id="9JA-9V-DwE"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Md8-3M-E6q">
+                                        <rect key="frame" x="92.5" y="0.0" width="84" height="32"/>
+                                        <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="16"/>
+                                        <state key="normal" title="Book Room"/>
+                                        <connections>
+                                            <segue destination="xOC-7n-L2J" kind="show" id="yk5-n1-ypQ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7fv-mi-psz">
+                                        <rect key="frame" x="235" y="0.0" width="100" height="32"/>
+                                        <fontDescription key="fontDescription" name="Lato-Heavy" family="Lato" pointSize="16"/>
+                                        <state key="normal" title="View Booking"/>
+                                        <connections>
+                                            <segue destination="VT6-Dq-lPM" kind="show" id="MPZ-tE-qyz"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -2046,7 +2062,6 @@
                             <constraint firstItem="BlM-aV-fXb" firstAttribute="centerX" secondItem="cI3-hb-3Jx" secondAttribute="centerX" id="8yH-He-yZ2"/>
                             <constraint firstItem="fi4-wd-LSL" firstAttribute="centerX" secondItem="cI3-hb-3Jx" secondAttribute="centerX" id="9Lo-dg-OXh"/>
                             <constraint firstItem="7Rb-Oi-p5h" firstAttribute="centerY" secondItem="cI3-hb-3Jx" secondAttribute="centerY" id="C76-Pg-0G1"/>
-                            <constraint firstItem="cI3-hb-3Jx" firstAttribute="trailing" secondItem="Md8-3M-E6q" secondAttribute="trailing" constant="20" id="CfR-3M-bML"/>
                             <constraint firstItem="cI3-hb-3Jx" firstAttribute="trailing" secondItem="fi4-wd-LSL" secondAttribute="trailing" constant="16" id="ENu-9q-gem"/>
                             <constraint firstItem="cI3-hb-3Jx" firstAttribute="bottom" secondItem="82J-zk-Tpw" secondAttribute="bottom" constant="552" id="Kz5-a8-851"/>
                             <constraint firstItem="RXG-Qk-Yxd" firstAttribute="leading" secondItem="cI3-hb-3Jx" secondAttribute="leading" constant="20" id="MYW-lH-3OK"/>
@@ -2054,15 +2069,15 @@
                             <constraint firstItem="82J-zk-Tpw" firstAttribute="top" secondItem="cI3-hb-3Jx" secondAttribute="top" constant="21" id="QUK-Ic-g1f"/>
                             <constraint firstItem="82J-zk-Tpw" firstAttribute="centerX" secondItem="a3f-cL-XZF" secondAttribute="centerX" id="Qhq-ed-E5N"/>
                             <constraint firstItem="RXG-Qk-Yxd" firstAttribute="top" secondItem="82J-zk-Tpw" secondAttribute="bottom" constant="16" id="STU-Vd-b5l"/>
+                            <constraint firstItem="cI3-hb-3Jx" firstAttribute="bottom" secondItem="kd1-zC-o2d" secondAttribute="bottom" constant="20" id="Ucj-UH-qFm"/>
+                            <constraint firstItem="cI3-hb-3Jx" firstAttribute="trailing" secondItem="kd1-zC-o2d" secondAttribute="trailing" constant="20" id="Vgd-3m-X2f"/>
                             <constraint firstItem="fi4-wd-LSL" firstAttribute="leading" secondItem="cI3-hb-3Jx" secondAttribute="leading" constant="16" id="Zum-Hu-csy"/>
                             <constraint firstItem="cI3-hb-3Jx" firstAttribute="trailing" secondItem="RXG-Qk-Yxd" secondAttribute="trailing" constant="20" id="a9X-GG-8rM"/>
                             <constraint firstItem="7Rb-Oi-p5h" firstAttribute="centerX" secondItem="cI3-hb-3Jx" secondAttribute="centerX" id="bOc-kM-MR1"/>
-                            <constraint firstItem="Ghm-dA-AAY" firstAttribute="leading" secondItem="cI3-hb-3Jx" secondAttribute="leading" constant="20" id="fby-yP-yCQ"/>
                             <constraint firstItem="BlM-aV-fXb" firstAttribute="firstBaseline" secondItem="fi4-wd-LSL" secondAttribute="baseline" constant="24" symbolType="layoutAnchor" id="gzr-vT-gfm"/>
                             <constraint firstItem="82J-zk-Tpw" firstAttribute="leading" secondItem="cI3-hb-3Jx" secondAttribute="leading" constant="84" id="lar-pq-tcC"/>
                             <constraint firstItem="BlM-aV-fXb" firstAttribute="leading" secondItem="cI3-hb-3Jx" secondAttribute="leading" constant="20" id="mLc-21-deP"/>
-                            <constraint firstItem="cI3-hb-3Jx" firstAttribute="bottom" secondItem="Ghm-dA-AAY" secondAttribute="bottom" constant="20" id="nXT-3J-wFC"/>
-                            <constraint firstItem="cI3-hb-3Jx" firstAttribute="bottom" secondItem="Md8-3M-E6q" secondAttribute="bottom" constant="20" id="v6C-8P-ija"/>
+                            <constraint firstItem="kd1-zC-o2d" firstAttribute="leading" secondItem="cI3-hb-3Jx" secondAttribute="leading" constant="20" id="oOr-JS-uXN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cI3-hb-3Jx"/>
                     </view>
@@ -2384,7 +2399,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nzF-Q2-DOu">
-                                <rect key="frame" x="0.0" y="404" width="375" height="206"/>
+                                <rect key="frame" x="0.0" y="404" width="375" height="162"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="12" reuseIdentifier="updateBookingRoomCell" rowHeight="88" id="lfg-YV-Ajn" customClass="UpdateBookingRoomTableViewCell" customModule="Hotel_Applicaiton" customModuleProvider="target">
@@ -2524,7 +2539,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Frt-Xc-IV1">
-                                <rect key="frame" x="20" y="617" width="335" height="30"/>
+                                <rect key="frame" x="20" y="573" width="335" height="30"/>
                                 <state key="normal" title="Cancel Booking">
                                     <color key="titleColor" red="1" green="0.25519192590000001" blue="0.1199331933" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -2648,6 +2663,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4Dx-5U-x28"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="T0r-TU-ugQ"/>
+                        <barButtonItem title="Item" id="Oni-ay-c4g"/>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="activityIndicator" destination="Tky-fU-15K" id="IB8-KJ-Onc"/>
                         <outlet property="amountPayedLabel" destination="E8w-86-Yx2" id="b7e-Tp-zRN"/>
@@ -2976,6 +2996,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="yk5-n1-ypQ"/>
         <segue reference="dGD-JH-ld0"/>
     </inferredMetricsTieBreakers>
 </document>

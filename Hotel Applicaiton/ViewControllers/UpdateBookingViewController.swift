@@ -50,17 +50,23 @@ class UpdateBookingViewController: UIViewController, UITableViewDataSource, UITa
         dateFormatter.dateFormat = "dd/MM/yyyy"
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "updateBookingRoomCell", for: indexPath) as! UpdateBookingRoomTableViewCell
-        cell.roomTypeLabel.text = "Type: " + bookedRooms[indexPath.row].RoomType
-        cell.roomNumberLabel.text = "Number: " + bookedRooms[indexPath.row].Number
-        cell.roomStatusLabel.text = "Status: " + bookedRooms[indexPath.row].RoomState
         
-        if (selectedBooking?.Breakfast.contains(bookedRooms[indexPath.row].RoomID))!{
-            print("Room has payed for breakfast")
-            cell.roomBreakfastLabel.text = "Breakfast"
-        } else {
-            print("Room has not payed for breakfast")
-            cell.roomBreakfastLabel.text = "No Breakfast"
-        }
+        
+       
+        
+        
+            
+             cell.roomTypeLabel.text = "Type: " + bookedRooms[indexPath.row].RoomType
+             cell.roomNumberLabel.text = "Number: " + bookedRooms[indexPath.row].Number
+             cell.roomStatusLabel.text = "Status: " + bookedRooms[indexPath.row].RoomState
+            
+            if (selectedBooking?.Breakfast.contains(bookedRooms[indexPath.row].RoomID))!{
+                print("Room has payed for breakfast")
+                cell.roomBreakfastLabel.text = "Breakfast"
+            } else {
+                print("Room has not payed for breakfast")
+                cell.roomBreakfastLabel.text = "No Breakfast"
+            }
         
         return cell
     }
@@ -187,6 +193,7 @@ class UpdateBookingViewController: UIViewController, UITableViewDataSource, UITa
                 print("Searching for room " + i)
                 if let error = error {
                     print(error.localizedDescription)
+                    
                     self.fireError(titleText: "Error fetching room!", lowerText: error.localizedDescription)
                     //self.dispatchGroup.leave()
                 } else {
