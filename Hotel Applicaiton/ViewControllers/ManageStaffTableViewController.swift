@@ -103,9 +103,15 @@ class ManageStaffTableViewController: UITableViewController, UISearchBarDelegate
         selectedStaff.removeAll()
         
         if(isSearching){
+            var search = searchBar.text
+            search = search?.lowercased()
+            search = search?.replacingOccurrences(of: " ", with: "")
             segmentPicker.isEnabled = false
             for i in staffList {
-                if(i.Email == searchBar.text){
+                var fbStaff = i.Email
+                fbStaff = fbStaff.lowercased()
+                fbStaff = fbStaff.replacingOccurrences(of: " ", with: "")
+                if(fbStaff == search){
                     selectedStaff.append(i)
                 }
             }
