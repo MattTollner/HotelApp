@@ -56,7 +56,7 @@ class UpdateRoomStatusViewController: UIViewController {
             roomToUpdate?.changeRoomState(index: 0)
         } else {
             roomStatus.text = "Unclean"
-            roomToUpdate?.changeRoomState(index: 0)
+            roomToUpdate?.changeRoomState(index: 1)
         }
     }
     
@@ -78,6 +78,7 @@ class UpdateRoomStatusViewController: UIViewController {
                                             "RoomState" : roomToUpdate?.RoomState as Any ,
                                             "RoomType" : roomToUpdate?.RoomType as Any]
         
+        print("Room to update " + (roomToUpdate?.RoomID)!)
         
         db.collection("Rooms").document((roomToUpdate?.RoomID)!).setData(updatedRoom) { err in
             if let err = err {

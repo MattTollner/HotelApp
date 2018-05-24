@@ -165,6 +165,8 @@ class ViewController: UIViewController {
                         HelperClass.userTypeRefernce.userType = staff.StaffType
                         print("UID " + HelperClass.userTypeRefernce.userID)
                         print("U TYPE " + HelperClass.userTypeRefernce.userType)
+                        self.emailTextField.text = ""
+                        self.passwordTextField.text = ""
                         self.performSegue(withIdentifier: "toStaffHome", sender: self)
                     } else {
                         self.hideElements(value: false)
