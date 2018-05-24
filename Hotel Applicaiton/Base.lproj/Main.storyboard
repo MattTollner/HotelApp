@@ -722,7 +722,6 @@
                         <segue destination="BPy-iW-tYc" kind="show" identifier="toManageRoomCleaning" id="IN2-9k-Bhs"/>
                         <segue destination="Bqe-WQ-Gbp" kind="show" identifier="toManageRooms" id="884-LD-wHK"/>
                         <segue destination="Xqe-Bq-nh4" kind="show" identifier="toManageStaff" id="cUv-AU-95x"/>
-                        <segue destination="xOC-7n-L2J" kind="show" identifier="toManageBookings" id="xWz-a0-3w1"/>
                         <segue destination="w9D-ij-Le2" kind="unwind" identifier="unwindStaffHome" unwindAction="unwindToVC1WithSegue:" id="eiT-Mn-5vU"/>
                         <segue destination="huO-fG-qXG" kind="show" identifier="toManageBookings" id="dGD-JH-ld0"/>
                         <segue destination="kuO-eo-IZZ" kind="show" identifier="toEditInfo" id="SPV-xs-iuE"/>
