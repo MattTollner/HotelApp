@@ -13,7 +13,9 @@ class ManageStaffTableViewController: UITableViewController, UISearchBarDelegate
 
     var staffList = [Staff]()
     var selectedStaff = [Staff]()
-    let db = Firestore.firestore()    
+    let db = Firestore.firestore()
+    
+    var tappedStaff = [Staff]()
  
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet var tblView: UITableView!
@@ -181,14 +183,15 @@ class ManageStaffTableViewController: UITableViewController, UISearchBarDelegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedIndex = indexPath.row
        // updateRoom = true
-       selectedStaff.append(staffList[selectedIndex])
+        tappedStaff.removeAll()
+       tappedStaff.append(selectedStaff[selectedIndex])
        performSegue(withIdentifier: "editStaff", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
       
         if  let destination = segue.destination as? EditStaffViewController {
-            destination.staffToUpdate = selectedStaff
+            destination.staffToUpdate = tappedStaff
         }
     }
 

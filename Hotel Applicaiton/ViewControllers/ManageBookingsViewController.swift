@@ -165,10 +165,19 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
                 checkInSegment.isEnabled = false
                 timeSegment.isEnabled = false
                 
+                var search = searchBar.text
+                search = search?.lowercased()
+                search = search?.replacingOccurrences(of: " ", with: "")
+                
+                
+                
                 print("Customer List Count " + String(customerList.count))
                 print("Booking List Count " + String(bookingList.count))
                 for i in 0...(customerList.count - 1) {
-                    if (customerList[i].Email == searchBar.text){
+                    var fbEmail = customerList[i].Email
+                    fbEmail = fbEmail.lowercased()
+                    fbEmail = (search?.replacingOccurrences(of: " ", with: ""))!
+                    if (fbEmail == search){
                         refinedBookingList.append(bookingList[i])
                         refinedCustomerList.append(customerList[i])
                         print("Refined booking count " + String(refinedBookingList.count))
