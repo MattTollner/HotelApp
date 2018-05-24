@@ -38,6 +38,9 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
     @IBOutlet weak var bottonConstraint: NSLayoutConstraint!
     @IBOutlet weak var elementsStack: UIStackView!
     @IBOutlet weak var priceStack: UIStackView!
+    @IBOutlet weak var topStackContraint: NSLayoutConstraint!
+    @IBOutlet weak var confirmDetails: UIButton!
+    
     
     //Segue Vars
     var amount : Double = 0.0
@@ -48,15 +51,18 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
     var checkInDate : Date = Date()
     var checkOutDate : Date = Date()
     
+    //Should stackview move up
     var moveUp = false
+    var moveUpAmount = 0.0
     
+    //Payment vars
     var paymentInPennys = 0
     var fullBookingCost = 0.0
     var depositAmount = 0.0
     var breakfastAmount = 0.0
     var deskPayment = 0.0
-    var moveUpAmount = 0.0
     
+    //Firebase/Stripe
     let db = Firestore.firestore()
     var thePaymentContext = STPPaymentContext()
     
@@ -68,8 +74,11 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
+        //Fill out payment UI
         buttonOutet.isEnabled = false
-        if depositAmount == 0 { //Payy all
+        self.buttonOutet.isHidden = false
+        if depositAmount == 0 {
+            //Payy all selected
             print("Pay now selected")
             depositLabel.text = "£0.0"
             paymentAtDeskLabel.text = "£0.0"
@@ -81,7 +90,8 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
             footnoteLabel.isHidden = true
             paymentInPennys = Int((fullBookingCost * 100))
             print("Payment In Pennys : " + String(paymentInPennys))
-        } else { //Pay deposit
+        } else {
+            //Pay deposit selected
             depositLabel.text = "£" + String(depositAmount)
             deskPayment = fullBookingCost - depositAmount
             paymentAtDeskLabel.text = "£" + String(deskPayment)
@@ -95,9 +105,9 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
             print("Payment In Pennys : " + String(paymentInPennys))
         }
         
-      
-        self.buttonOutet.isHidden = false
-       
+        
+        
+        
         //Tool bar setup
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
@@ -113,7 +123,7 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
         cityLabel.inputAccessoryView = toolBar
         
     }
-    @IBOutlet weak var topStackContraint: NSLayoutConstraint!
+    
     
     //Move view up
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -148,8 +158,7 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
         }
     }
     
-    
-    
+    //Enable/Disable Elements
     func enableElements(enable : Bool){
         if enable {
             elementsStack.isHidden = false
@@ -160,6 +169,7 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
         }
     }
     
+    //Closes keyboard
     @objc func doneClicked(){
         self.view.endEditing(true)
     }
@@ -167,21 +177,24 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    //Displays custom error alert
     func fireError(titleText : String, lowerText : String){
         let alert = UIAlertController(title: titleText, message: lowerText, preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true)
     }
-   
+    
     //Pay pressed get stripe context
     @IBAction func testPayButton(_ sender: Any) {
         self.thePaymentContext.requestPayment()
     }
-
+    
     func checkLabels( ) -> Bool{
         var isPass = true
         
+        //Remove whitesapce
         forenameLabel.text  = forenameLabel.text?.replacingOccurrences(of: " ", with: "")
         sirnameLabel.text  = sirnameLabel.text?.replacingOccurrences(of: " ", with: "")
         emailLabel.text  = emailLabel.text?.replacingOccurrences(of: " ", with: "")
@@ -200,7 +213,7 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
         }else {
             forenameLabel.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         }
-       
+        
         if(sirnameLabel.text == ""){
             sirnameLabel.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
             isPass = false
@@ -228,11 +241,13 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
         if(addressLabel.text == ""){
             addressLabel.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
             isPass = false
+            
         }else {
             addressLabel.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         }
         if(postcodeLabel.text == ""){
             isPass = false
+            postcodeLabel.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
         }else {
             postcodeLabel.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         }
@@ -255,17 +270,12 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
         } else {
             return false
         }
-        
-        
-        
     }
     
-    
+    //Set if text filed should move stack view up
     @IBAction func foreNameBegin(_ sender: Any) {
         moveUp = false
     }
-
-    
     
     @IBAction func sirnameBegin(_ sender: Any) {
         moveUp = false
@@ -288,43 +298,44 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
     @IBAction func cityBegin(_ sender: Any) {
         moveUp = true
     }
-    @IBOutlet weak var confirmDetails: UIButton!
+    
+    
     @IBAction func confrimDetails(_ sender: Any) {
-        //paymentTextField.isHidden = false
         
+        //Check inputs
         if(checkLabels() == false){
             print("Incorrect Label Text")
         } else {
             
-        
-        
-        
-        let custDetails = [forenameLabel.text,
-                           sirnameLabel.text,
-                           emailLabel.text,
-                           addressLabel.text,
-                           postcodeLabel.text,
-                           cityLabel.text]
-        
-        APIClient.customerDetails = custDetails as! [String]
-        let config = STPPaymentConfiguration.shared()
-        config.publishableKey = "pk_test_D5d9OgNCQ8OZStYlQNtDanFA"
-        config.companyName = "Student Enterprises"
-        
-        let customerContext = STPCustomerContext(keyProvider: APIClient.sharedClient)
-        let paymentContext = STPPaymentContext(customerContext: customerContext,
-                                               configuration: config,
-                                               theme: .default())
-        paymentContext.paymentAmount = Int(paymentInPennys)
-        paymentContext.paymentCurrency = "GBP"
-        
-        self.thePaymentContext = paymentContext
-        self.thePaymentContext.delegate = self
-        paymentContext.hostViewController = self
-        paymentContext.pushPaymentMethodsViewController()
-        
-        forenameLabel.isEnabled = false
-        sirnameLabel.isEnabled = false
+            
+            let custDetails = [forenameLabel.text,
+                               sirnameLabel.text,
+                               emailLabel.text,
+                               addressLabel.text,
+                               postcodeLabel.text,
+                               cityLabel.text]
+            
+            //Sets payment detials
+            APIClient.customerDetails = custDetails as! [String]
+            let config = STPPaymentConfiguration.shared()
+            config.publishableKey = "pk_test_D5d9OgNCQ8OZStYlQNtDanFA"
+            config.companyName = "Student Enterprises"
+            
+            //Create context
+            let customerContext = STPCustomerContext(keyProvider: APIClient.sharedClient)
+            let paymentContext = STPPaymentContext(customerContext: customerContext,
+                                                   configuration: config,
+                                                   theme: .default())
+            paymentContext.paymentAmount = Int(paymentInPennys)
+            paymentContext.paymentCurrency = "GBP"
+            
+            self.thePaymentContext = paymentContext
+            self.thePaymentContext.delegate = self
+            paymentContext.hostViewController = self
+            paymentContext.pushPaymentMethodsViewController()
+            
+            forenameLabel.isEnabled = false
+            sirnameLabel.isEnabled = false
         }
     }
     
@@ -363,10 +374,11 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
         var message: String = ""
         switch status {
         case .error:
+            //Payment error
             title = "Error"
             message = error?.localizedDescription ?? ""
         case .success:
-            
+            //Success
             let customerDict : [String : Any] = ["Forename" : forenameLabel.text! ,
                                                  "Sirname" : sirnameLabel.text!,
                                                  "Email" : emailLabel.text!,
@@ -374,7 +386,7 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
                                                  "Postcode" : postcodeLabel.text!,
                                                  "City" : cityLabel.text!]
             
-   
+            //Upload customer to firebase
             let db = Firestore.firestore()
             var ref: DocumentReference? = nil
             var cID = ""
@@ -382,7 +394,7 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
             ref = db.collection("Customer").addDocument(data: customerDict) { err in
                 if let err = err {
                     print("Error adding document: \(err)")
-                     self.fireError(titleText: "Error adding customer", lowerText: err.localizedDescription)
+                    self.fireError(titleText: "Error adding customer", lowerText: err.localizedDescription)
                 } else {
                     print("Customer added reference : " + (ref?.documentID)!)
                     cID = (ref?.documentID)!
@@ -393,6 +405,7 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
                     } else {
                         cost = self.depositAmount
                     }
+                    //Add booking with customer id
                     var bookingDict : [String: Any] = ["BookingDate" : "",
                                                        "CheckIn" : self.checkInDate,
                                                        "CheckOut" : self.checkOutDate,
@@ -413,25 +426,25 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
                             
                             if let bRef = ref2?.documentID {
                                 bID = bRef
-                                 self.formEmail(bookingID: bID)
+                                self.formEmail(bookingID: bID)
                             } else {
-                               print("Optional Unwrapped Found Nil")
+                                print("Optional Unwrapped Found Nil")
                             }
                             bookingDict =  ["BookingDate" : "",
-                             "CheckIn" : self.checkInDate,
-                             "CheckOut" : self.checkOutDate,
-                             "CustomerID" : cID,
-                             "RoomID" : self.roomIDs,
-                             "Breakfast" : self.breakfastRoomIDs ,
-                             "TotalAmount" : self.fullBookingCost,
-                             "AmountPayed" : cost,
-                             "Status" : "Booked",
-                             "BookingID" : bID]
+                                            "CheckIn" : self.checkInDate,
+                                            "CheckOut" : self.checkOutDate,
+                                            "CustomerID" : cID,
+                                            "RoomID" : self.roomIDs,
+                                            "Breakfast" : self.breakfastRoomIDs ,
+                                            "TotalAmount" : self.fullBookingCost,
+                                            "AmountPayed" : cost,
+                                            "Status" : "Booked",
+                                            "BookingID" : bID]
                             
                             db.collection("Booking").document(bID).setData(bookingDict) { (error) in
                                 if let error = error {
                                     print("Error updating booking (ID not set): \(error)")
-                                     self.fireError(titleText: "Error setting booking data", lowerText: error.localizedDescription)
+                                    self.fireError(titleText: "Error setting booking data", lowerText: error.localizedDescription)
                                 } else {
                                     print("Booking ID updated stored id: \(bID)")
                                     
@@ -453,6 +466,8 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    
+    //Send email
     func formEmail(bookingID : String){
         var baseURLString: String? = "https://evening-garden-46354.herokuapp.com"
         var baseURL: URL {
@@ -463,6 +478,8 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
             }
         }
         
+        
+        //Date format
         let url = baseURL.appendingPathComponent("email")
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
@@ -471,6 +488,7 @@ class PaymentViewController: UIViewController, STPPaymentContextDelegate {
         
         print("CHECK IN : " + checkIn + " Checkout " + checkOut)
         let nameC = forenameLabel.text! + " " + sirnameLabel.text!
+        //Node JS details
         Alamofire.request(url, method: .post, parameters: [
             
             "customerEmail" : emailLabel.text!,

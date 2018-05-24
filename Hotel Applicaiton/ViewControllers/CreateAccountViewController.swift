@@ -19,6 +19,8 @@ class CreateAccountViewController: UIViewController {
     @IBOutlet weak var phoneNumberInput: UITextField!
     @IBOutlet weak var postcodeInput: UITextField!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var inputStackVew: UIStackView!
     @IBOutlet weak var stackConstraint: NSLayoutConstraint!
     @IBOutlet weak var accountType: UISegmentedControl!
     
@@ -114,16 +116,22 @@ class CreateAccountViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
+    @IBOutlet weak var createAccountButton: UIButton!
     @IBAction func createAccountTapped(_ sender: Any) {
         if (!checkLabels())
         {
             print("All fields need to be entered")
         } else {
+            activityIndicator.startAnimating()
+            createAccountButton.isEnabled = false
+            
             //Create Account
             Auth.auth().createUser(withEmail: emailInput.text!, password: "changeme", completion: { (user, error) in
                 
                 if let err = error {
                     self.fireError(titleText: "Unable to change create user", lowerText: err.localizedDescription)
+                    self.activityIndicator.stopAnimating()
+                    self.createAccountButton.isEnabled = true
                 } else {
                     print("Created account")
                     self.createAccount()
@@ -200,6 +208,8 @@ class CreateAccountViewController: UIViewController {
     {
         if(checkLabels() == false)
         {
+            self.activityIndicator.stopAnimating()
+            self.createAccountButton.isEnabled = true
             print("Inputs incorrect")
         } else {
             let staffType = accountType.titleForSegment(at: accountType.selectedSegmentIndex)
@@ -223,7 +233,11 @@ class CreateAccountViewController: UIViewController {
                 if let err = err {
                     print("Error adding staff document: \(err)")
                     self.fireError(titleText: "Error creating account", lowerText: err.localizedDescription)
+                    self.activityIndicator.stopAnimating()
+                    self.createAccountButton.isEnabled = true
                 } else {
+                    self.activityIndicator.stopAnimating()
+                    self.createAccountButton.isEnabled = true
                     print("Staff added with ID: \(userID!)")
                     let successAlert = UIAlertController(title: "Staff Created", message: "Created a new account with email : " + self.emailInput.text!, preferredStyle: UIAlertControllerStyle.alert)
                     
@@ -236,10 +250,5 @@ class CreateAccountViewController: UIViewController {
                 }
             }
         }
-        
-   
     }
-    
-  
-
 }

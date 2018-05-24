@@ -149,7 +149,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Fk-Kx-wZl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-831.20000000000005" y="-1527.8860569715143"/>
+            <point key="canvasLocation" x="-1740" y="-896"/>
         </scene>
         <!--Manage Bookings View Controller-->
         <scene sceneID="mVo-1c-FTg">
@@ -295,7 +295,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rEX-xU-krY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="884" y="-1623.2383808095954"/>
+            <point key="canvasLocation" x="1076" y="-1602"/>
         </scene>
         <!--Update Booking-->
         <scene sceneID="BbD-g0-hYl">
@@ -535,7 +535,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qN7-U1-hgh" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="UCD-aX-pdG" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1885.5999999999999" y="-1924.5877061469266"/>
+            <point key="canvasLocation" x="1769" y="-1603"/>
         </scene>
         <!--Manage Cleaning-->
         <scene sceneID="zkL-0a-MHc">
@@ -617,7 +617,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U2J-L8-xFY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1506.4000000000001" y="-790.25487256371821"/>
+            <point key="canvasLocation" x="-982" y="-896"/>
         </scene>
         <!--Staff Home-->
         <scene sceneID="wF2-hR-i0s">
@@ -659,7 +659,7 @@
                                         <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                         <state key="normal" title="Manage Bookings"/>
                                         <connections>
-                                            <segue destination="huO-fG-qXG" kind="show" id="CF0-Xd-7Yi"/>
+                                            <action selector="manageBookingsTapped:" destination="lvA-Qc-nFD" eventType="touchUpInside" id="fvj-V4-xsc"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AjN-Zw-yM1">
@@ -667,7 +667,7 @@
                                         <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
                                         <state key="normal" title="Create Booking"/>
                                         <connections>
-                                            <action selector="manageBookingsTapped:" destination="lvA-Qc-nFD" eventType="touchUpInside" id="qzJ-7n-hgb"/>
+                                            <action selector="createBookingsTapped:" destination="lvA-Qc-nFD" eventType="touchUpInside" id="MCs-QA-xtj"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="alR-Ux-vZH">
@@ -726,6 +726,8 @@
                         <segue destination="w9D-ij-Le2" kind="unwind" identifier="unwindStaffHome" unwindAction="unwindToVC1WithSegue:" id="eiT-Mn-5vU"/>
                         <segue destination="huO-fG-qXG" kind="show" identifier="toManageBookings" id="dGD-JH-ld0"/>
                         <segue destination="kuO-eo-IZZ" kind="show" identifier="toEditInfo" id="SPV-xs-iuE"/>
+                        <segue destination="w9D-ij-Le2" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="aA4-zj-7qg"/>
+                        <segue destination="xOC-7n-L2J" kind="show" identifier="toCreateBooking" id="HOs-PX-gmo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mb3-OV-irK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1117,7 +1119,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kWN-Tj-fpv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="7Zt-ou-s51" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2815" y="-1284"/>
+            <point key="canvasLocation" x="2455" y="-860"/>
         </scene>
         <!--Summary-->
         <scene sceneID="gWX-pp-S72">
@@ -1315,7 +1317,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3gQ-za-tY0" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Aka-kc-m3w" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1885.5999999999999" y="-749.7751124437782"/>
+            <point key="canvasLocation" x="1770" y="-860"/>
         </scene>
         <!--Sign In-->
         <scene sceneID="tne-QT-ifu">
@@ -1389,7 +1391,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1359.2" y="-49.025487256371818"/>
+            <point key="canvasLocation" x="62" y="-65"/>
         </scene>
         <!--Manage Staff-->
         <scene sceneID="xIF-Vw-1it">
@@ -1608,6 +1610,10 @@
                                     <action selector="updateAccount:" destination="qhl-xZ-lTL" eventType="touchUpInside" id="53Z-8x-onN"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="SRc-h1-RtW">
+                                <rect key="frame" x="169.5" y="347.5" width="37" height="37"/>
+                                <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -1616,18 +1622,23 @@
                             <constraint firstItem="qOP-W7-qqc" firstAttribute="bottom" secondItem="NJ5-gY-XqC" secondAttribute="bottom" constant="20" id="A61-tP-YMR"/>
                             <constraint firstItem="qOP-W7-qqc" firstAttribute="bottom" secondItem="wg3-m7-6fn" secondAttribute="bottom" constant="110" id="CIv-Vc-f8K"/>
                             <constraint firstItem="qOP-W7-qqc" firstAttribute="trailing" secondItem="wg3-m7-6fn" secondAttribute="trailing" constant="25" id="RZf-V2-AVA"/>
+                            <constraint firstItem="SRc-h1-RtW" firstAttribute="centerX" secondItem="qOP-W7-qqc" secondAttribute="centerX" id="Vch-Qc-ehM"/>
                             <constraint firstItem="qOP-W7-qqc" firstAttribute="trailing" secondItem="NJ5-gY-XqC" secondAttribute="trailing" constant="125" id="cVx-5Y-jWI"/>
+                            <constraint firstItem="SRc-h1-RtW" firstAttribute="centerY" secondItem="qOP-W7-qqc" secondAttribute="centerY" id="eMP-h0-OUi"/>
                             <constraint firstItem="wg3-m7-6fn" firstAttribute="top" secondItem="qOP-W7-qqc" secondAttribute="top" constant="15" id="grX-IZ-Z0B"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qOP-W7-qqc"/>
                     </view>
                     <connections>
                         <outlet property="accountType" destination="TyJ-zk-Okj" id="gLh-eu-KXY"/>
+                        <outlet property="activityIndicator" destination="SRc-h1-RtW" id="k0Z-xv-MHw"/>
                         <outlet property="addressInput" destination="dHd-h2-H9G" id="lNj-d0-3VM"/>
                         <outlet property="bottomConstraint" destination="CIv-Vc-f8K" id="3B7-AA-jDp"/>
                         <outlet property="bottomStackConstraint" destination="CIv-Vc-f8K" id="7Xu-vg-1zU"/>
+                        <outlet property="createAccountButton" destination="NJ5-gY-XqC" id="acs-mR-Yx6"/>
                         <outlet property="emailInput" destination="pBB-kL-TMe" id="8oh-vu-dyP"/>
                         <outlet property="foreNameInput" destination="aqP-Bm-JN1" id="bUf-C3-QzX"/>
+                        <outlet property="inputStackVew" destination="wg3-m7-6fn" id="DTh-TV-19g"/>
                         <outlet property="phoneNumberInput" destination="aCf-uc-9rN" id="mS8-dC-5ph"/>
                         <outlet property="postcodeInput" destination="VSD-dY-fXe" id="PoV-K5-NRj"/>
                         <outlet property="sirNameInput" destination="L5w-7F-FZb" id="ySq-jP-jda"/>
@@ -1639,7 +1650,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hzF-nF-6eS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="qhl-xZ-lTL" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1521" y="1321"/>
+            <point key="canvasLocation" x="1572" y="1542"/>
         </scene>
         <!--Manage Rooms-->
         <scene sceneID="xgo-tE-qe6">
@@ -1761,7 +1772,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jtz-GZ-6th" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2148" y="-34.632683658170919"/>
+            <point key="canvasLocation" x="1847" y="-15"/>
         </scene>
         <!--Edit Room-->
         <scene sceneID="cym-2k-boo">
@@ -1898,12 +1909,13 @@
                         <outlet property="roomType" destination="31U-84-B0T" id="8BB-3L-dTh"/>
                         <outlet property="updateRoomButton" destination="NqG-dT-cRy" id="FWF-EZ-U6p"/>
                         <segue destination="Wxp-Kl-CjD" kind="unwind" identifier="unwindEditRoom" unwindAction="unwindToManageRoomWithSegue:" id="pNu-TZ-9H2"/>
+                        <segue destination="Wxp-Kl-CjD" kind="unwind" identifier="unwindToManageRoom" unwindAction="unwindToManageRoomWithSegue:" id="EhA-Wl-gh4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nnC-J8-4FX" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Wxp-Kl-CjD" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3024.8000000000002" y="265.81709145427288"/>
+            <point key="canvasLocation" x="2577" y="-16"/>
         </scene>
         <!--Hotel Main Page View Controller-->
         <scene sceneID="5Ah-61-QTQ">
@@ -2097,7 +2109,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="laG-dg-jcg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="92" y="-70.614692653673174"/>
+            <point key="canvasLocation" x="-713" y="-65"/>
         </scene>
         <!--Add Room-->
         <scene sceneID="3ch-fs-vTX">
@@ -2222,7 +2234,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rd2-F9-Op6" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="hUs-f9-OmW" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3096.8000000000002" y="-498.80059970014997"/>
+            <point key="canvasLocation" x="3262" y="-16"/>
         </scene>
         <!--Edit Account-->
         <scene sceneID="Ly0-9F-lbe">
@@ -2350,6 +2362,7 @@
                         <outlet property="activityIndicator" destination="mKp-4R-nL1" id="Lh0-qb-34u"/>
                         <outlet property="addressInput" destination="89Y-NB-uqG" id="oTR-4n-9Oi"/>
                         <outlet property="bottomStackConstraint" destination="CoW-1O-7Uw" id="Lop-98-beO"/>
+                        <outlet property="deleteButton" destination="lEH-To-JEz" id="VAQ-lN-asc"/>
                         <outlet property="emailInput" destination="gbh-9p-sx1" id="ef3-JC-i3i"/>
                         <outlet property="foreNameInput" destination="84U-HG-Zd4" id="OsQ-Q6-YZ6"/>
                         <outlet property="mainStackView" destination="7Vi-SA-7Ef" id="Pju-Kh-DbR"/>
@@ -2357,6 +2370,7 @@
                         <outlet property="postcodeInput" destination="m7A-2K-AeV" id="s99-rq-6KK"/>
                         <outlet property="sirNameInput" destination="7IY-mV-3zJ" id="tk3-0h-OUB"/>
                         <outlet property="stackConstraint" destination="Vbp-Ep-TfV" id="T0c-5n-8bG"/>
+                        <outlet property="updateButton" destination="5la-hW-paH" id="iMA-iS-VBe"/>
                         <segue destination="DcU-Fk-3dK" kind="unwind" unwindAction="unwindEditAccount:" id="6Xt-ef-tmB"/>
                         <segue destination="DcU-Fk-3dK" kind="unwind" identifier="unwindToManageStaff" unwindAction="unwindToManageStaffWithSegue:" id="g8C-sK-dn0"/>
                     </connections>
@@ -2364,7 +2378,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XPz-Sr-muX" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="DcU-Fk-3dK" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="642" y="1592"/>
+            <point key="canvasLocation" x="838" y="1541"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jpQ-C1-dZQ">
@@ -2382,7 +2396,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gQ6-dE-fDO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-732" y="-71"/>
+            <point key="canvasLocation" x="-1506" y="-64"/>
         </scene>
         <!--Search Booking-->
         <scene sceneID="jrF-YG-MeK">
@@ -2692,7 +2706,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zay-ad-adV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-732" y="685.90704647676171"/>
+            <point key="canvasLocation" x="62" y="770"/>
         </scene>
         <!--Edit Information-->
         <scene sceneID="2S1-3a-Q67">
@@ -2869,7 +2883,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z42-xj-cya" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="FI7-rM-edj" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="92" y="-1747.3763118440781"/>
+            <point key="canvasLocation" x="62" y="-1603"/>
         </scene>
         <!--Update Account-->
         <scene sceneID="FLy-Xt-bHJ">
@@ -2992,11 +3006,10 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="huo-fI-bxV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ekQ-9A-5n9" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1501.5999999999999" y="638.2308845577212"/>
+            <point key="canvasLocation" x="1572" y="770"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="yk5-n1-ypQ"/>
-        <segue reference="dGD-JH-ld0"/>
+        <segue reference="HOs-PX-gmo"/>
     </inferredMetricsTieBreakers>
 </document>

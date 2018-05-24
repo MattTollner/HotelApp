@@ -157,9 +157,7 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
             dateFormatter.dateFormat = "dd/MM/yyyy" //Your date format
             let theDate = dateFormatter.date(from: todayDateStr!)
             var a : Int = Int(bookingList.endIndex)
-            a -= 1
-            
-            //ERROR WAS ERE
+            a -= 1            
             print("Booking 1 date : " + dateFormatter.string(from: bookingList[0].CheckIn))
             
             if(isSearching){
@@ -316,7 +314,7 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
                 //Loop trough booking list fetching customer details of each
                 for i in self.bookingList {
                     
-                    print("i Index :: " + String(describing: i))
+                   //Ensures program execution does not continue till .leave()
                     self.dispatchGroup.enter()
                     
                     self.db.collection("Customer").document(i.CustomerID ).getDocument(completion: { (snapshot, error) in
@@ -348,7 +346,7 @@ class ManageBookingsViewController: UIViewController, UITableViewDelegate, UITab
                 
             }
             .then { obj -> Void in
-                print("ENd :: Custerom List : " + String(self.customerList.count) + " BookingList :: " + String(self.bookingList.count))
+                //Update/Enable UI
                 self.activityIndicator.stopAnimating()
                 if self.bookingList.count == 0{
                     print("no bookings")

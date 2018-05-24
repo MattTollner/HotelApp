@@ -318,14 +318,12 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
                 count = 0
                 print("Room Count Set 0 :  : " + String(count))
             }
-            
         }
         return count
     }
     
     @IBAction func unwindToBooking(segue:UIStoryboardSegue) {
         print("UNWIND DETECTED")
-        
     }
     
     
@@ -336,21 +334,20 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
         print("Editing Nights")
         nightsTextField.text = "1"
     }
+    
     @IBAction func touchUpInside(_ sender: Any) {
         print("touch up Nights")
-        
     }
+    
     @IBAction func editingRooms(_ sender: Any) {
         nightsSelected = false
         thePicker.reloadAllComponents()
         print("editing room")
         roomCountTextFiled.text = "1"
-        
-    
     }
+    
     @IBAction func touchUpRooms(_ sender: Any) {
         print("touch up room")
-        
     }
     
     
@@ -394,7 +391,7 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func alertShow(type : Int){
-        
+        //No rooms available
         if(type == 0){
             let conAlert = UIAlertController(title: "Room Availability", message: "Room types are not available for the time frame selected", preferredStyle: UIAlertControllerStyle.alert)
             
@@ -472,8 +469,9 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
                             print("Room " + i.RoomID + " in roomIDS list")
                             continue
                         }
+                        //Room bookable
                         canBookRoomType = true
-                        print("I belive you can book this room " + i.RoomID + " Room Type :  " + i.RoomType)
+                        print("Room available to book " + i.RoomID + " Room Type :  " + i.RoomType)
                         self.roomIDs.append(i.RoomID)
                         break
                     }
@@ -629,7 +627,7 @@ class BookingViewController: UIViewController, UITableViewDelegate, UITableViewD
                             }
                             //break
                         } else {
-                            //Add booking room ids to array
+                            //Add booking room ids to unavailable array
                             for ez in booking.RoomID {
                                 self.unavailableRooms.append(ez)
                                 print("Booking not availalbe for room " + ez)

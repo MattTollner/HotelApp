@@ -164,6 +164,7 @@ class CreateRoomViewController: UIViewController, UITextFieldDelegate, UIPickerV
         
         if(roomNumber.text == ""){
             roomNumber.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
+            print("room number bad")
             isPass = false
         } else {
             roomNumber.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
@@ -180,16 +181,23 @@ class CreateRoomViewController: UIViewController, UITextFieldDelegate, UIPickerV
         
         let types = ["Single", "Double Single", "Double", "Family"]
         
-        for i in types {
-            if roomType.text == i {
+        //Check room types input
+        if let type = roomType.text{
+            if types.contains(type){
                 roomType.backgroundColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
-                break
             } else {
+                print("roomTypeError " )
                 roomType.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
                 isPass = false
             }
+            
+        } else {
+            print("roomTypeError empty" )
+            roomType.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
+            isPass = false
         }
-        
+      
+        //Check room number exist on database
         if(roomsNumberList.contains(roomNumber.text!)){
             isPass = false
             fireError(titleText: "Room Number Exist", lowerText: "That room number appears to be on the database already")

@@ -76,7 +76,7 @@ class BookingSummaryViewController: UIViewController, UITableViewDelegate, UITab
     
     @IBAction func paySegmentChanged(_ sender: Any) {
         //Colour price labels
-        price()
+        calculatePrice()
     }
     
     //Table view controls
@@ -136,21 +136,21 @@ class BookingSummaryViewController: UIViewController, UITableViewDelegate, UITab
         if(indexPath.row == roomsToBook.count - 1){
             print("Hit last row")
             print(pricesPerNight[0], pricesPerNight[1],pricesPerNight[2],pricesPerNight[3])
-            price()
+            calculatePrice()
         }
         
         print("Total Price : " + String(totalPrice))
         print("Breakfast Amount : " + String(breakfastTotalAmount))
         priceLabel.text = String(totalPrice)
        // extraPriceLabel.text =  String(breakfastTotalAmount)
-        price()
-        //totalPrice(segmentIndex: paymentSegment.selectedSegmentIndex)
+        calculatePrice()
+
         
        
         return cell
     }
 
-    func price(){
+    func calculatePrice(){
         var roomCostBeforeNights = 0.0
         var totalCosts = 0.0
         var theDepositAmount = 0.0
@@ -219,7 +219,7 @@ class BookingSummaryViewController: UIViewController, UITableViewDelegate, UITab
             self.populateText()
             self.theButton.isEnabled = true
             self.activityIndicator.stopAnimating()
-            self.price()
+            self.calculatePrice()
            // self.totalPrice(segmentIndex: self.paymentSegment.selectedSegmentIndex)
         }
         
@@ -266,6 +266,7 @@ class BookingSummaryViewController: UIViewController, UITableViewDelegate, UITab
             fullBookingCost = totalAmount
             paymentInPennys = Int(totalAmount * 100)
         } else {
+            //Deposit selected
             percentageAmountLabel.isHidden = false
             totalAmount = totalPrice
             percentAmount = (totalAmount * 0.1)
@@ -282,7 +283,7 @@ class BookingSummaryViewController: UIViewController, UITableViewDelegate, UITab
     func populateText(){
         //Calculate cost
         //totalPrice(segmentIndex: paymentSegment.selectedSegmentIndex)
-        price()
+        calculatePrice()
         
         //Calculate Dates
         let dateFormatter = DateFormatter()

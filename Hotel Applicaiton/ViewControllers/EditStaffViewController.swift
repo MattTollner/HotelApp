@@ -27,7 +27,9 @@ class EditStaffViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var accountType: UISegmentedControl!
     @IBOutlet weak var mainStackView: UIStackView!
-   var moveStack = false
+    @IBOutlet weak var updateButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
+    var moveStack = false
     
     let db = Firestore.firestore()
      var staffToUpdate = [Staff]()
@@ -154,10 +156,13 @@ class EditStaffViewController: UIViewController {
     
     func deleteStaff(){
         
+        
         let delAlert = UIAlertController(title: "Delete Staff", message: "Are you sure you want to delete the staff account?", preferredStyle: UIAlertControllerStyle.alert)
         delAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
             self.activityIndicator.startAnimating()
             self.mainStackView.isHidden = true
+            self.deleteButton.isEnabled = false
+            self.updateButton.isEnabled = false
             
             //Delete from firebase
             self.db.collection("Staff").document(self.staffToUpdate[0].StaffID).delete() { err in
@@ -165,17 +170,25 @@ class EditStaffViewController: UIViewController {
                     print("Error removing staff document: \(err)")
                     self.activityIndicator.stopAnimating()
                     self.mainStackView.isHidden = false
+                    self.deleteButton.isEnabled = true
+                    self.updateButton.isEnabled = true
+                    
                     self.fireError(titleText: "Error deleting staff!", lowerText: err.localizedDescription)
                 } else {
                     self.activityIndicator.stopAnimating()
                     self.mainStackView.isHidden = false
-                    self.confirmAlert()
-                    
+                    self.deleteButton.isEnabled = true
+                    self.updateButton.isEnabled = true
+                    self.delAlert()
                 }
             }
         }))
         
         delAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+            self.deleteButton.isEnabled = true
+            self.updateButton.isEnabled = true
+            self.activityIndicator.stopAnimating()
+            self.mainStackView.isHidden = false
             
         }))
         self.present(delAlert, animated: true, completion: nil)
@@ -248,6 +261,15 @@ class EditStaffViewController: UIViewController {
     
     func confirmAlert(){
         let successAlert = UIAlertController(title: "Account Updated", message: "Updated account information is now live", preferredStyle: UIAlertControllerStyle.alert)
+        
+        successAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
+            self.performSegue(withIdentifier: "unwindToManageStaff", sender: self)
+        }))
+        self.present(successAlert, animated: true, completion: nil)
+    }
+    
+    func delAlert(){
+        let successAlert = UIAlertController(title: "Account Deleted", message: "Deleted account from database", preferredStyle: UIAlertControllerStyle.alert)
         
         successAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
             self.performSegue(withIdentifier: "unwindToManageStaff", sender: self)

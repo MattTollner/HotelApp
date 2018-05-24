@@ -58,6 +58,9 @@ class ManageCleaningViewController: UITableViewController {
                 for i in roomsList {
                     if i.RoomState != "Clean" {
                         selectedRoomList.append(i)
+                        self.selectedRoomList = self.selectedRoomList.sorted(by: { (room0: Room, room1: Room) -> Bool in
+                            return room0.Number < room1.Number
+                        })
                         print(i.Number + " roomState to sel room " + i.RoomState)
                     }
                 }
@@ -66,6 +69,9 @@ class ManageCleaningViewController: UITableViewController {
                 for i in roomsList {
                     if i.RoomState == "Clean" {
                         selectedRoomList.append(i)
+                        self.selectedRoomList = self.selectedRoomList.sorted(by: { (room0: Room, room1: Room) -> Bool in
+                            return room0.Number < room1.Number
+                        })
                         print(i.Number + " roomState to sel room " + i.RoomState)
                     }
                 }
@@ -131,11 +137,18 @@ class ManageCleaningViewController: UITableViewController {
                     print(rooms.RoomType + " " + rooms.Price + " " + rooms.RoomState )
           
                     self.roomsList.append(rooms)
+                    
+                    self.roomsList = self.roomsList.sorted(by: { (room0: Room, room1: Room) -> Bool in
+                        return room0.Number < room1.Number
+                    })
                    
                     //If not clean append to selected
                     if(rooms.RoomState != "Clean"){
                         print("Detected unclean room adding to selectedRoomList")
                         self.selectedRoomList.append(rooms)
+                        self.selectedRoomList = self.selectedRoomList.sorted(by: { (room0: Room, room1: Room) -> Bool in
+                            return room0.Number < room1.Number
+                        })
                         print("Count " + String(self.selectedRoomList.count))
                     }
                     

@@ -15,7 +15,7 @@ class StaffHomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+         navigationItem.hidesBackButton = true;
         //Checks if user logged in
         if (HelperClass.userTypeRefernce.userID == "NIL" || HelperClass.userTypeRefernce.userType == "NIL"){
             print("USER NOT LOGGED IN PERFROM SEGUE")
@@ -35,7 +35,8 @@ class StaffHomeViewController: UIViewController {
         
     }
     
-    @IBAction func signOutTapped(_ sender: Any) {
+    
+    func signOut(){
         print("Sign out")
         let firebaseAuth = Auth.auth()
         do {
@@ -47,7 +48,17 @@ class StaffHomeViewController: UIViewController {
         HelperClass.userTypeRefernce.userID = "NIL"
         HelperClass.userTypeRefernce.userType = "NIL"
         print("Signing Out " + HelperClass.userTypeRefernce.userID + " " + HelperClass.userTypeRefernce.userType)
-        self.performSegue(withIdentifier: "unwindStaffHome", sender: self)
+        self.performSegue(withIdentifier: "unwindToLogin", sender: self)
+    }
+    
+    @IBAction func signOutTapped(_ sender: Any) {
+        let alert = UIAlertController(title: "Logout?", message: "Are you sure you want to logout?", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+            self.signOut()
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
         
     }
     
@@ -86,6 +97,16 @@ class StaffHomeViewController: UIViewController {
         if HelperClass.userTypeRefernce.userType == "Admin" || HelperClass.userTypeRefernce.userType == "Receptionist" {
             print("Perfrom Segue")
             performSegue(withIdentifier: "toManageBookings", sender: self)
+        } else {
+            print("Permission Denied")
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func createBookingsTapped(_ sender: Any) {
+        if HelperClass.userTypeRefernce.userType == "Admin" || HelperClass.userTypeRefernce.userType == "Receptionist" {
+            print("Perfrom Segue")
+            performSegue(withIdentifier: "toCreateBooking", sender: self)
         } else {
             print("Permission Denied")
             self.present(alert, animated: true, completion: nil)
